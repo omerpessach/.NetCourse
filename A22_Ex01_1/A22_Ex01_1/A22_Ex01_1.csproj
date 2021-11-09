@@ -4,7 +4,7 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{5F8BD4FE-3105-4782-BA25-60419A85F362}</ProjectGuid>
+    <ProjectGuid>{6F0416B8-F1B5-44EA-8B79-37B94864EDAF}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>A22_Ex01_1</RootNamespace>
     <AssemblyName>A22_Ex01_1</AssemblyName>
@@ -31,8 +31,5 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup>
-    <Compile Include="Program.cs" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
