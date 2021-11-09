@@ -44,6 +44,5 @@ namespace A22_Ex01_1
             return (int)convertedDecNumber;
         }
 
-        static bool 
     }
 }
