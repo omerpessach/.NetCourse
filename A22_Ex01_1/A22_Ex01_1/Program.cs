@@ -8,19 +8,27 @@ namespace A22_Ex01_1
     {
         static void Main()
         {
-            int numberOfOnes = 0;
-            int numberOfZero = 0;
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
-            double avgOnes = numberOfOnes / 4;
-            double avgZeros = numberOfZero / 4;
+            int numberOfOnesInAllNumbers = 0;
+            int numberOfZerosInAllNumbers = 0;
+            int countOfNumbersThatPowOfTwo = 0;
+            int maxNumber = 0;
+            int minNumber = int.MaxValue;
+
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            double avgOnes = numberOfOnesInAllNumbers / 4;
+            double avgZeros = numberOfZerosInAllNumbers / 4;
             Console.WriteLine($"avg of ones is {avgOnes}");
             Console.WriteLine($"avg of zeros is {avgZeros}");
+            Console.WriteLine($"count of numbers that pow of 2 {countOfNumbersThatPowOfTwo}");
+            Console.WriteLine($"The max number is  {maxNumber}");
+            Console.WriteLine($"The min number is  {minNumber}");
+            Console.ReadLine();
         }
 
-        static int Input(ref int numberOfOnes, ref int numberOfZeros)
+        static int Input(ref int numberOfOnesInAllNumbers, ref int numberOfZerosInAllNumbers, ref int countOfNumbersThatPowOfTwo, ref int maxNumber, ref int minNumber)
         {
             string inputRequest = "Please enter number in binary format";
             Console.WriteLine("Please enter number in binary format");
@@ -32,10 +40,28 @@ namespace A22_Ex01_1
                 userInput = Console.ReadLine();
             }
 
-            numberOfOnes += userInput.Split('1').Length - 1;
-            numberOfZeros += userInput.Split('0').Length - 1;
+            int numberOfOnes = userInput.Split('1').Length - 1;
+            int numberOfZeros = userInput.Split('0').Length - 1;
+            numberOfOnesInAllNumbers += numberOfOnes;
+            numberOfZerosInAllNumbers += numberOfZeros;
+
+            if (numberOfOnes == 1)
+            {
+                countOfNumbersThatPowOfTwo++;
+            }
 
             int convertedNumber = Convert.ToInt32(userInput, 2);
+
+            if (maxNumber < convertedNumber)
+            {
+                maxNumber = convertedNumber;
+            }
+
+            if (minNumber > convertedNumber)
+            {
+                minNumber = convertedNumber;
+            }
+
             return convertedNumber;
         }
     }
