@@ -11,35 +11,33 @@ namespace A22_Ex01_2
             HourGlass();
         }
 
-        public static void HourGlass(int starCount = 5, int spaceFromStart = 0)
+        public static void HourGlass(int i_StarCount = 5, int i_SpaceFromStart = 0)
         {
-            if (starCount > 0)
+            if (i_StarCount > 0)
             {
-                PrintLevelHourGlass(starCount, spaceFromStart);
-
-                HourGlass(starCount - 2, spaceFromStart + 1);
-
-                if (starCount > 1)
+                PrintLevelHourGlass(i_StarCount, i_SpaceFromStart);
+                HourGlass(i_StarCount - 2, i_SpaceFromStart + 1);
+                if (i_StarCount > 1)
                 {
-                    PrintLevelHourGlass(starCount, spaceFromStart);
+                    PrintLevelHourGlass(i_StarCount, i_SpaceFromStart);
                 }
             }
         }
 
-        public static void PrintLevelHourGlass(int starCount, int spaceFromStart)
+        public static void PrintLevelHourGlass(int i_StarCount, int i_SpaceFromStart)
         {
-            PrintSingleCharNTimesInARow(' ', spaceFromStart);
-            PrintSingleCharNTimesInARow('*', starCount);
-            PrintSingleCharNTimesInARow(' ', spaceFromStart);
+            PrintSingleCharNTimesInARow(' ', i_SpaceFromStart);
+            PrintSingleCharNTimesInARow('*', i_StarCount);
+            PrintSingleCharNTimesInARow(' ', i_SpaceFromStart);
             Console.WriteLine();
         }
 
-        public static void PrintSingleCharNTimesInARow(char sign, int n)
+        public static void PrintSingleCharNTimesInARow(char i_Sign, int i_TimesToPrint)
         {
-            if (n > 0)
+            if (i_TimesToPrint > 0)
             {
-                Console.Write(sign);
-                PrintSingleCharNTimesInARow(sign, n - 1);
+                Console.Write(i_Sign);
+                PrintSingleCharNTimesInARow(i_Sign, i_TimesToPrint - 1);
             }
         }
     }

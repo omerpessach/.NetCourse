@@ -13,53 +13,56 @@ namespace A22_Ex01_1
             int countOfNumbersThatPowOfTwo = 0;
             int maxNumber = 0;
             int minNumber = int.MaxValue;
+            double avgOnes;
+            double avgZeros;
 
             Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
             Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
             Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
             Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            double avgOnes = numberOfOnesInAllNumbers / 4;
-            double avgZeros = numberOfZerosInAllNumbers / 4;
+            avgOnes = numberOfOnesInAllNumbers / 4;
+            avgZeros = numberOfZerosInAllNumbers / 4;
             Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
             Console.WriteLine(string.Format("Avg of zeros is {0}", avgZeros));
             Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
             Console.WriteLine(string.Format("The max number is {0}", maxNumber));
             Console.WriteLine(string.Format("The min number is {0}", minNumber));
-            Console.ReadLine();
         }
 
-        static int Input(ref int numberOfOnesInAllNumbers, ref int numberOfZerosInAllNumbers, ref int countOfNumbersThatPowOfTwo, ref int maxNumber, ref int minNumber)
+        static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
         {
             string inputRequest = "Please enter number in binary format";
-            Console.WriteLine(inputRequest);
-            string userInput = Console.ReadLine();
+            string userInput;
+            int numberOfOnes;
+            int numberOfZeros;
+            int convertedNumber;
 
+            Console.WriteLine(inputRequest);
+            userInput = Console.ReadLine();
             while (userInput.Length != 8 || (!userInput.Contains("0") || !userInput.Contains("1")))
             {
                 Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
                 userInput = Console.ReadLine();
             }
 
-            int numberOfOnes = userInput.Split('1').Length - 1;
-            int numberOfZeros = userInput.Split('0').Length - 1;
-            numberOfOnesInAllNumbers += numberOfOnes;
-            numberOfZerosInAllNumbers += numberOfZeros;
-
+            numberOfOnes = userInput.Split('1').Length - 1;
+            numberOfZeros = userInput.Split('0').Length - 1;
+            io_NumberOfOnesInAllNumbers += numberOfOnes;
+            io_NumberOfZerosInAllNumbers += numberOfZeros;
             if (numberOfOnes == 1)
             {
-                countOfNumbersThatPowOfTwo++;
+                io_CountOfNumbersThatPowOfTwo++;
             }
 
-            int convertedNumber = ConvertStringToDecimelNumber(userInput);
-
-            if (maxNumber < convertedNumber)
+            convertedNumber = ConvertStringToDecimelNumber(userInput);
+            if (io_MaxNumber < convertedNumber)
             {
-                maxNumber = convertedNumber;
+                io_MaxNumber = convertedNumber;
             }
 
-            if (minNumber > convertedNumber)
+            if (io_MinNumber > convertedNumber)
             {
-                minNumber = convertedNumber;
+                io_MinNumber = convertedNumber;
             }
 
             return convertedNumber;
@@ -76,8 +79,8 @@ namespace A22_Ex01_1
                     convertedDecNumber += Math.Pow(2, 7 - i - 1);
                 }
             }
+
             return (int)convertedDecNumber;
         }
-
     }
 }

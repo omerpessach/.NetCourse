@@ -9,16 +9,20 @@ namespace A22_Ex01_3
     {
         static void Main()
         {
-            int inputFromUserAsUInt = GetInputFromUser();
+            int inputFromUserAsUInt;
+
+            inputFromUserAsUInt = GetInputFromUser();
             Ex2.Program.HourGlass(inputFromUserAsUInt);
         }
 
         static int GetInputFromUser()
         {
-            string inputRequest = "Please enter the height of the hour Glass";
-            Console.WriteLine(inputRequest);
-            string userInput = Console.ReadLine();
             int userInputAsNumber;
+            string inputRequest = "Please enter the height of the hour Glass";
+            string userInput;
+
+            Console.WriteLine(inputRequest);
+            userInput = Console.ReadLine();
             while (!int.TryParse(userInput, out userInputAsNumber) || userInputAsNumber < 0)
             {
                 Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
