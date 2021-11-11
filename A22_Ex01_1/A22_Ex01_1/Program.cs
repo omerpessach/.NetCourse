@@ -10,10 +10,11 @@ namespace A22_Ex01_1
         {
             int numberOfOnes = 0;
             int numberOfZero = 0;
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
-            Input(ref numberOfOnes, ref numberOfZero);
+            for (int i = 0; i < 4; i++)
+            {
+                Input(ref numberOfOnes, ref numberOfZero);
+            }
+
             double avgOnes = numberOfOnes / 4;
             double avgZeros = numberOfZero / 4;
             Console.WriteLine($"avg of ones is {avgOnes}");
@@ -31,7 +32,6 @@ namespace A22_Ex01_1
                 Console.WriteLine($"The correct input is wrong, please try again\n {inputRequest}");
                 userInput = Console.ReadLine();
             }
-
             numberOfOnes += userInput.Split('1').Length - 1;
             numberOfZeros += userInput.Split('0').Length - 1;
 
@@ -43,9 +43,9 @@ namespace A22_Ex01_1
         {
             double convertedDecNumber = 0;
 
-            for(int i = 0; i< i_str2Dec.Length; i++)
+            for (int i = 0; i < i_str2Dec.Length; i++)
             {
-                if(i_str2Dec[i] ==  '1')
+                if (i_str2Dec[i] == '1')
                 {
                     convertedDecNumber += Math.Pow(2, 7 - i - 1);
                 }
@@ -55,16 +55,16 @@ namespace A22_Ex01_1
 
         static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
         {
-           string NumberToString =  i_DecNumber.ToString();
-           bool IncreasingSequence = true;
-           for (int i=0; i<NumberToString.Length && IncreasingSequence == true; ++i)
-           {
-                if((int)NumberToString[i] >= (int)NumberToString[i+1])
+            string NumberToString = i_DecNumber.ToString();
+            bool IncreasingSequence = true;
+            for (int i = 0; i < NumberToString.Length && IncreasingSequence == true; ++i)
+            {
+                if ((int)NumberToString[i] >= (int)NumberToString[i + 1])
                 {
                     IncreasingSequence = false;
                 }
-           }
-           return IncreasingSequence;
+            }
+            return IncreasingSequence;
         }
 
         static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
