@@ -20,11 +20,11 @@ namespace A22_Ex01_1
             Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
             double avgOnes = numberOfOnesInAllNumbers / 4;
             double avgZeros = numberOfZerosInAllNumbers / 4;
-            Console.WriteLine($"avg of ones is {avgOnes}");
-            Console.WriteLine($"avg of zeros is {avgZeros}");
-            Console.WriteLine($"count of numbers that pow of 2 {countOfNumbersThatPowOfTwo}");
-            Console.WriteLine($"The max number is  {maxNumber}");
-            Console.WriteLine($"The min number is  {minNumber}");
+            Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
+            Console.WriteLine(string.Format("Avg of zeros is {0}", avgZeros));
+            Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
+            Console.WriteLine(string.Format("The max number is {0}", maxNumber));
+            Console.WriteLine(string.Format("The min number is {0}", minNumber));
             Console.ReadLine();
         }
 
@@ -36,7 +36,7 @@ namespace A22_Ex01_1
 
             while (userInput.Length != 8 || (!userInput.Contains("0") || !userInput.Contains("1")))
             {
-                Console.WriteLine($"The input is wrong, please try again\n {inputRequest}");
+                Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
                 userInput = Console.ReadLine();
             }
 

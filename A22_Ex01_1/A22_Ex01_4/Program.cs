@@ -21,7 +21,7 @@ namespace A22_Ex01_3
             int userInputAsNumber;
             while (!int.TryParse(userInput, out userInputAsNumber) || userInputAsNumber < 0)
             {
-                Console.WriteLine($"The input is wrong, please try again\n {inputRequest}");
+                Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
                 userInput = Console.ReadLine();
             }
 
