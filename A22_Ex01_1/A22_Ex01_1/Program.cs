@@ -35,21 +35,7 @@ namespace A22_Ex01_1
             numberOfOnes += userInput.Split('1').Length - 1;
             numberOfZeros += userInput.Split('0').Length - 1;
 
-            int convertedNumber = Convert.ToInt32(userInput, 2);
-            return convertedNumber;
-        static int Input()
-        {
-            string inputRequest = "Please enter number in binary format";
-            Console.WriteLine("Please enter number in binary format");
-            string userInput = Console.ReadLine();
-
-            while (userInput.Length == 0 && (!userInput.Contains("0") || !userInput.Contains("1")))
-            {
-                Console.WriteLine($"The correct input is wrong, please try again\n {inputRequest}");
-                userInput = Console.ReadLine();
-            }
-
-            int convertedNumber = Convert.ToInt32(userInput, 2);
+            int convertedNumber = Convert.ToInt32(userInput, 2); // need to fix this and to use the method
             return convertedNumber;
         }
 
@@ -67,5 +53,31 @@ namespace A22_Ex01_1
             return (int)convertedDecNumber;
         }
 
+        static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
+        {
+           string NumberToString =  i_DecNumber.ToString();
+           bool IncreasingSequence = true;
+           for (int i=0; i<NumberToString.Length && IncreasingSequence == true; ++i)
+           {
+                if((int)NumberToString[i] >= (int)NumberToString[i+1])
+                {
+                    IncreasingSequence = false;
+                }
+           }
+           return IncreasingSequence;
+        }
+
+        static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
+        {
+            int AmountOfIncreasingSequencesNumbers = 0;
+            foreach (int DecNumber in i_DecNumbers)
+            {
+                if (DoseTheNumberRepresentIncreasingSequence(DecNumber) == true)
+                {
+                    AmountOfIncreasingSequencesNumbers++;
+                }
+            }
+            return AmountOfIncreasingSequencesNumbers;
+        }
     }
 }
