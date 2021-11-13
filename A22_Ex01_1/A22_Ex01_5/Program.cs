@@ -52,7 +52,8 @@ namespace A22_Ex01_5
             int averageDigitsResult = 0;
             int divisionBy3Result = 0;
             int SmallerThanUnityResult = 0;
-            LargestDigitInTheNumber(i_SevenDigitNumber, ref largestDigit);
+
+            largestDigit = LargestDigitInTheNumber(i_SevenDigitNumber);
             AverageDigits(i_SevenDigitNumber, ref averageDigitsResult);
             AmountOfDigitsDiviedByThree(i_SevenDigitNumber, ref divisionBy3Result);
             AmountOfSmallerDigitsThanUnity(i_SevenDigitNumber, ref SmallerThanUnityResult);
@@ -62,15 +63,9 @@ The number of digits which are divided by three is: {2}.
 The amount of digits which is smaller then the unity is: {3}.", largestDigit, averageDigitsResult, divisionBy3Result, SmallerThanUnityResult);
             Console.WriteLine(investigationResults);
         }
-        private static void LargestDigitInTheNumber(string i_SevenDigitNumber, ref char io_LargestDigit)
+        private static char LargestDigitInTheNumber(string i_SevenDigitNumber)
         {
-            foreach (char digit in i_SevenDigitNumber)
-            {
-                if (digit > io_LargestDigit)
-                {
-                    io_LargestDigit = digit;
-                }
-            }
+            return i_SevenDigitNumber.Max(x => x);
         }
         private static void AverageDigits(string i_SevenDigitNumber, ref int io_AverageaResult)
         {
