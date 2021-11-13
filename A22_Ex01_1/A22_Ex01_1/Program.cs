@@ -8,34 +8,63 @@ namespace A22_Ex01_1
     {
         static void Main()
         {
-            int numberOfOnes = 0;
-            int numberOfZero = 0;
-            for (int i = 0; i < 4; i++)
-            {
-                Input(ref numberOfOnes, ref numberOfZero);
-            }
+            int numberOfOnesInAllNumbers = 0;
+            int numberOfZerosInAllNumbers = 0;
+            int countOfNumbersThatPowOfTwo = 0;
+            int maxNumber = 0;
+            int minNumber = int.MaxValue;
+            double avgOnes;
+            double avgZeros;
 
-            double avgOnes = numberOfOnes / 4;
-            double avgZeros = numberOfZero / 4;
-            Console.WriteLine($"avg of ones is {avgOnes}");
-            Console.WriteLine($"avg of zeros is {avgZeros}");
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            avgOnes = numberOfOnesInAllNumbers / 4;
+            avgZeros = numberOfZerosInAllNumbers / 4;
+            Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
+            Console.WriteLine(string.Format("Avg of zeros is {0}", avgZeros));
+            Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
+            Console.WriteLine(string.Format("The max number is {0}", maxNumber));
+            Console.WriteLine(string.Format("The min number is {0}", minNumber));
         }
 
-        static int Input(ref int numberOfOnes, ref int numberOfZeros)
+        static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
         {
             string inputRequest = "Please enter number in binary format";
-            Console.WriteLine("Please enter number in binary format");
-            string userInput = Console.ReadLine();
+            string userInput;
+            int numberOfOnes;
+            int numberOfZeros;
+            int convertedNumber;
 
+            Console.WriteLine(inputRequest);
+            userInput = Console.ReadLine();
             while (userInput.Length != 8 || (!userInput.Contains("0") || !userInput.Contains("1")))
             {
-                Console.WriteLine($"The correct input is wrong, please try again\n {inputRequest}");
+                Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
                 userInput = Console.ReadLine();
             }
-            numberOfOnes += userInput.Split('1').Length - 1;
-            numberOfZeros += userInput.Split('0').Length - 1;
 
-            int convertedNumber = Convert.ToInt32(userInput, 2); // need to fix this and to use the method
+            numberOfOnes = userInput.Split('1').Length - 1;
+            numberOfZeros = userInput.Split('0').Length - 1;
+            io_NumberOfOnesInAllNumbers += numberOfOnes;
+            io_NumberOfZerosInAllNumbers += numberOfZeros;
+            if (numberOfOnes == 1)
+            {
+                io_CountOfNumbersThatPowOfTwo++;
+            }
+
+            convertedNumber = ConvertStringToDecimelNumber(userInput);
+            if (io_MaxNumber < convertedNumber)
+            {
+                io_MaxNumber = convertedNumber;
+            }
+
+            if (io_MinNumber > convertedNumber)
+            {
+                io_MinNumber = convertedNumber;
+            }
+
             return convertedNumber;
         }
 
@@ -50,6 +79,7 @@ namespace A22_Ex01_1
                     convertedDecNumber += Math.Pow(2, 7 - i - 1);
                 }
             }
+
             return (int)convertedDecNumber;
         }
 

@@ -4,10 +4,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{6F0416B8-F1B5-44EA-8B79-37B94864EDAF}</ProjectGuid>
+    <ProjectGuid>{12B1B0BC-B586-452F-B4DF-F623D7477839}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>A22_Ex01_1</RootNamespace>
-    <AssemblyName>A22_Ex01_1</AssemblyName>
+    <RootNamespace>A22_Ex01_2</RootNamespace>
+    <AssemblyName>A22_Ex01_2</AssemblyName>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
@@ -33,12 +33,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="DN_MTA_2022A_Ex01.pdf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Ex01.exe" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
