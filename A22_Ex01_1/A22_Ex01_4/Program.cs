@@ -19,35 +19,39 @@ namespace A22_Ex01_4
             bool isNumber = false;
             int amountUppercaseResult = 0;
             string inputRequest = "Please insert a 6-character string.The string should contain only numbers or letters but not combined";
+            string sixCharacterString;
+
             Console.WriteLine("Please insert a 6-character string.");
-            string sixCharacterString = Console.ReadLine();
+            sixCharacterString = Console.ReadLine();
             while (!IsValidNumber(sixCharacterString, ref numberFromTheString, ref isNumber))
             {
-                Console.WriteLine($"the string you entered isn't valid, please try again.\n{inputRequest}");
+                Console.WriteLine(string.Format("the string you entered isn't valid, please try again.\n{0}", inputRequest));
                 sixCharacterString = Console.ReadLine();
             }
+
             Console.WriteLine(string.Format("Is the string a Palindrome? {0}", PalindromeCheck(sixCharacterString) ? "YES" : "NO"));
             if (isNumber == true)
             {
-                DivideByFourCheck(numberFromTheString, ref divisionBy4Result);
+                divisionBy4Result = DivideByFourCheck(numberFromTheString);
                 Console.WriteLine(string.Format("Is the number divided By 4? {0}", divisionBy4Result ? "YES" : "NO"));
             }
             else
             {
-                AmountOfUppercaseLetters(sixCharacterString, ref amountUppercaseResult);
+                amountUppercaseResult = AmountOfUppercaseLetters(sixCharacterString);
                 Console.WriteLine(string.Format("The Amount of uppercase letters in the sting is: {0}", amountUppercaseResult));
             }
         }
-        private static bool IsValidNumber(string i_StringFromUser, ref int io_IntgerFromString, ref bool io_IsNumber )
+        private static bool IsValidNumber(string i_StringFromUser, ref int io_IntgerFromString, ref bool io_IsNumber)
         {
             bool validString = true;
+
             if (i_StringFromUser.Length != 6)
             {
                 validString = false;
             }
-            else if (int.TryParse(i_StringFromUser,out io_IntgerFromString))
+            else if (int.TryParse(i_StringFromUser, out io_IntgerFromString))
             {
-                io_IsNumber = true; 
+                io_IsNumber = true;
             }
             else
             {
@@ -59,17 +63,19 @@ namespace A22_Ex01_4
                     }
                 }
             }
+
             return validString;
         }
         private static bool PalindromeCheck(string i_InputString)
         {
             int stringLength = i_InputString.Length;
-            if(stringLength == 0)
+
+            if (stringLength == 0)
             {
                 return true;
             }
 
-            return IsPalindromeRecursive(i_InputString,0,stringLength-1);
+            return IsPalindromeRecursive(i_InputString, 0, stringLength - 1);
         }
         private static bool IsPalindromeRecursive(string i_InputString, int i_StartPoint, int i_EndPoint)
         {
@@ -77,33 +83,26 @@ namespace A22_Ex01_4
             {
                 return true;
             }
+
             if (i_InputString[i_StartPoint] != i_InputString[i_EndPoint])
             {
                 return false;
             }
+
             if (i_StartPoint < i_EndPoint + 1)
             {
                 return IsPalindromeRecursive(i_InputString, i_StartPoint + 1, i_EndPoint - 1);
             }
+
             return true;
         }
-        private static void DivideByFourCheck(int i_NumberFromString, ref bool io_IsDividedByFour)
+        private static bool DivideByFourCheck(int i_NumberFromString)
         {
-            
-            if(i_NumberFromString % 4 == 0)
-            {
-                io_IsDividedByFour = true;
-            }
+            return i_NumberFromString % 4 == 0;
         }
-        private static void AmountOfUppercaseLetters(string i_InputString, ref int io_AmountOfUpperCaseLetters)
+        private static int AmountOfUppercaseLetters(string i_InputString)
         {
-            foreach(char singleChar in i_InputString)
-            {
-                if(singleChar >= 'A' && singleChar <= 'Z')
-                {
-                    io_AmountOfUpperCaseLetters++;
-                }
-            }
+            return i_InputString.Count(c => c >= 'A' && c <= 'Z');
         }
     }
 }
