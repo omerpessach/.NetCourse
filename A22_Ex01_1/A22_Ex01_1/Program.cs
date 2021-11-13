@@ -82,5 +82,32 @@ namespace A22_Ex01_1
 
             return (int)convertedDecNumber;
         }
+
+        static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
+        {
+            string NumberToString = i_DecNumber.ToString();
+            bool IncreasingSequence = true;
+            for (int i = 0; i < NumberToString.Length && IncreasingSequence == true; ++i)
+            {
+                if ((int)NumberToString[i] >= (int)NumberToString[i + 1])
+                {
+                    IncreasingSequence = false;
+                }
+            }
+            return IncreasingSequence;
+        }
+
+        static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
+        {
+            int AmountOfIncreasingSequencesNumbers = 0;
+            foreach (int DecNumber in i_DecNumbers)
+            {
+                if (DoseTheNumberRepresentIncreasingSequence(DecNumber) == true)
+                {
+                    AmountOfIncreasingSequencesNumbers++;
+                }
+            }
+            return AmountOfIncreasingSequencesNumbers;
+        }
     }
 }
