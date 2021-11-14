@@ -9,6 +9,11 @@ namespace A22_Ex01_3
     {
         static void Main()
         {
+            PrintHourGlass();
+        }
+
+        private static void PrintHourGlass()
+        {
             int inputFromUserAsUInt;
 
             inputFromUserAsUInt = GetInputFromUser();

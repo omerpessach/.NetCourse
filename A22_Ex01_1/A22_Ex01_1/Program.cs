@@ -8,6 +8,11 @@ namespace A22_Ex01_1
     {
         static void Main()
         {
+            AnalyzeBinaryNumbers();
+        }
+
+        private static void AnalyzeBinaryNumbers()
+        {
             int numberOfOnesInAllNumbers = 0;
             int numberOfZerosInAllNumbers = 0;
             int countOfNumbersThatPowOfTwo = 0;
@@ -16,20 +21,21 @@ namespace A22_Ex01_1
             double avgOnes;
             double avgZeros;
 
-            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            for (int i = 0; i < 4; i++)
+            {
+                Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            }
+
             avgOnes = numberOfOnesInAllNumbers / 4;
             avgZeros = numberOfZerosInAllNumbers / 4;
             Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
-            Console.WriteLine(string.Format("Avg of zeros is {0}", avgZeros));
+            Console.WriteLine(string.Format("Avg of zeros is {0} :)", avgZeros));
             Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
             Console.WriteLine(string.Format("The max number is {0}", maxNumber));
             Console.WriteLine(string.Format("The min number is {0}", minNumber));
         }
 
-        static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
+        private static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
         {
             string inputRequest = "Please enter number in binary format";
             string userInput;
@@ -68,7 +74,7 @@ namespace A22_Ex01_1
             return convertedNumber;
         }
 
-        static int ConvertStringToDecimelNumber(string i_str2Dec)
+        private static int ConvertStringToDecimelNumber(string i_str2Dec)
         {
             double convertedDecNumber = 0;
 
@@ -83,7 +89,7 @@ namespace A22_Ex01_1
             return (int)convertedDecNumber;
         }
 
-        static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
+        private static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
         {
             string NumberToString = i_DecNumber.ToString();
             bool IncreasingSequence = true;
@@ -97,9 +103,10 @@ namespace A22_Ex01_1
             return IncreasingSequence;
         }
 
-        static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
+        private static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
         {
             int AmountOfIncreasingSequencesNumbers = 0;
+
             foreach (int DecNumber in i_DecNumbers)
             {
                 if (DoseTheNumberRepresentIncreasingSequence(DecNumber) == true)
@@ -107,6 +114,7 @@ namespace A22_Ex01_1
                     AmountOfIncreasingSequencesNumbers++;
                 }
             }
+
             return AmountOfIncreasingSequencesNumbers;
         }
     }
