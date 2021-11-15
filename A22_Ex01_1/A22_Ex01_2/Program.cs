@@ -19,15 +19,15 @@ namespace A22_Ex01_2
             Console.Write(clockBuilder.ToString());
         }
 
-        private static void PrintHourGlassRecursive(StringBuilder clockBuilder, int i_Height, int i_Level)
+        private static void PrintHourGlassRecursive(StringBuilder i_ClockBuilder, int i_Height, int i_Level)
         {
             string line = GetLevelHourGlass(i_Height, i_Level);
 
-            clockBuilder.AppendLine(line);
+            i_ClockBuilder.AppendLine(line);
             if (i_Height > 2)
             {
-                PrintHourGlassRecursive(clockBuilder, i_Height - 2, i_Level + 1);
-                clockBuilder.AppendLine(line);
+                PrintHourGlassRecursive(i_ClockBuilder, i_Height - 2, i_Level + 1);
+                i_ClockBuilder.AppendLine(line);
             }
         }
 
