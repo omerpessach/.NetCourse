@@ -8,37 +8,37 @@ namespace A22_Ex01_2
     {
         static void Main()
         {
-            HourGlass();
+            PrintHourGlass();
         }
 
-        public static void HourGlass(int i_StarCount = 5, int i_SpaceFromStart = 0)
+        public static void PrintHourGlass(int i_Height = 5, int i_Level = 0)
         {
-            if (i_StarCount > 0)
+            StringBuilder clockBuilder = new StringBuilder();
+
+            PrintHourGlassRecursive(clockBuilder, i_Height, i_Level);
+            Console.Write(clockBuilder.ToString());
+        }
+
+        private static void PrintHourGlassRecursive(StringBuilder clockBuilder, int i_Height, int i_Level)
+        {
+            string line = GetLevelHourGlass(i_Height, i_Level++);
+
+            clockBuilder.AppendLine(line);
+            if (i_Height > 2)
             {
-                PrintLevelHourGlass(i_StarCount, i_SpaceFromStart);
-                HourGlass(i_StarCount - 2, i_SpaceFromStart + 1);
-                if (i_StarCount > 1)
-                {
-                    PrintLevelHourGlass(i_StarCount, i_SpaceFromStart);
-                }
+                PrintHourGlassRecursive(clockBuilder, i_Height - 2, i_Level);
+                clockBuilder.AppendLine(line);
             }
         }
 
-        public static void PrintLevelHourGlass(int i_StarCount, int i_SpaceFromStart)
+        private static string GetLevelHourGlass(int i_Height, int i_Level)
         {
-            PrintSingleCharNTimesInARow(' ', i_SpaceFromStart);
-            PrintSingleCharNTimesInARow('*', i_StarCount);
-            PrintSingleCharNTimesInARow(' ', i_SpaceFromStart);
-            Console.WriteLine();
+            return PrintSingleCharNTimesInARow(' ', i_Level) + PrintSingleCharNTimesInARow('*', i_Height);
         }
 
-        public static void PrintSingleCharNTimesInARow(char i_Sign, int i_TimesToPrint)
+        private static string PrintSingleCharNTimesInARow(char i_Sign, int i_TimesToPrint)
         {
-            if (i_TimesToPrint > 0)
-            {
-                Console.Write(i_Sign);
-                PrintSingleCharNTimesInARow(i_Sign, i_TimesToPrint - 1);
-            }
+            return new string(i_Sign, i_TimesToPrint);
         }
     }
 }

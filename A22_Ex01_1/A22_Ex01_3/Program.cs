@@ -17,10 +17,10 @@ namespace A22_Ex01_3
             int inputFromUserAsUInt;
 
             inputFromUserAsUInt = GetInputFromUser();
-            Ex2.Program.HourGlass(inputFromUserAsUInt);
+            Ex2.Program.PrintHourGlass(inputFromUserAsUInt);
         }
 
-        static int GetInputFromUser()
+        private static int GetInputFromUser()
         {
             int userInputAsNumber;
             string inputRequest = "Please enter the height of the hour Glass";
