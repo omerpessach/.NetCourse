@@ -21,12 +21,12 @@ namespace A22_Ex01_2
 
         private static void PrintHourGlassRecursive(StringBuilder clockBuilder, int i_Height, int i_Level)
         {
-            string line = GetLevelHourGlass(i_Height, i_Level++);
+            string line = GetLevelHourGlass(i_Height, i_Level);
 
             clockBuilder.AppendLine(line);
             if (i_Height > 2)
             {
-                PrintHourGlassRecursive(clockBuilder, i_Height - 2, i_Level);
+                PrintHourGlassRecursive(clockBuilder, i_Height - 2, i_Level + 1);
                 clockBuilder.AppendLine(line);
             }
         }
