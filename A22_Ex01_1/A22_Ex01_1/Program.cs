@@ -20,19 +20,25 @@ namespace A22_Ex01_1
             int minNumber = int.MaxValue;
             double avgOnes;
             double avgZeros;
+            int numberA;
+            int numberB;
+            int numberC;
+            int numberD;
+            int countOfIncreasingSequencesNumbers;
 
-            for (int i = 0; i < 4; i++)
-            {
-                Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            }
-
+            numberA = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            numberB = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            numberC = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            numberD = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
             avgOnes = numberOfOnesInAllNumbers / 4;
             avgZeros = numberOfZerosInAllNumbers / 4;
+            countOfIncreasingSequencesNumbers = CountOfIncreasingSequencesNumbers(numberA, numberB, numberC, numberD);
             Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
             Console.WriteLine(string.Format("Avg of zeros is {0} :)", avgZeros));
             Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
             Console.WriteLine(string.Format("The max number is {0}", maxNumber));
             Console.WriteLine(string.Format("The min number is {0}", minNumber));
+            Console.WriteLine(string.Format("Count of increasing sequences numbers is {0}", countOfIncreasingSequencesNumbers));
         }
 
         private static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
