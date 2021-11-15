@@ -16,68 +16,121 @@ namespace A22_Ex01_1
             int numberOfOnesInAllNumbers = 0;
             int numberOfZerosInAllNumbers = 0;
             int countOfNumbersThatPowOfTwo = 0;
-            int maxNumber = 0;
-            int minNumber = int.MaxValue;
+            int maxNumber;
+            int minNumber;
             double avgOnes;
             double avgZeros;
+            string numberAAsString;
+            string numberBAsString;
+            string numberCAsString;
+            string numberDAsString;
             int numberA;
             int numberB;
             int numberC;
             int numberD;
             int countOfIncreasingSequencesNumbers;
 
-            numberA = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            numberB = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            numberC = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
-            numberD = Input(ref numberOfOnesInAllNumbers, ref numberOfZerosInAllNumbers, ref countOfNumbersThatPowOfTwo, ref maxNumber, ref minNumber);
+            numberAAsString = InputNumberFromUser();
+            numberBAsString = InputNumberFromUser();
+            numberCAsString = InputNumberFromUser();
+            numberDAsString = InputNumberFromUser();
+
+            numberOfOnesInAllNumbers = GetNumberOfSignalInAllNumbers('1', numberAAsString, numberBAsString, numberCAsString, numberDAsString);
+            numberOfZerosInAllNumbers = GetNumberOfSignalInAllNumbers('0', numberAAsString, numberBAsString, numberCAsString, numberDAsString);
             avgOnes = numberOfOnesInAllNumbers / 4;
             avgZeros = numberOfZerosInAllNumbers / 4;
+            countOfNumbersThatPowOfTwo = CountOfNumbersThatPowOfTwo(numberAAsString, numberBAsString, numberCAsString, numberDAsString);
+            numberA = ConvertStringToDecimelNumber(numberAAsString);
+            numberB = ConvertStringToDecimelNumber(numberBAsString);
+            numberC = ConvertStringToDecimelNumber(numberCAsString);
+            numberD = ConvertStringToDecimelNumber(numberDAsString);
+            minNumber = GetMinNumberFromArray(numberA, numberB, numberC, numberD);
+            maxNumber = GetMaxNumberFromArray(numberA, numberB, numberC, numberD);
             countOfIncreasingSequencesNumbers = CountOfIncreasingSequencesNumbers(numberA, numberB, numberC, numberD);
             Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
-            Console.WriteLine(string.Format("Avg of zeros is {0} :)", avgZeros));
+            Console.WriteLine(string.Format("Avg of zeros is {0}", avgZeros));
             Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
             Console.WriteLine(string.Format("The max number is {0}", maxNumber));
             Console.WriteLine(string.Format("The min number is {0}", minNumber));
             Console.WriteLine(string.Format("Count of increasing sequences numbers is {0}", countOfIncreasingSequencesNumbers));
         }
 
-        private static int Input(ref int io_NumberOfOnesInAllNumbers, ref int io_NumberOfZerosInAllNumbers, ref int io_CountOfNumbersThatPowOfTwo, ref int io_MaxNumber, ref int io_MinNumber)
+        private static string InputNumberFromUser()
         {
             string inputRequest = "Please enter number in binary format";
             string userInput;
-            int numberOfOnes;
-            int numberOfZeros;
-            int convertedNumber;
 
             Console.WriteLine(inputRequest);
             userInput = Console.ReadLine();
-            while (userInput.Length != 8 || (!userInput.Contains("0") || !userInput.Contains("1")))
+            while ((userInput.Length != 8 || (!userInput.Contains("0") || !userInput.Contains("1"))) && (userInput != "11111111") && (userInput != "00000000"))
             {
                 Console.WriteLine(string.Format("The input is wrong, please try again\n {0}", inputRequest));
                 userInput = Console.ReadLine();
             }
 
-            numberOfOnes = userInput.Split('1').Length - 1;
-            numberOfZeros = userInput.Split('0').Length - 1;
-            io_NumberOfOnesInAllNumbers += numberOfOnes;
-            io_NumberOfZerosInAllNumbers += numberOfZeros;
-            if (numberOfOnes == 1)
+            return userInput;
+        }
+
+        private static int GetNumberOfSignalInAllNumbers(char i_Signal, params string[] i_DecNumbers)
+        {
+            int numberOfSignal = 0;
+
+            foreach (string item in i_DecNumbers)
             {
-                io_CountOfNumbersThatPowOfTwo++;
+                numberOfSignal += GetNumberOfSignalInSingleNumber(i_Signal, item);
             }
 
-            convertedNumber = ConvertStringToDecimelNumber(userInput);
-            if (io_MaxNumber < convertedNumber)
+            return numberOfSignal;
+        }
+
+        private static int GetNumberOfSignalInSingleNumber(char i_Signal, string i_DecNumber)
+        {
+            return i_DecNumber.Split(i_Signal).Length - 1;
+        }
+
+        private static int CountOfNumbersThatPowOfTwo(params string[] i_DecNumbers)
+        {
+            int countOfNumbersThatPowOfTwo = 0;
+
+            foreach (string item in i_DecNumbers)
             {
-                io_MaxNumber = convertedNumber;
+                if (GetNumberOfSignalInSingleNumber('1', item) == 1)
+                {
+                    countOfNumbersThatPowOfTwo++;
+                }
             }
 
-            if (io_MinNumber > convertedNumber)
+            return countOfNumbersThatPowOfTwo;
+        }
+
+        private static int GetMinNumberFromArray(params int[] i_DecNumbers)
+        {
+            int min = int.MaxValue;
+
+            foreach (int item in i_DecNumbers)
             {
-                io_MinNumber = convertedNumber;
+                if (item < min)
+                {
+                    min = item;
+                }
             }
 
-            return convertedNumber;
+            return min;
+        }
+
+        private static int GetMaxNumberFromArray(params int[] i_DecNumbers)
+        {
+            int max = int.MinValue;
+
+            foreach (int item in i_DecNumbers)
+            {
+                if (item > max)
+                {
+                    max = item;
+                }
+            }
+
+            return max;
         }
 
         private static int ConvertStringToDecimelNumber(string i_str2Dec)
