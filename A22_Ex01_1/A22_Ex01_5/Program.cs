@@ -27,7 +27,7 @@ namespace A22_Ex01_5
 
             Console.WriteLine("Please enter a 7 digit positive number.");
             userInput = Console.ReadLine();
-            while (!uint.TryParse(userInput, out userInputUInt) || userInputUInt.ToString().Length != 7)
+            while (!uint.TryParse(userInput, out userInputUInt) || userInput.Length != 7)
             {
                 Console.WriteLine(string.Format(@"the number you entered isn't valid, please try again.\n{0}", inputRequest));
                 userInput = Console.ReadLine();

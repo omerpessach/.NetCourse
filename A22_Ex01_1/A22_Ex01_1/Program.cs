@@ -29,8 +29,9 @@ namespace A22_Ex01_1
             avgOnes = numberOfOnesInAllNumbers / 4;
             avgZeros = numberOfZerosInAllNumbers / 4;
             Console.WriteLine(string.Format("Avg of ones is {0}", avgOnes));
-            Console.WriteLine(string.Format("Avg of zeros is {0} :)", avgZeros));
+            Console.WriteLine(string.Format("Avg of zeros is {0} ", avgZeros));
             Console.WriteLine(string.Format("Count of numbers that pow of 2 {0}", countOfNumbersThatPowOfTwo));
+            Console.WriteLine(string.Format("The amount of numbers that represent increasing sequence {0}"));
             Console.WriteLine(string.Format("The max number is {0}", maxNumber));
             Console.WriteLine(string.Format("The min number is {0}", minNumber));
         }
