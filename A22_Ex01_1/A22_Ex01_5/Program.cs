@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace A22_Ex01_5
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
             GetStaticstics();
         }
@@ -51,8 +51,10 @@ namespace A22_Ex01_5
             investigationResults = string.Format(@"The Largest digit in the number is: {0}.
 The average of the current digits is: {1}.
 The number of digits which are divided by three is: {2}.
-The amount of digits which is smaller then the unity is: {3}.", largestDigit, averageDigitsResult, divisionBy3Result, smallerThanUnityResult);
+The amount of digits which is smaller then the unity is: {3}."
+, largestDigit, averageDigitsResult, divisionBy3Result, smallerThanUnityResult);
             Console.WriteLine(investigationResults);
+
         }
 
         private static char LargestDigitInTheNumber(string i_SevenDigitNumber)

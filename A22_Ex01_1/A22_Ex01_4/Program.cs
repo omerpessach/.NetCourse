@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace A22_Ex01_4
 {
-    class Program
+    public class Program
     {
         public static void Main()
         {
@@ -58,29 +58,29 @@ namespace A22_Ex01_4
 
         private static bool IsPalindrome(string i_InputString, int i_StartPoint = 0, int i_EndPoint = 5)
         {
-            bool IsTheInputPalindrome = false;
+            bool isTheInputPalindrome = false;
 
             if (!i_InputString.Any())
             {
-                IsTheInputPalindrome = false;
+                isTheInputPalindrome = false;
             }
             else if (i_StartPoint - i_EndPoint == 1)
             {
-                IsTheInputPalindrome = true;
+                isTheInputPalindrome = true;
             }
             else
             {
                 if (i_InputString[i_StartPoint] == i_InputString[i_EndPoint])
                 {
-                    IsTheInputPalindrome = IsPalindrome(i_InputString, i_StartPoint + 1, i_EndPoint - 1);
+                    isTheInputPalindrome = IsPalindrome(i_InputString, i_StartPoint + 1, i_EndPoint - 1);
                 }
                 else
                 {
-                    IsTheInputPalindrome = false;
+                    isTheInputPalindrome = false;
                 }
             }
 
-            return IsTheInputPalindrome;
+            return isTheInputPalindrome;
         }
 
         private static bool DivideByFourCheck(int i_NumberFromString)

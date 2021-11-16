@@ -4,9 +4,9 @@ using System.Text;
 
 namespace A22_Ex01_1
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
             AnalyzeBinaryNumbers();
         }
@@ -150,31 +150,32 @@ namespace A22_Ex01_1
 
         private static bool DoseTheNumberRepresentIncreasingSequence(int i_DecNumber)
         {
-            string NumberToString = i_DecNumber.ToString();
-            bool IncreasingSequence = true;
-            for (int i = 0; i < (NumberToString.Length - 1) && IncreasingSequence == true; ++i)
+            string numberToString = i_DecNumber.ToString();
+            bool isIncreasingSequence = true;
+            for (int i = 0; i < (numberToString.Length - 1) && isIncreasingSequence == true; ++i)
             {
-                if ((int)NumberToString[i] >= (int)NumberToString[i + 1])
+                if ((int)numberToString[i] >= (int)numberToString[i + 1])
                 {
-                    IncreasingSequence = false;
+                    isIncreasingSequence = false;
                 }
             }
-            return IncreasingSequence;
+
+            return isIncreasingSequence;
         }
 
         private static int CountOfIncreasingSequencesNumbers(params int[] i_DecNumbers)
         {
-            int AmountOfIncreasingSequencesNumbers = 0;
+            int amountOfIncreasingSequencesNumbers = 0;
 
-            foreach (int DecNumber in i_DecNumbers)
+            foreach (int decNumber in i_DecNumbers)
             {
-                if (DoseTheNumberRepresentIncreasingSequence(DecNumber) == true)
+                if (DoseTheNumberRepresentIncreasingSequence(decNumber) == true)
                 {
-                    AmountOfIncreasingSequencesNumbers++;
+                    amountOfIncreasingSequencesNumbers++;
                 }
             }
 
-            return AmountOfIncreasingSequencesNumbers;
+            return amountOfIncreasingSequencesNumbers;
         }
     }
 }

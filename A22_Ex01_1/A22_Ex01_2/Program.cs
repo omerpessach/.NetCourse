@@ -6,7 +6,7 @@ namespace A22_Ex01_2
 {
     public class Program
     {
-        static void Main()
+        public static void Main()
         {
             PrintHourGlass();
         }

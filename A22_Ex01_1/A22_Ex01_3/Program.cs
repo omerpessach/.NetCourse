@@ -5,9 +5,9 @@ using Ex2 = A22_Ex01_2;
 
 namespace A22_Ex01_3
 {
-    class Program
+    public class Program
     {
-        static void Main()
+        public static void Main()
         {
             PrintHourGlass();
         }
