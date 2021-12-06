@@ -10,41 +10,51 @@ namespace ConsoleApp1
     {
         private const int k_MinNumOfAttempts = 4;
         private const int k_MaxNumOfAttempts = 10;
+        private const ushort k_SequenceLenght = 4;
+        private const char k_CorrectLocationSign = 'V';
+        private const char k_AlmostCorrectLocationSign = 'X';
+        private const char k_HiddenSign = '#';
+        private const string k_TypeGuessStatement = "Please type your next guess <{0}> or 'Q' to quit";
+        private const string k_PrePrintBoardStatusStatement = "current board status:";
+        private const string k_AskForRestartStatement = "Would you like to start a new game? <Y/N>";
+        private const string k_WinStatement = "You guessed after {0} steps!";
+        private const string k_LostStatement = "No more guesses allowed. You Lost.";
+        private const string k_InValidInputNotALetter = "No more guesses allowed. You Lost."; // I should change the text
+        private const string k_InValidInputNotANumber = "No more guesses allowed. You Lost.";
+        private const string k_InValidInputNubmerOutOfRange = "No more guesses allowed. You Lost.";
+        private const string k_InValidInputLetterOutOfRange = "No more guesses allowed. You Lost.";
 
         private StringBuilder m_GameBuilder;
-        private GameManager gameManager = new GameManager(0, "");
+        private GameManager gameManager = new GameManager(0);
 
-        private void CheckIfAnswerIsCorrect()
+        private void checkIfAnswerIsCorrect()
         {
             gameManager.CheckIfCorrectAnswer();
             Console.WriteLine("");
         }
 
-        private void PrintBoard()
+        private void printBoard()
         {
         }
 
-        private void CleanScreen()
+        private void cleanScreen()
         {
-            Ex02.ConsoleUtils.Screen.Clear();
+            Screen.Clear();
         }
 
-        private bool IsInputValid(string input)
+        private bool isInputValid(string input)
         {
             return false;
         }
 
-        private void Restart()
+        private void restart()
         {
 
         }
 
-        /// <summary>
-        /// After 'Q'
-        /// </summary>
-        private void Exit()
+        private void closeConsole()
         {
-
+            Environment.Exit(0);
         }
     }
 }
