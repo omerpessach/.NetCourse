@@ -14,6 +14,7 @@ namespace ConsoleApp1
         private static void StartGame()
         {
             BullsAndCowsGameConsole gameConsole = new BullsAndCowsGameConsole();
+            gameConsole.StartNewGame();
         }
     }
 }

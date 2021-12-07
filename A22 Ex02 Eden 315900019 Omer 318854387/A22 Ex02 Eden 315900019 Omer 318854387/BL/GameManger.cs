@@ -27,11 +27,6 @@ namespace BL
             get { return m_RoundsOfGame; }
         }
 
-        private char[] RandomSequenceForComparison
-        {
-            get { return m_RandomSequenceForComparison; }
-        }
-
         public GameManger(uint i_AmountOfRounds)
         {
             m_RoundsOfGame = new Round[i_AmountOfRounds];
@@ -73,7 +68,7 @@ namespace BL
             return isLetterExists;
         }
 
-        public Round createRound(char[] i_currentGuessFromUser)
+        public Round CreateRound(char[] i_currentGuessFromUser)
         {
             Guess currentGuess = new Guess(i_currentGuessFromUser);
 

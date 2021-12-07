@@ -49,8 +49,7 @@ namespace BL
 
         public Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
         {
-            return new Feedback(AmountOfBulls(i_RandomSequenceForComparison), AmountOfCows(i_RandomSequenceForComparison)) ;
+            return new Feedback(AmountOfBulls(i_RandomSequenceForComparison), AmountOfCows(i_RandomSequenceForComparison));
         }
-
     }
 }
