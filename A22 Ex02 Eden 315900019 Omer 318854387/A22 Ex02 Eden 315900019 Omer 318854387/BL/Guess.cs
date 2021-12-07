@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BL
 {
-    class Guess
+    public class Guess
     {
         public const uint k_AmountOfCharForGuess = 4;
         private char[] m_CurrentGuess = new char[k_AmountOfCharForGuess];

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BL
 {
-    class Round
+    public class Round
     {
         private Guess m_CurrentGuess = null ;
         private Feedback? m_CurrentFeedback = null;

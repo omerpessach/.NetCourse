@@ -4,11 +4,11 @@ using System.Text;
 
 namespace BL
 {
-    public class GameManager
+    public class GameManger
     {
-        private Round[] m_RoundsOfGame = null;
         private const ushort m_AmountOfLettersInSequence = 4;
-        private readonly char[] m_RandomSequenceForComparison;
+        private char[] m_RandomSequenceForComparison;
+        private Round[] m_RoundsOfGame = null;
 
         public enum eGuessingOption
         {
@@ -22,12 +22,17 @@ namespace BL
             H,
         }
 
-        public char[] RandomSequenceForComparison
+        private Round[] RoundsOfGame
+        {
+            get { return m_RoundsOfGame; }
+        }
+
+        private char[] RandomSequenceForComparison
         {
             get { return m_RandomSequenceForComparison; }
         }
 
-        public GameManager(uint i_AmountOfRounds)
+        public GameManger(uint i_AmountOfRounds)
         {
             m_RoundsOfGame = new Round[i_AmountOfRounds];
             m_RandomSequenceForComparison = createRandomSequence();
@@ -68,7 +73,12 @@ namespace BL
             return isLetterExists;
         }
 
+        public Round createRound(char[] i_currentGuessFromUser)
+        {
+            Guess currentGuess = new Guess(i_currentGuessFromUser);
+
+            return new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
+        }
 
     }
-
 }

@@ -4,7 +4,7 @@ using System.Text;
 
 namespace BL
 {
-    struct Feedback
+    public struct Feedback
     {
         private byte m_AmountOfV;
         private byte m_AmountOfX;
