@@ -37,7 +37,7 @@ namespace BL
             {
                 for (int j = 0; j < i_RandomSequenceForComparison.Length; j++)
                 {
-                    if (i != j && m_CurrentGuess[i] == i_RandomSequenceForComparison[j])
+                    if ((i != j) && m_CurrentGuess[i] == i_RandomSequenceForComparison[j])
                     {
                         amountOfCows++;
                     }

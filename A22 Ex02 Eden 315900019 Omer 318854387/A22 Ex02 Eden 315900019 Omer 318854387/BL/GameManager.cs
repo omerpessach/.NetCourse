@@ -57,9 +57,9 @@ namespace BL
         {
             bool isLetterExists = false;
 
-            foreach(char currentLetter in i_currentSequence)
+            foreach (char currentLetter in i_currentSequence)
             {
-                if(i_currentCharFromRandom == currentLetter)
+                if (i_currentCharFromRandom == currentLetter)
                 {
                     isLetterExists = true;
                 }
