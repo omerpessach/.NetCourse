@@ -16,6 +16,4 @@ namespace ConsoleApp1
             BullsAndCowsGameConsole gameConsole = new BullsAndCowsGameConsole();
         }
     }
-
-
 }
