@@ -11,21 +11,23 @@ namespace ConsoleApp1
         private const uint k_MinNumOfAttempts = 4;
         private const uint k_MaxNumOfAttempts = 10;
         private const ushort k_SequenceLenght = 4;
-        private const char k_CorrectLocationSign = 'V';
-        private const char k_AlmostCorrectLocationSign = 'X';
-        private const char k_HiddenSign = '#';
+        private const string k_QuitSign = "Q";
+        private const char k_YesSign = 'Y';
+        private const char k_NoSign = 'N';
         private const string k_TypeGuessStatement = "Please type your next guess <{0}> or 'Q' to quit";
-        private const string k_PrePrintBoardStatusStatement = "current board status:";
         private const string k_AskForRestartStatement = "Would you like to start a new game? <Y/N>";
         private const string k_WinStatement = "You guessed after {0} steps!";
         private const string k_LostStatement = "No more guesses allowed. You Lost.";
         private const string k_NumberOfGuessesRequest = "Please enter number of guesses between {0} to {1}";
-        private const string k_InValidInputNotALetter = "No more guesses allowed. You Lost."; // I should change the text
-        private const string k_InValidInputNotANumber = "No more guesses allowed. You Lost.";
-        private const string k_InValidInputNumberOutOfRange = "No more guesses allowed. You Lost.";
-        private const string k_InValidInputLetterOutOfRange = "No more guesses allowed. You Lost.";
-        private GameManger m_GameManager = new GameManger(0);
+        private const string k_InValidInputNotALetters = "Invalid format, letters only";
+        private const string k_InValidInputNotANumber = "Invalid format, native number only";
+        private const string k_InValidInputNumberOutOfRange = "Number out of range";
+        private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range";
+        private const string k_InValidInputLNotEnoughChars = "Invalid, type 4 chars only";
+        private const string k_QuitMsg = "Goodbye";
+        private GameManger m_GameManager;
         private Board m_Board;
+        private uint m_guessesNumber;
 
         private Board Board
         {
@@ -33,52 +35,45 @@ namespace ConsoleApp1
             set { m_Board = value; }
         }
 
-
         public void StartNewGame()
         {
-            uint guessesNumber = getGuessesNumberFromUser();
+            m_guessesNumber = getGuessesNumberFromUser();
 
-            Board = new Board(guessesNumber);
-            guessesInteractionsWithTheUser();
-        }
-
-        private void checkIfAnswerIsCorrect(char[] i_Guesses)
-        {
-            m_GameManager.CreateRound(i_Guesses);
-            Console.WriteLine("");
-        }
-
-        private void cleanScreen()
-        {
-            Screen.Clear();
+            m_GameManager = new GameManger(m_guessesNumber);
+            Board = new Board(m_guessesNumber);
+            Board.PrintBoard();
+            startGuessesInteractionsWithTheUser();
         }
 
         private void closeConsole()
         {
+            Console.WriteLine(k_QuitMsg);
             Environment.Exit(0);
         }
 
-        private void guessesInteractionsWithTheUser()
+        private void startGuessesInteractionsWithTheUser()
         {
-            char[] guessesInput = new char[k_SequenceLenght];
-
-            for (int i = 0; i < k_SequenceLenght; i++)
+            for (int i = 0; i < m_guessesNumber; i++)
             {
-                guessesInput[i] = getUserGuess();
-            }
+                char[] guessesInput = getUserGuess().ToCharArray();
 
-            checkIfAnswerIsCorrect(guessesInput);
-            Board.PrintBoard();
+                Round newRound = m_GameManager.CreateRound(guessesInput);
+                Board.AddRound(newRound);
+                Board.PrintBoard();
+            }
         }
 
-        private char getUserGuess()
+        private string getUserGuess()
         {
-            char userInput;
+            string userInput;
             eInputValidCheckResponse validCheckResponse;
-            char[] computerSequence = { 'A', 'B' }; //m_GameManager.RandomSequenceForComparison;
-            Console.WriteLine(string.Format(k_TypeGuessStatement, computerSequence.ToString()));
-            userInput = Console.ReadKey().KeyChar;
-            validCheckResponse = Validations.IsCharRepresnetscharInSpecRange(userInput, computerSequence);
+            char[] computerSequence = { 'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H' }; //m_GameManager.RandomSequenceForComparison;
+            StringBuilder sb = new StringBuilder();
+            sb.Append(computerSequence);
+
+            Console.WriteLine(string.Format(k_TypeGuessStatement, sb));
+            userInput = Console.ReadLine();
+            validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, computerSequence);
             while (validCheckResponse != eInputValidCheckResponse.VALID)
             {
                 switch (validCheckResponse)
@@ -88,14 +83,19 @@ namespace ConsoleApp1
                             closeConsole();
                             break;
                         }
+                    case eInputValidCheckResponse.NOTENOUGHCHARS:
+                        {
+                            Console.WriteLine(k_InValidInputLNotEnoughChars);
+                            break;
+                        }
                     case eInputValidCheckResponse.OUT_OF_RANGE:
                         {
-                            Console.WriteLine(k_InValidInputLetterOutOfRange);
+                            Console.WriteLine(k_InValidInputLettersOutOfRange);
                             break;
                         }
                     case eInputValidCheckResponse.WRONG_FORMAT:
                         {
-                            Console.WriteLine(k_InValidInputNotALetter);
+                            Console.WriteLine(k_InValidInputNotALetters);
                             break;
                         }
                     default:
@@ -104,8 +104,8 @@ namespace ConsoleApp1
                         }
                 }
 
-                userInput = Console.ReadKey().KeyChar;
-                validCheckResponse = Validations.IsCharRepresnetscharInSpecRange(userInput, computerSequence);
+                userInput = Console.ReadLine();
+                validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, computerSequence);
             }
 
             return userInput;
@@ -114,18 +114,18 @@ namespace ConsoleApp1
         private uint getGuessesNumberFromUser()
         {
             string requestForNumberMsg = string.Format(k_NumberOfGuessesRequest, k_MinNumOfAttempts, k_MaxNumOfAttempts);
-            StringBuilder requestForNumberOutput = new StringBuilder(requestForNumberMsg);
-            StringBuilder notADigitMsg = new StringBuilder(k_InValidInputNotANumber);
-            StringBuilder notInRangeMsg = new StringBuilder(k_InValidInputNumberOutOfRange);
             string userInput;
             uint userInputAsValidDigit;
             eInputValidCheckResponse validCheckResponse;
+            StringBuilder requestForNumberOutput = new StringBuilder(requestForNumberMsg);
+            StringBuilder notADigitMsg = new StringBuilder(k_InValidInputNotANumber);
+            StringBuilder notInRangeMsg = new StringBuilder(k_InValidInputNumberOutOfRange);
 
             notADigitMsg.AppendLine(requestForNumberMsg);
             notInRangeMsg.AppendLine(requestForNumberMsg);
             Console.WriteLine(requestForNumberOutput);
             userInput = Console.ReadLine();
-            validCheckResponse = Validations.IsStringRepresnetsDigitInSpecRange(userInput, k_MinNumOfAttempts, k_MaxNumOfAttempts, out userInputAsValidDigit);
+            validCheckResponse = isStringRepresnetsDigitInSpecRange(userInput, k_MinNumOfAttempts, k_MaxNumOfAttempts, out userInputAsValidDigit);
             while (validCheckResponse != eInputValidCheckResponse.VALID)
             {
                 switch (validCheckResponse)
@@ -152,10 +152,69 @@ namespace ConsoleApp1
                 }
 
                 userInput = Console.ReadLine();
-                validCheckResponse = Validations.IsStringRepresnetsDigitInSpecRange(userInput, k_MinNumOfAttempts, k_MaxNumOfAttempts, out userInputAsValidDigit);
+                validCheckResponse = isStringRepresnetsDigitInSpecRange(userInput, k_MinNumOfAttempts, k_MaxNumOfAttempts, out userInputAsValidDigit);
             }
 
             return userInputAsValidDigit;
         }
+
+        private eInputValidCheckResponse isStringRepresnetsDigitInSpecRange(string i_stringToCheck, uint i_MinValue, uint i_MaxValue, out uint o_result)
+        {
+            eInputValidCheckResponse response = eInputValidCheckResponse.VALID;
+            uint inputNumber;
+            o_result = default;
+
+            if (i_stringToCheck == k_QuitSign)
+            {
+                response = eInputValidCheckResponse.QUIT;
+            }
+            else if (!uint.TryParse(i_stringToCheck, out inputNumber))
+            {
+                response = eInputValidCheckResponse.WRONG_FORMAT;
+            }
+            else if (inputNumber < i_MinValue || inputNumber > i_MaxValue)
+            {
+                response = eInputValidCheckResponse.OUT_OF_RANGE;
+            }
+            else
+            {
+                o_result = inputNumber;
+            }
+
+            return response;
+        }
+
+        private eInputValidCheckResponse isStringContainsLetterAndSpecCharsOnly(string i_StringToCheck, char[] i_SpecChars)
+        {
+            eInputValidCheckResponse response = eInputValidCheckResponse.VALID;
+
+            if (i_StringToCheck == k_QuitSign)
+            {
+                response = eInputValidCheckResponse.QUIT;
+            }
+            else if (i_StringToCheck.Length != k_SequenceLenght)
+            {
+                response = eInputValidCheckResponse.NOTENOUGHCHARS;
+            }
+            else if (!Validations.IsStringContainsLettersOnly(i_StringToCheck))
+            {
+                response = eInputValidCheckResponse.WRONG_FORMAT;
+            }
+            else if (!Validations.IsStringContainsSpecCharsOnly(i_StringToCheck, i_SpecChars))
+            {
+                response = eInputValidCheckResponse.OUT_OF_RANGE;
+            }
+
+            return response;
+        }
+    }
+
+    public enum eInputValidCheckResponse
+    {
+        VALID,
+        OUT_OF_RANGE,
+        WRONG_FORMAT,
+        NOTENOUGHCHARS,
+        QUIT,
     }
 }

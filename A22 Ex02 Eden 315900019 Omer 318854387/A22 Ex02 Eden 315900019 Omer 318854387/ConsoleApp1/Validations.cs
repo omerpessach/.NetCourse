@@ -6,58 +6,29 @@ namespace ConsoleApp1
 {
     public static class Validations
     {
-        public static eInputValidCheckResponse IsCharRepresnetscharInSpecRange(char i_CharToCheck, char[] i_Range)
+        public static bool IsStringContainsLettersOnly(string i_StringToCheck)
         {
-            eInputValidCheckResponse response = eInputValidCheckResponse.VALID;
+            bool isStringContainsLettersOnly = true;
 
-            if (!Char.IsLetter(i_CharToCheck))
+            for (int i = 0; i < i_StringToCheck.Length && isStringContainsLettersOnly; i++)
             {
-                response = eInputValidCheckResponse.WRONG_FORMAT;
-            }
-            else if (i_CharToCheck == 'Q')
-            {
-                response = eInputValidCheckResponse.QUIT;
-            }
-            else if (!i_Range.ToString().Contains(i_CharToCheck.ToString()))
-            {
-                response = eInputValidCheckResponse.OUT_OF_RANGE;
+                isStringContainsLettersOnly = char.IsLetter(i_StringToCheck[i]);
             }
 
-            return response;
+            return isStringContainsLettersOnly;
         }
 
-        public static eInputValidCheckResponse IsStringRepresnetsDigitInSpecRange(string i_stringToCheck, uint i_MinValue, uint i_MaxValue, out uint o_result)
+        public static bool IsStringContainsSpecCharsOnly(string i_StringToCheck, char[] i_SpecChars)
         {
-            eInputValidCheckResponse response = eInputValidCheckResponse.VALID;
-            uint inputNumber;
+            bool isStringContainsSpecCharsOnly = true;
+            string specChars = new string(i_SpecChars);
 
-            if (i_stringToCheck == "Q")
+            for (int i = 0; i < i_StringToCheck.Length && isStringContainsSpecCharsOnly; i++)
             {
-                response = eInputValidCheckResponse.QUIT;
-            }
-            else if (!uint.TryParse(i_stringToCheck, out inputNumber))
-            {
-                response = eInputValidCheckResponse.WRONG_FORMAT;
-            }
-            else if (inputNumber < i_MinValue || inputNumber > i_MaxValue)
-            {
-                response = eInputValidCheckResponse.OUT_OF_RANGE;
-            }
-            else
-            {
-                o_result = inputNumber;
+                isStringContainsSpecCharsOnly = specChars.Contains(i_StringToCheck[i].ToString());
             }
 
-            o_result = default;
-            return response;
+            return isStringContainsSpecCharsOnly;
         }
-
-    }
-    public enum eInputValidCheckResponse
-    {
-        VALID,
-        OUT_OF_RANGE,
-        WRONG_FORMAT,
-        QUIT,
     }
 }

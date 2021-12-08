@@ -9,9 +9,21 @@ namespace BL
         public const uint k_AmountOfCharForGuess = 4;
         private char[] m_CurrentGuess = new char[k_AmountOfCharForGuess];
 
+        public char[] CurrentGuess
+        {
+            get
+            {
+                return m_CurrentGuess;
+            }
+            set
+            {
+                m_CurrentGuess = value;
+            }
+        }
+
         public Guess(char[] i_GuessFromUser)
         {
-            m_CurrentGuess = i_GuessFromUser;
+            CurrentGuess = i_GuessFromUser;
         }
 
         private uint AmountOfBulls(char[] i_RandomSequenceForComparison)
@@ -20,7 +32,7 @@ namespace BL
 
             for (int i = 0; i < k_AmountOfCharForGuess; i++)
             {
-                if (m_CurrentGuess[i] == i_RandomSequenceForComparison[i])
+                if (CurrentGuess[i] == i_RandomSequenceForComparison[i])
                 {
                     amountOfBulls++;
                 }
@@ -37,7 +49,7 @@ namespace BL
             {
                 for (int j = 0; j < i_RandomSequenceForComparison.Length; j++)
                 {
-                    if ((i != j) && m_CurrentGuess[i] == i_RandomSequenceForComparison[j])
+                    if ((i != j) && CurrentGuess[i] == i_RandomSequenceForComparison[j])
                     {
                         amountOfCows++;
                     }
@@ -47,7 +59,7 @@ namespace BL
             return amountOfCows;
         }
 
-        public Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
+        internal Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
         {
             return new Feedback(AmountOfBulls(i_RandomSequenceForComparison), AmountOfCows(i_RandomSequenceForComparison));
         }
