@@ -6,10 +6,10 @@ namespace BL
 {
     public class Round
     {
-        private Guess m_CurrentGuess;
+        private Guess    m_CurrentGuess;
         private Feedback m_CurrentFeedback;
 
-        public Guess CurrentGuess
+        public Guess    CurrentGuess
         {
             get
             {

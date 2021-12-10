@@ -8,15 +8,15 @@ namespace ConsoleApp1
 {
     public class Board
     {
-        private const char k_CorrectLocationSign = 'V';
-        private const char k_AlmostCorrectLocationSign = 'X';
-        private const char k_BlankSign = ' ';
-        private const int k_NumberOfCharsInRow = 8;
-        private const int k_MiddleOfBoard = 4;
-        private const int k_EndOfRow = 8;
         private const string k_PrePrintBoardStatusStatement = "Current board status:";
-        private uint m_NumberOfGuesses;
-        private char[,] m_BoardGame;
+        private const char   k_CorrectLocationSign = 'V';
+        private const char   k_AlmostCorrectLocationSign = 'X';
+        private const char   k_BlankSign = ' ';
+        private const int    k_NumberOfCharsInRow = 8;
+        private const int    k_MiddleOfBoard = 4;
+        private const int    k_EndOfRow = 8;
+        private uint         m_NumberOfGuesses;
+        private char[,]      m_BoardGame;
 
         private uint NumberOfGuesses
         {
@@ -31,7 +31,7 @@ namespace ConsoleApp1
             buildBoard();
         }
 
-        public void PrintBoard()
+        public void  PrintBoard()
         {
             cleanScreen();
             Console.WriteLine(k_PrePrintBoardStatusStatement);
@@ -39,7 +39,7 @@ namespace ConsoleApp1
             buildBoard();
         }
 
-        public void AddRound(Round i_NewRound, int i_GuessNumber)
+        public void  AddRound(Round i_NewRound, int i_GuessNumber)
         {
             addGuess(i_NewRound.CurrentGuess, i_GuessNumber);
             addFeedback(i_NewRound.CurrentFeedback, i_GuessNumber);
@@ -80,6 +80,7 @@ namespace ConsoleApp1
         private void buildBoard()
         {
             StringBuilder m_GameBuilder = new StringBuilder();
+
             for (int i = 0; i < m_BoardGame.GetLength(0); i++)
             {
                 m_GameBuilder.AppendFormat(
@@ -104,7 +105,7 @@ m_BoardGame[i, 7]);
 {0}", m_GameBuilder.ToString());
 
             Console.WriteLine(printOnScreen);
-        }
+        } 
 
         private void cleanScreen()
         {

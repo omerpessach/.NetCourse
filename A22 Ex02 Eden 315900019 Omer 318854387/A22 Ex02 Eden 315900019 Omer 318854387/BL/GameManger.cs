@@ -7,8 +7,8 @@ namespace BL
     public class GameManger
     {
         private const ushort m_AmountOfLettersInSequence = 4;
-        private char[] m_RandomSequenceForComparison;
-        private Round[] m_RoundsOfGame = null;
+        private char[]       m_RandomSequenceForComparison;
+        private Round[]      m_RoundsOfGame = null;
 
         public enum eGuessingOption
         {
@@ -29,13 +29,13 @@ namespace BL
 
         public GameManger(uint i_AmountOfRounds)
         {
-            m_RoundsOfGame = new Round[i_AmountOfRounds];
+            m_RoundsOfGame =                 new Round[i_AmountOfRounds];
             m_RandomSequenceForComparison = createRandomSequence();
         }
 
-        private char[] createRandomSequence() //should it be static?
+        private char[] createRandomSequence() 
         {
-            Random randomAct = new Random();
+            Random randomAct =                       new Random();
             char randomChar;
             char[] tempRandomSequenceForComparison = new char[m_AmountOfLettersInSequence];
 
@@ -53,7 +53,7 @@ namespace BL
             return tempRandomSequenceForComparison;
         }
 
-        private bool checkIfExistsInSequence(char i_currentCharFromRandom, char[] i_currentSequence)
+        private bool   checkIfExistsInSequence(char i_currentCharFromRandom, char[] i_currentSequence)
         {
             bool isLetterExists = false;
 
@@ -68,7 +68,7 @@ namespace BL
             return isLetterExists;
         }
 
-        public Round CreateRound(char[] i_currentGuessFromUser)
+        public Round   CreateRound(char[] i_currentGuessFromUser)
         {
             Guess currentGuess = new Guess(i_currentGuessFromUser);
 
