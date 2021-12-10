@@ -35,7 +35,7 @@ namespace ConsoleApp1
         {
             cleanScreen();
             Console.WriteLine(k_PrePrintBoardStatusStatement);
-            Console.WriteLine(string.Empty);
+            Console.WriteLine();
             buildBoard();
         }
 
@@ -52,7 +52,6 @@ namespace ConsoleApp1
             {
                 m_BoardGame[i_GuessNumber, startIndex] = i_CurrentGuess.CurrentGuess[startIndex];
             }
-
         }
 
         private void addFeedback(Feedback i_CurrentFeedback, int i_GuessNumber)
@@ -111,10 +110,5 @@ m_BoardGame[i, 7]);
         {
             Screen.Clear();
         }
-
-
-
-
-
     }
 }
