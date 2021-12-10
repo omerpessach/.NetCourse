@@ -41,7 +41,6 @@ namespace ConsoleApp1
 
             m_GameManager = new GameManger(m_guessesNumber);
             Board = new Board(m_guessesNumber);
-            Board.PrintBoard();
             startGuessesInteractionsWithTheUser();
         }
 
@@ -58,7 +57,7 @@ namespace ConsoleApp1
                 char[] guessesInput = getUserGuess().ToCharArray();
 
                 Round newRound = m_GameManager.CreateRound(guessesInput);
-                Board.AddRound(newRound);
+                Board.AddRound(newRound,i);
                 Board.PrintBoard();
             }
         }

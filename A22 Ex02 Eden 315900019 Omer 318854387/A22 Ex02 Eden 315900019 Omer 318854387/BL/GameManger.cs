@@ -22,7 +22,7 @@ namespace BL
             H,
         }
 
-        private Round[] RoundsOfGame
+        public Round[] RoundsOfGame
         {
             get { return m_RoundsOfGame; }
         }
