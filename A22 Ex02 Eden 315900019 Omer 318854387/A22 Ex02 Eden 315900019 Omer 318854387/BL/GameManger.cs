@@ -20,10 +20,23 @@ namespace BL
     {
         private char[] m_RandomSequenceForComparison;
         private Round[] m_RoundsOfGame = null;
+        private uint m_CurrentRound = 0;
 
         private Round[] RoundsOfGame
         {
             get { return m_RoundsOfGame; }
+        }
+
+        public uint CurrentRound
+        {
+            get
+            {
+                return m_CurrentRound;
+            }
+            private set
+            {
+                m_CurrentRound = value;
+            }
         }
 
         public GameManger(uint i_AmountOfRounds, uint i_AmountOfLettersInSequence)
@@ -70,8 +83,11 @@ namespace BL
         public Round CreateRound(char[] i_currentGuessFromUser)
         {
             Guess currentGuess = new Guess(i_currentGuessFromUser);
+            Round newRound = new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
 
-            return new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
+            CurrentRound++;
+            RoundsOfGame[CurrentRound] = newRound;
+            return newRound;
         }
     }
 }

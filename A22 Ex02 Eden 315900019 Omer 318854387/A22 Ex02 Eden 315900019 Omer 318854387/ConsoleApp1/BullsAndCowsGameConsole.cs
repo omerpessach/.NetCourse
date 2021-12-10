@@ -85,7 +85,7 @@ namespace ConsoleApp1
 
             if (hasTheUserWon)
             {
-                endGameOutput.AppendLine(string.Format(k_WinStatement, m_guessesNumber));
+                endGameOutput.AppendLine(string.Format(k_WinStatement, m_GameManager.CurrentRound));
             }
             else
             {
