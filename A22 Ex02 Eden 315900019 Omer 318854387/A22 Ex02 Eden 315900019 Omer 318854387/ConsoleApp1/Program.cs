@@ -6,12 +6,12 @@ namespace ConsoleApp1
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void  Main(string[] args)
         {
-            StartGame();
+            startGame();
         }
 
-        private static void StartGame()
+        private static void startGame()
         {
             BullsAndCowsGameConsole gameConsole = new BullsAndCowsGameConsole();
             gameConsole.StartNewGame();

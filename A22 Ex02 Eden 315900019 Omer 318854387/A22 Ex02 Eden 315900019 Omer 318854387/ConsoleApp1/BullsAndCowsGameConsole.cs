@@ -93,7 +93,6 @@ namespace ConsoleApp1
             }
 
             endGameOutput.AppendLine(string.Format(k_AskForRestartStatement, k_YesSign, k_NoSign));
-
             do
             {
                 Console.WriteLine(endGameOutput);
