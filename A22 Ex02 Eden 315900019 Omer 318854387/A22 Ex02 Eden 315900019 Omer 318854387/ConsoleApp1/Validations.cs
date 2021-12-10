@@ -18,14 +18,13 @@ namespace ConsoleApp1
             return isStringContainsLettersOnly;
         }
 
-        public static bool IsStringContainsSpecCharsOnly(string i_StringToCheck, char[] i_SpecChars)
+        public static bool IsStringContainsSpecCharsOnly(string i_StringToCheck, string i_SpecChars)
         {
             bool isStringContainsSpecCharsOnly = true;
-            string specChars = new string(i_SpecChars);
 
             for (int i = 0; i < i_StringToCheck.Length && isStringContainsSpecCharsOnly; i++)
             {
-                isStringContainsSpecCharsOnly = specChars.Contains(i_StringToCheck[i].ToString());
+                isStringContainsSpecCharsOnly = i_SpecChars.Contains(i_StringToCheck[i].ToString());
             }
 
             return isStringContainsSpecCharsOnly;

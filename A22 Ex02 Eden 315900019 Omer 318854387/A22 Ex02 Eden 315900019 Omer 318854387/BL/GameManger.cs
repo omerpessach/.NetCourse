@@ -4,42 +4,41 @@ using System.Text;
 
 namespace BL
 {
+    public enum eGuessingOption
+    {
+        A,
+        B,
+        C,
+        D,
+        E,
+        F,
+        G,
+        H,
+    }
+
     public class GameManger
     {
-        private const ushort m_AmountOfLettersInSequence = 4;
         private char[] m_RandomSequenceForComparison;
         private Round[] m_RoundsOfGame = null;
-
-        public enum eGuessingOption
-        {
-            A,
-            B,
-            C,
-            D,
-            E,
-            F,
-            G,
-            H,
-        }
 
         private Round[] RoundsOfGame
         {
             get { return m_RoundsOfGame; }
         }
 
-        public GameManger(uint i_AmountOfRounds)
+        public GameManger(uint i_AmountOfRounds, uint i_AmountOfLettersInSequence)
         {
             m_RoundsOfGame = new Round[i_AmountOfRounds];
-            m_RandomSequenceForComparison = createRandomSequence();
+            m_RandomSequenceForComparison = createRandomSequence(i_AmountOfLettersInSequence);
         }
 
-        private char[] createRandomSequence() //should it be static?
+        private char[] createRandomSequence(uint i_AmountOfLettersInSequence) //should it be static?
         {
             Random randomAct = new Random();
             char randomChar;
-            char[] tempRandomSequenceForComparison = new char[m_AmountOfLettersInSequence];
+            char[] tempRandomSequenceForComparison = new char[i_AmountOfLettersInSequence];
 
-            for (int i = 0; i < m_AmountOfLettersInSequence; i++)
+            for (int i = 0; i < i_AmountOfLettersInSequence; i++)
             {
                 do
                 {
@@ -74,6 +73,5 @@ namespace BL
 
             return new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
         }
-
     }
 }
