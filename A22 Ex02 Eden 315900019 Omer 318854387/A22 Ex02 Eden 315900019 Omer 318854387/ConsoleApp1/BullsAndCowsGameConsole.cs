@@ -16,8 +16,8 @@ namespace UI
 
     public class BullsAndCowsGameConsole
     {
-        private const uint   k_MinNumOfAttempts = 4;
-        private const uint   k_MaxNumOfAttempts = 10;
+        private const uint k_MinNumOfAttempts = 4;
+        private const uint k_MaxNumOfAttempts = 10;
         private const ushort k_SequenceLength = 4;
         private const string k_QuitSign = "Q";
         private const string k_YesSign = "Y";
@@ -31,13 +31,13 @@ namespace UI
         private const string k_InValidInputNotANumber = "Invalid format, native number only";
         private const string k_InValidInputNumberOutOfRange = "Number out of range";
         private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range";
-        private const string k_InValidInputLNotEnoughChars = "Invalid, type 4 chars only";
+        private const string k_InValidInputLNotEnoughChars = "Invalid, type {0} chars only";
         private const string k_QuitMsg = "Goodbye";
-        private uint         m_GuessesNumber;
-        private GameManger   m_GameManager;
-        private Board        m_Board;
+        private uint m_GuessesNumber;
+        private GameManger m_GameManager;
+        private Board m_Board;
 
-        public void                      StartNewGame()
+        public void StartNewGame()
         {
             m_GuessesNumber = getGuessesNumberFromUser();
             m_GameManager = new GameManger(m_GuessesNumber, k_SequenceLength);
@@ -46,13 +46,13 @@ namespace UI
             startGuessesInteractionsWithTheUser();
         }
 
-        private void                     closeConsole()
+        private void closeConsole()
         {
             Console.WriteLine(k_QuitMsg);
             Environment.Exit(0);
         }
 
-        private void                     startGuessesInteractionsWithTheUser()
+        private void startGuessesInteractionsWithTheUser()
         {
             bool hasTheUserWon = false;
 
@@ -69,7 +69,7 @@ namespace UI
             endInteractionWithTheUser(hasTheUserWon);
         }
 
-        private void                     endInteractionWithTheUser(bool i_HasTheUserWon)
+        private void endInteractionWithTheUser(bool i_HasTheUserWon)
         {
             StringBuilder endGameOutput = new StringBuilder();
             string userResponse;
@@ -101,7 +101,7 @@ namespace UI
             }
         }
 
-        private string                   getUserGuess()
+        private string getUserGuess()
         {
             string userInput;
             eInputValidCheckResponse validCheckResponse;
@@ -123,7 +123,7 @@ namespace UI
                         }
                     case eInputValidCheckResponse.InputNotInTheRightLength:
                         {
-                            Console.WriteLine(k_InValidInputLNotEnoughChars);
+                            Console.WriteLine(string.Format(k_InValidInputLNotEnoughChars, k_SequenceLength));
                             break;
                         }
                     case eInputValidCheckResponse.OutOfRange:
@@ -149,7 +149,7 @@ namespace UI
             return userInput;
         }
 
-        private uint                     getGuessesNumberFromUser()
+        private uint getGuessesNumberFromUser()
         {
             string requestForNumberMsg = string.Format(k_NumberOfGuessesRequest, k_MinNumOfAttempts, k_MaxNumOfAttempts);
             string userInput;
@@ -196,7 +196,7 @@ namespace UI
             return userInputAsValidDigit;
         }
 
-        private bool                     hasTheUserWon(Feedback i_Feedback)
+        private bool hasTheUserWon(Feedback i_Feedback)
         {
             return (i_Feedback.AmountOfV == k_SequenceLength);
         }
