@@ -16,18 +16,12 @@ namespace ConsoleApp1
         private const int    k_MiddleOfBoard = 4;
         private const int    k_EndOfRow = 8;
         private uint         m_NumberOfGuesses;
-        private char[,]      m_BoardGame;
-
-        private uint NumberOfGuesses
-        {
-            get { return m_NumberOfGuesses; }
-            set { m_NumberOfGuesses = value; }
-        }
+        private char[,]      m_Board;
 
         public Board(uint i_NumberOfGuesses)
         {
-            NumberOfGuesses = i_NumberOfGuesses;
-            m_BoardGame =     new char[i_NumberOfGuesses, k_NumberOfCharsInRow];
+            m_NumberOfGuesses = i_NumberOfGuesses;
+            m_Board =           new char[i_NumberOfGuesses, k_NumberOfCharsInRow];
             BuildBoard();
         }
 
@@ -47,12 +41,10 @@ namespace ConsoleApp1
 
         private void AddGuess(Guess i_CurrentGuess, int i_GuessNumber)
         {
-
             for (int startIndex = 0; startIndex < i_CurrentGuess.CurrentGuess.Length; startIndex++)
             {
-                m_BoardGame[i_GuessNumber, startIndex] = i_CurrentGuess.CurrentGuess[startIndex];
+                m_Board[i_GuessNumber, startIndex] = i_CurrentGuess.CurrentGuess[startIndex];
             }
-
         }
 
         private void AddFeedback(Feedback i_CurrentFeedback, int i_GuessNumber)
@@ -62,17 +54,17 @@ namespace ConsoleApp1
 
             for (int i = k_MiddleOfBoard; i < amountOfV + k_MiddleOfBoard; i++)
             {
-                m_BoardGame[i_GuessNumber, i] = k_CorrectLocationSign;
+                m_Board[i_GuessNumber, i] = k_CorrectLocationSign;
             }
 
             for (int i = k_MiddleOfBoard + amountOfV; i < k_MiddleOfBoard + amountOfV + amountOfX; i++)
             {
-                m_BoardGame[i_GuessNumber, i] = k_AlmostCorrectLocationSign;
+                m_Board[i_GuessNumber, i] = k_AlmostCorrectLocationSign;
             }
 
             for (int i = k_MiddleOfBoard + amountOfV + amountOfX; i < k_EndOfRow; i++)
             {
-                m_BoardGame[i_GuessNumber, i] = k_BlankSign;
+                m_Board[i_GuessNumber, i] = k_BlankSign;
             }
 
         }
@@ -81,20 +73,20 @@ namespace ConsoleApp1
         {
             StringBuilder m_GameBuilder = new StringBuilder();
 
-            for (int i = 0; i < m_BoardGame.GetLength(0); i++)
+            for (int i = 0; i < m_Board.GetLength(0); i++)
             {
                 m_GameBuilder.AppendFormat(
 @"| {0} {1} {2} {3} | {4} {5} {6} {7} |
 |=========|=========|
 ",
-m_BoardGame[i, 0],
-m_BoardGame[i, 1],
-m_BoardGame[i, 2],
-m_BoardGame[i, 3],
-m_BoardGame[i, 4],
-m_BoardGame[i, 5],
-m_BoardGame[i, 6],
-m_BoardGame[i, 7]);
+m_Board[i, 0],
+m_Board[i, 1],
+m_Board[i, 2],
+m_Board[i, 3],
+m_Board[i, 4],
+m_Board[i, 5],
+m_Board[i, 6],
+m_Board[i, 7]);
             }
 
             string printOnScreen = string.Format(

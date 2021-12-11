@@ -17,8 +17,8 @@ namespace ConsoleApp1
 
     public class BullsAndCowsGameConsole
     {
-        private const uint k_MinNumOfAttempts = 4;
-        private const uint k_MaxNumOfAttempts = 10;
+        private const uint   k_MinNumOfAttempts = 4;
+        private const uint   k_MaxNumOfAttempts = 10;
         private const ushort k_SequenceLength = 4;
         private const string k_QuitSign = "Q";
         private const string k_YesSign = "Y";
@@ -34,34 +34,26 @@ namespace ConsoleApp1
         private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range";
         private const string k_InValidInputLNotEnoughChars = "Invalid, type 4 chars only";
         private const string k_QuitMsg = "Goodbye";
-        private GameManger m_GameManager;
-        private Board m_Board;
-        private uint m_guessesNumber;
+        private GameManger   m_GameManager;
+        private Board        m_Board;
+        private uint         m_guessesNumber;
 
-        // What about private props? is it fine?
-        private Board Board
+        public void                      StartNewGame()
         {
-            get { return m_Board; }
-            set { m_Board = value; }
-        }
-
-        public void StartNewGame()
-        {
-            Screen.Clear();
             m_guessesNumber = getGuessesNumberFromUser();
             m_GameManager = new GameManger(m_guessesNumber, k_SequenceLength);
-            Board = new Board(m_guessesNumber);
-            Board.PrintBoard();
+            m_Board = new Board(m_guessesNumber);
+            m_Board.PrintBoard();
             startGuessesInteractionsWithTheUser();
         }
 
-        private void closeConsole()
+        private void                     closeConsole()
         {
             Console.WriteLine(k_QuitMsg);
             Environment.Exit(0);
         }
 
-        private void startGuessesInteractionsWithTheUser()
+        private void                     startGuessesInteractionsWithTheUser()
         {
             bool hasTheUserWon = false;
 
@@ -70,20 +62,20 @@ namespace ConsoleApp1
                 char[] guessesInput = getUserGuess().ToCharArray();
 
                 Round newRound = m_GameManager.CreateRound(guessesInput);
-                Board.AddRound(newRound, i);
+                m_Board.AddRound(newRound, i);
                 hasTheUserWon = this.hasTheUserWon(newRound.CurrentFeedback);
-                Board.PrintBoard();
+                m_Board.PrintBoard();
             }
 
             endInteractionWithTheUser(hasTheUserWon);
         }
 
-        private void endInteractionWithTheUser(bool hasTheUserWon)
+        private void                     endInteractionWithTheUser(bool i_HasTheUserWon)
         {
             StringBuilder endGameOutput = new StringBuilder();
             string userResponse;
 
-            if (hasTheUserWon)
+            if (i_HasTheUserWon)
             {
                 endGameOutput.AppendLine(string.Format(k_WinStatement, m_GameManager.CurrentRound));
             }
@@ -101,6 +93,7 @@ namespace ConsoleApp1
 
             if (userResponse == k_YesSign)
             {
+                Screen.Clear();
                 StartNewGame();
             }
             else
@@ -110,7 +103,7 @@ namespace ConsoleApp1
             }
         }
 
-        private string getUserGuess()
+        private string                   getUserGuess()
         {
             string userInput;
             eInputValidCheckResponse validCheckResponse;
@@ -158,7 +151,7 @@ namespace ConsoleApp1
             return userInput;
         }
 
-        private uint getGuessesNumberFromUser()
+        private uint                     getGuessesNumberFromUser()
         {
             string requestForNumberMsg = string.Format(k_NumberOfGuessesRequest, k_MinNumOfAttempts, k_MaxNumOfAttempts);
             string userInput;
@@ -205,22 +198,22 @@ namespace ConsoleApp1
             return userInputAsValidDigit;
         }
 
-        private bool hasTheUserWon(Feedback i_Feedback)
+        private bool                     hasTheUserWon(Feedback i_Feedback)
         {
             return (i_Feedback.AmountOfV == k_SequenceLength);
         }
 
-        private eInputValidCheckResponse isStringRepresnetsDigitInSpecRange(string i_stringToCheck, uint i_MinValue, uint i_MaxValue, out uint o_result)
+        private eInputValidCheckResponse isStringRepresnetsDigitInSpecRange(string i_StringToCheck, uint i_MinValue, uint i_MaxValue, out uint o_Result)
         {
             eInputValidCheckResponse response = eInputValidCheckResponse.Valid;
             uint inputNumber;
 
-            o_result = default;
-            if (i_stringToCheck == k_QuitSign)
+            o_Result = default;
+            if (i_StringToCheck == k_QuitSign)
             {
                 response = eInputValidCheckResponse.Quit;
             }
-            else if (!uint.TryParse(i_stringToCheck, out inputNumber))
+            else if (!uint.TryParse(i_StringToCheck, out inputNumber))
             {
                 response = eInputValidCheckResponse.WrongFormat;
             }
@@ -230,7 +223,7 @@ namespace ConsoleApp1
             }
             else
             {
-                o_result = inputNumber;
+                o_Result = inputNumber;
             }
 
             return response;
