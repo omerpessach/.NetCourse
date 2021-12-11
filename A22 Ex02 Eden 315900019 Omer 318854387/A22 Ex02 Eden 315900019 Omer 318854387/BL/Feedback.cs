@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace BL
+﻿namespace BL
 {
     public struct Feedback
     {
@@ -24,7 +20,5 @@ namespace BL
             m_AmountOfV = (byte)i_AmountOfV;
             m_AmountOfX = (byte)i_AmountOfX;
         }
-
     }
-
 }

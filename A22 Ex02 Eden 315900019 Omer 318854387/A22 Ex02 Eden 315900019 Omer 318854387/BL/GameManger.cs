@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace BL
 {
@@ -18,9 +16,9 @@ namespace BL
 
     public class GameManger
     {
-        private char[]  m_RandomSequenceForComparison;
+        private char[] m_RandomSequenceForComparison;
         private Round[] m_RoundsOfGame = null;
-        private uint    m_CurrentRound = 0;
+        private uint m_CurrentRound = 0;
 
         public GameManger(uint i_AmountOfRounds, uint i_AmountOfLettersInSequence)
         {
@@ -32,23 +30,18 @@ namespace BL
         {
             get { return m_RoundsOfGame; }
         }
-
-        public uint     CurrentRound
+        public uint    CurrentRound
         {
             get
             {
                 return m_CurrentRound;
             }
-            private set
-            {
-                m_CurrentRound = value;
-            }
         }
 
-        private char[]  createRandomSequence(uint i_AmountOfLettersInSequence) //should it be static?
+        private char[]  createRandomSequence(uint i_AmountOfLettersInSequence)
         {
             Random randomAct = new Random();
-            char   randomChar;
+            char randomChar;
             char[] tempRandomSequenceForComparison = new char[i_AmountOfLettersInSequence];
 
             for (int i = 0; i < i_AmountOfLettersInSequence; i++)
@@ -69,26 +62,22 @@ namespace BL
         {
             bool isLetterExists = false;
 
-            foreach (char currentLetter in i_currentSequence)
+            for (int i = 0; i < i_currentSequence.Length && !isLetterExists; i++)
             {
-                if (i_currentCharFromRandom == currentLetter)
-                {
-                    isLetterExists = true;
-                }
+                isLetterExists = i_currentSequence[i] == i_currentCharFromRandom;
             }
 
             return isLetterExists;
         }
 
-        public Round    CreateRound(char[] i_currentGuessFromUser)
+        public Round   CreateRound(char[] i_currentGuessFromUser)
         {
             Guess currentGuess = new Guess(i_currentGuessFromUser);
             Round newRound = new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
 
-            CurrentRound++;
+            m_CurrentRound++;
             RoundsOfGame[CurrentRound] = newRound;
             return newRound;
         }
-
     }
 }

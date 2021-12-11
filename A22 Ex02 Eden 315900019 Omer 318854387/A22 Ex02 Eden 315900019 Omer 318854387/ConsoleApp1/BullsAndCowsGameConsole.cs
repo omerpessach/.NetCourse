@@ -1,10 +1,9 @@
 ﻿using BL;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using Ex02.ConsoleUtils;
 
-namespace ConsoleApp1
+namespace UI
 {
     public enum eInputValidCheckResponse
     {
@@ -34,15 +33,15 @@ namespace ConsoleApp1
         private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range";
         private const string k_InValidInputLNotEnoughChars = "Invalid, type 4 chars only";
         private const string k_QuitMsg = "Goodbye";
+        private uint         m_GuessesNumber;
         private GameManger   m_GameManager;
         private Board        m_Board;
-        private uint         m_guessesNumber;
 
         public void                      StartNewGame()
         {
-            m_guessesNumber = getGuessesNumberFromUser();
-            m_GameManager = new GameManger(m_guessesNumber, k_SequenceLength);
-            m_Board = new Board(m_guessesNumber);
+            m_GuessesNumber = getGuessesNumberFromUser();
+            m_GameManager = new GameManger(m_GuessesNumber, k_SequenceLength);
+            m_Board = new Board(m_GuessesNumber);
             m_Board.PrintBoard();
             startGuessesInteractionsWithTheUser();
         }
@@ -57,7 +56,7 @@ namespace ConsoleApp1
         {
             bool hasTheUserWon = false;
 
-            for (int i = 0; i < m_guessesNumber && !hasTheUserWon; i++)
+            for (int i = 0; i < m_GuessesNumber && !hasTheUserWon; i++)
             {
                 char[] guessesInput = getUserGuess().ToCharArray();
 
@@ -98,7 +97,6 @@ namespace ConsoleApp1
             }
             else
             {
-                // Should I close the console or just print goodbye?
                 closeConsole();
             }
         }
