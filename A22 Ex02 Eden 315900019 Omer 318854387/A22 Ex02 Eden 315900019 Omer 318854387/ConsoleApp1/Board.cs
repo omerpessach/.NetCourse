@@ -8,14 +8,15 @@ namespace ConsoleApp1
 {
     public class Board
     {
-        private const string k_CorrectLocationSign = "V";
-        private const string k_AlmostCorrectLocationSign = "X";
-        private const string k_HiddenSign = " # ";
         private const string k_PrePrintBoardStatusStatement = "Current board status:";
-
-        private StringBuilder m_IntroGameBuilder = new StringBuilder();
-        private StringBuilder m_GameBuilder = new StringBuilder();
+        private const char k_CorrectLocationSign = 'V';
+        private const char k_AlmostCorrectLocationSign = 'X';
+        private const char k_BlankSign = ' ';
+        private const int k_NumberOfCharsInRow = 8;
+        private const int k_MiddleOfBoard = 4;
+        private const int k_EndOfRow = 8;
         private uint m_NumberOfGuesses;
+        private char[,] m_BoardGame;
 
         private uint NumberOfGuesses
         {
@@ -26,85 +27,92 @@ namespace ConsoleApp1
         public Board(uint i_NumberOfGuesses)
         {
             NumberOfGuesses = i_NumberOfGuesses;
+            m_BoardGame = new char[i_NumberOfGuesses, k_NumberOfCharsInRow];
             buildBoard();
         }
 
         public void PrintBoard()
         {
             cleanScreen();
-            StringBuilder board = new StringBuilder(m_IntroGameBuilder.ToString());
-            board.AppendLine(m_GameBuilder.ToString());
-            Console.WriteLine(board);
+            Console.WriteLine(k_PrePrintBoardStatusStatement);
+            Console.WriteLine(string.Empty);
+            buildBoard();
         }
 
-        public void AddRound(Round i_NewRound)
+        public void AddRound(Round i_NewRound, int i_GuessNumber)
         {
-            addGuess(i_NewRound.CurrentGuess);
-            addFeedback(i_NewRound.CurrentFeedback);
+            addGuess(i_NewRound.CurrentGuess, i_GuessNumber);
+            addFeedback(i_NewRound.CurrentFeedback, i_GuessNumber);
         }
 
-        private void addGuess(Guess i_CurrentGuess)
+        private void addGuess(Guess i_CurrentGuess, int i_GuessNumber)
         {
-            int startIndex = m_GameBuilder.ToString().IndexOf("         ");
-            string guessConsoleFormat = " ";
-            foreach (char item in i_CurrentGuess.CurrentGuess)
+
+            for (int startIndex = 0; startIndex < i_CurrentGuess.CurrentGuess.Length; startIndex++)
             {
-                guessConsoleFormat += string.Format("{0} ", item);
+                m_BoardGame[i_GuessNumber, startIndex] = i_CurrentGuess.CurrentGuess[startIndex];
             }
 
-            m_GameBuilder.Replace("         ", guessConsoleFormat, startIndex, 9);
         }
 
-        private void addFeedback(Feedback i_CurrentFeedback)
+        private void addFeedback(Feedback i_CurrentFeedback, int i_GuessNumber)
         {
-            int startIndex = m_GameBuilder.ToString().IndexOf("       ");
-            StringBuilder correctLocationSigns = new StringBuilder();
-            StringBuilder almostCorrectLocationSigns = new StringBuilder();
-            StringBuilder feedbackResult = new StringBuilder();
+            int amountOfV = i_CurrentFeedback.AmountOfV;
+            int amountOfX = i_CurrentFeedback.AmountOfX;
 
-            for (int i = 0; i < i_CurrentFeedback.AmountOfV; i++)
+            for (int i = k_MiddleOfBoard; i < amountOfV + k_MiddleOfBoard; i++)
             {
-                correctLocationSigns.Append(string.Format("{0} ", k_CorrectLocationSign));
+                m_BoardGame[i_GuessNumber, i] = k_CorrectLocationSign;
             }
 
-            for (int i = 0; i < i_CurrentFeedback.AmountOfX; i++)
+            for (int i = k_MiddleOfBoard + amountOfV; i < k_MiddleOfBoard + amountOfV + amountOfX; i++)
             {
-                almostCorrectLocationSigns.Append(string.Format("{0} ", k_AlmostCorrectLocationSign));
+                m_BoardGame[i_GuessNumber, i] = k_AlmostCorrectLocationSign;
             }
 
-            int amountOfSpacedToAddInTheEnd = 7 - (i_CurrentFeedback.AmountOfV + i_CurrentFeedback.AmountOfX) * 2;
-
-            feedbackResult.Append(correctLocationSigns);
-            feedbackResult.Append(almostCorrectLocationSigns);
-            if (amountOfSpacedToAddInTheEnd < 0)
+            for (int i = k_MiddleOfBoard + amountOfV + amountOfX; i < k_EndOfRow; i++)
             {
-                feedbackResult.Remove(feedbackResult.Length - 1, 1);
-            }
-            else
-            {
-                feedbackResult.Append(' ', amountOfSpacedToAddInTheEnd);
+                m_BoardGame[i_GuessNumber, i] = k_BlankSign;
             }
 
-            m_GameBuilder.Replace("       ", feedbackResult.ToString(), startIndex, 7);
         }
 
         private void buildBoard()
         {
-            m_IntroGameBuilder.AppendLine(k_PrePrintBoardStatusStatement);
-            m_IntroGameBuilder.AppendLine("|Pins:    |Result:|");
-            m_IntroGameBuilder.AppendLine("|=========|=======|");
-            m_IntroGameBuilder.AppendLine("| # # # # |       |");
-            m_IntroGameBuilder.AppendLine("|=========|=======|");
-            for (int i = 0; i < NumberOfGuesses; i++)
+            StringBuilder m_GameBuilder = new StringBuilder();
+
+            for (int i = 0; i < m_BoardGame.GetLength(0); i++)
             {
-                m_GameBuilder.AppendLine("|         |       |");
-                m_GameBuilder.AppendLine("|=========|=======|");
+                m_GameBuilder.AppendFormat(
+@"| {0} {1} {2} {3} | {4} {5} {6} {7} |
+|=========|=========|
+",
+m_BoardGame[i, 0],
+m_BoardGame[i, 1],
+m_BoardGame[i, 2],
+m_BoardGame[i, 3],
+m_BoardGame[i, 4],
+m_BoardGame[i, 5],
+m_BoardGame[i, 6],
+m_BoardGame[i, 7]);
             }
+
+            string printOnScreen = string.Format(
+@"|Pins:    |Result:  |
+|=========|=========|
+| # # # # |         |
+|=========|=========|
+{0}", m_GameBuilder.ToString());
+
+            Console.WriteLine(printOnScreen);
         }
 
         private void cleanScreen()
         {
             Screen.Clear();
         }
+
+
+
     }
 }
