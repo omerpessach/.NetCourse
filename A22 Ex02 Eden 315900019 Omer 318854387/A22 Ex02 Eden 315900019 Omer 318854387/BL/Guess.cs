@@ -7,9 +7,9 @@ namespace BL
     public class Guess
     {
         public const uint k_AmountOfCharForGuess = 4;
-        private char[] m_CurrentGuess = new char[k_AmountOfCharForGuess];
+        private char[]    m_CurrentGuess = new char[k_AmountOfCharForGuess];
 
-        public char[] CurrentGuess
+        public char[]     CurrentGuess
         {
             get
             {
@@ -26,7 +26,7 @@ namespace BL
             CurrentGuess = i_GuessFromUser;
         }
 
-        private uint AmountOfBulls(char[] i_RandomSequenceForComparison)
+        private uint      AmountOfBulls(char[] i_RandomSequenceForComparison)
         {
             uint amountOfBulls = 0;
 
@@ -41,7 +41,7 @@ namespace BL
             return amountOfBulls;
         }
 
-        private uint AmountOfCows(char[] i_RandomSequenceForComparison)
+        private uint      AmountOfCows(char[] i_RandomSequenceForComparison)
         {
             uint amountOfCows = 0;
 
@@ -63,5 +63,6 @@ namespace BL
         {
             return new Feedback(AmountOfBulls(i_RandomSequenceForComparison), AmountOfCows(i_RandomSequenceForComparison));
         }
+
     }
 }

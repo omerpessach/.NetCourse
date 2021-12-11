@@ -9,14 +9,14 @@ namespace ConsoleApp1
     public class Board
     {
         private const string k_PrePrintBoardStatusStatement = "Current board status:";
-        private const char k_CorrectLocationSign = 'V';
-        private const char k_AlmostCorrectLocationSign = 'X';
-        private const char k_BlankSign = ' ';
-        private const int k_NumberOfCharsInRow = 8;
-        private const int k_MiddleOfBoard = 4;
-        private const int k_EndOfRow = 8;
-        private uint m_NumberOfGuesses;
-        private char[,] m_BoardGame;
+        private const char   k_CorrectLocationSign = 'V';
+        private const char   k_AlmostCorrectLocationSign = 'X';
+        private const char   k_BlankSign = ' ';
+        private const int    k_NumberOfCharsInRow = 8;
+        private const int    k_MiddleOfBoard = 4;
+        private const int    k_EndOfRow = 8;
+        private uint         m_NumberOfGuesses;
+        private char[,]      m_BoardGame;
 
         private uint NumberOfGuesses
         {
@@ -27,25 +27,25 @@ namespace ConsoleApp1
         public Board(uint i_NumberOfGuesses)
         {
             NumberOfGuesses = i_NumberOfGuesses;
-            m_BoardGame = new char[i_NumberOfGuesses, k_NumberOfCharsInRow];
-            buildBoard();
+            m_BoardGame =     new char[i_NumberOfGuesses, k_NumberOfCharsInRow];
+            BuildBoard();
         }
 
-        public void PrintBoard()
+        public void  PrintBoard()
         {
-            cleanScreen();
+            CleanScreen();
             Console.WriteLine(k_PrePrintBoardStatusStatement);
             Console.WriteLine(string.Empty);
-            buildBoard();
+            BuildBoard();
         }
 
-        public void AddRound(Round i_NewRound, int i_GuessNumber)
+        public void  AddRound(Round i_NewRound, int i_GuessNumber)
         {
-            addGuess(i_NewRound.CurrentGuess, i_GuessNumber);
-            addFeedback(i_NewRound.CurrentFeedback, i_GuessNumber);
+            AddGuess(i_NewRound.CurrentGuess, i_GuessNumber);
+            AddFeedback(i_NewRound.CurrentFeedback, i_GuessNumber);
         }
 
-        private void addGuess(Guess i_CurrentGuess, int i_GuessNumber)
+        private void AddGuess(Guess i_CurrentGuess, int i_GuessNumber)
         {
 
             for (int startIndex = 0; startIndex < i_CurrentGuess.CurrentGuess.Length; startIndex++)
@@ -55,7 +55,7 @@ namespace ConsoleApp1
 
         }
 
-        private void addFeedback(Feedback i_CurrentFeedback, int i_GuessNumber)
+        private void AddFeedback(Feedback i_CurrentFeedback, int i_GuessNumber)
         {
             int amountOfV = i_CurrentFeedback.AmountOfV;
             int amountOfX = i_CurrentFeedback.AmountOfX;
@@ -77,7 +77,7 @@ namespace ConsoleApp1
 
         }
 
-        private void buildBoard()
+        private void BuildBoard()
         {
             StringBuilder m_GameBuilder = new StringBuilder();
 
@@ -107,12 +107,10 @@ m_BoardGame[i, 7]);
             Console.WriteLine(printOnScreen);
         }
 
-        private void cleanScreen()
+        private void CleanScreen()
         {
             Screen.Clear();
         }
-
-
 
     }
 }
