@@ -26,9 +26,15 @@ namespace UI
         private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range. please choose 4 letters from the range A-H";
         private const string k_InValidInputLNotEnoughChars = "Invalid, type {0} chars only";
         private const string k_QuitMsg = "Goodbye";
+        private string       m_GuessingOptions;
         private uint         m_GuessesNumber;
         private GameManger   m_GameManager;
         private UIBoard      m_UIBoard;
+
+        public BullsAndCowsGameConsole()
+        {
+            initGuessingOptions();
+        }
 
         public void                      StartNewGame()
         {
@@ -37,6 +43,13 @@ namespace UI
             m_UIBoard = new UIBoard(m_GuessesNumber);
             m_UIBoard.PrintBoard();
             startGuessesInteractionsWithTheUser();
+        }
+
+        private void                     initGuessingOptions()
+        {
+            string[] guessingOptionsEnumNames = Enum.GetNames(typeof(eGuessingOption));
+
+            m_GuessingOptions = string.Concat(guessingOptionsEnumNames);
         }
 
         private void                     closeConsole()
@@ -98,12 +111,10 @@ namespace UI
         {
             string userInput;
             eInputValidCheckResponse validCheckResponse;
-            string[] guessingOptionsEnumNames = Enum.GetNames(typeof(eGuessingOption));
-            string guessingOptions = string.Concat(guessingOptionsEnumNames);
 
             Console.WriteLine(k_TypeGuessStatement);
             userInput = Console.ReadLine();
-            validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, guessingOptions);
+            validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, m_GuessingOptions);
             while (validCheckResponse != eInputValidCheckResponse.Valid)
             {
                 switch (validCheckResponse)
@@ -113,25 +124,21 @@ namespace UI
                             closeConsole();
                             break;
                         }
-
                     case eInputValidCheckResponse.InputNotInTheRightLength:
                         {
                             Console.WriteLine(string.Format(k_InValidInputLNotEnoughChars, k_SequenceLength));
                             break;
                         }
-
                     case eInputValidCheckResponse.OutOfRange:
                         {
                             Console.WriteLine(k_InValidInputLettersOutOfRange);
                             break;
                         }
-
                     case eInputValidCheckResponse.WrongFormat:
                         {
                             Console.WriteLine(k_InValidInputNotALetters);
                             break;
                         }
-
                     default:
                         {
                             break;
@@ -139,7 +146,7 @@ namespace UI
                 }
 
                 userInput = Console.ReadLine();
-                validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, guessingOptions);
+                validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, m_GuessingOptions);
             }
 
             return userInput;
@@ -169,19 +176,16 @@ namespace UI
                             Console.WriteLine(notADigitMsg);
                             break;
                         }
-
                     case eInputValidCheckResponse.OutOfRange:
                         {
                             Console.WriteLine(notInRangeMsg);
                             break;
                         }
-
                     case eInputValidCheckResponse.Quit:
                         {
                             closeConsole();
                             break;
                         }
-
                     default:
                         {
                             break;
@@ -204,8 +208,8 @@ namespace UI
         {
             eInputValidCheckResponse response = eInputValidCheckResponse.Valid;
             uint inputNumber;
-
             o_Result = default;
+
             if (i_StringToCheck == k_QuitSign)
             {
                 response = eInputValidCheckResponse.Quit;
