@@ -42,7 +42,7 @@
   <ItemGroup>
     <Compile Include="UIBoard.cs" />
     <Compile Include="BullsAndCowsGameConsole.cs" />
-    <Compile Include="eInputValidCheckResponse.cs" />
+    <Compile Include="Enums\eInputValidCheckResponse.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Validations.cs" />

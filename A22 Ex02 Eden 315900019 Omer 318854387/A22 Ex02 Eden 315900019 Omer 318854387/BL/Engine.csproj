@@ -36,7 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="eGuessingOption.cs" />
+    <Compile Include="Enums\eGuessingOption.cs" />
     <Compile Include="EngineBoard.cs" />
     <Compile Include="Feedback.cs" />
     <Compile Include="GameManger.cs" />

@@ -5,10 +5,10 @@
         private Guess    m_CurrentGuess;
         private Feedback m_CurrentFeedback;
 
-        public Round(Guess i_currentGuss, Feedback i_currentFeedback)
+        public Round(Guess i_CurrentGuss, Feedback i_CurrentFeedback)
         {
-            m_CurrentFeedback = i_currentFeedback;
-            m_CurrentGuess = i_currentGuss;
+            m_CurrentFeedback = i_CurrentFeedback;
+            m_CurrentGuess = i_CurrentGuss;
         }
 
         public Guess     CurrentGuess

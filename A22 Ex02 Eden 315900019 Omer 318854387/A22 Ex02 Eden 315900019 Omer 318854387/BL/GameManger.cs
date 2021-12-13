@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Engine.Enums;
+using System;
 
 namespace Engine
 {
@@ -32,22 +33,13 @@ namespace Engine
             }
         }
 
-        private Round[]     RoundsOfGame
+        public Round        CreateRound(char[] i_CurrentGuessFromUser)
         {
-            get
-            {
-                return m_RoundsOfGame;
-            }
-        }
-
-        public Round        CreateRound(char[] i_currentGuessFromUser)
-        {
-            Guess currentGuess = new Guess(i_currentGuessFromUser);
+            Guess currentGuess = new Guess(i_CurrentGuessFromUser);
             Round newRound = new Round(currentGuess, currentGuess.createFeedbackFromGuess(m_RandomSequenceForComparison));
 
-            RoundsOfGame[CurrentRound] = newRound;
+            m_RoundsOfGame[CurrentRound] = newRound;
             m_CurrentRound++;
-            
             return newRound;
         }
 
@@ -71,13 +63,13 @@ namespace Engine
             return tempRandomSequenceForComparison;
         }
 
-        private bool        checkIfExistsInSequence(char i_currentCharFromRandom, char[] i_currentSequence)
+        private bool        checkIfExistsInSequence(char i_CurrentCharFromRandom, char[] i_CurrentSequence)
         {
             bool isLetterExists = false;
 
-            for (int i = 0; i < i_currentSequence.Length && !isLetterExists; i++)
+            for (int i = 0; i < i_CurrentSequence.Length && !isLetterExists; i++)
             {
-                isLetterExists = i_currentSequence[i] == i_currentCharFromRandom;
+                isLetterExists = i_CurrentSequence[i] == i_CurrentCharFromRandom;
             }
 
             return isLetterExists;

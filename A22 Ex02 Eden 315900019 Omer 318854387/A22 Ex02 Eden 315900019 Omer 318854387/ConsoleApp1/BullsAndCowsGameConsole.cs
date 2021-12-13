@@ -2,6 +2,8 @@
 using System;
 using System.Text;
 using Ex02.ConsoleUtils;
+using Engine.Enums;
+using UI.Enums;
 
 namespace UI
 {
