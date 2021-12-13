@@ -1,8 +1,13 @@
-﻿namespace BL
+﻿namespace Engine
 {
     public class Guess
     {
         private char[]    m_CurrentGuess;
+
+        public Guess(char[] i_GuessFromUser)
+        {
+            m_CurrentGuess = i_GuessFromUser;
+        }
 
         public char[]     CurrentGuess
         {
@@ -12,9 +17,9 @@
             }
         }
 
-        public Guess(char[] i_GuessFromUser)
+        internal Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
         {
-            m_CurrentGuess = i_GuessFromUser;
+            return new Feedback(amountOfBulls(i_RandomSequenceForComparison), amountOfCows(i_RandomSequenceForComparison));
         }
 
         private uint      amountOfBulls(char[] i_RandomSequenceForComparison)
@@ -48,11 +53,6 @@
             }
 
             return amountOfCows;
-        }
-
-        internal Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
-        {
-            return new Feedback(amountOfBulls(i_RandomSequenceForComparison), amountOfCows(i_RandomSequenceForComparison));
         }
     }
 }

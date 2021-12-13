@@ -1,19 +1,10 @@
-﻿using BL;
+﻿using Engine;
 using System;
 using System.Text;
 using Ex02.ConsoleUtils;
 
 namespace UI
 {
-    public enum eInputValidCheckResponse
-    {
-        Valid,
-        OutOfRange,
-        WrongFormat,
-        InputNotInTheRightLength,
-        Quit,
-    }
-
     public class BullsAndCowsGameConsole
     {
         private const uint   k_MinNumOfAttempts = 4;
@@ -22,7 +13,7 @@ namespace UI
         private const string k_QuitSign = "Q";
         private const string k_YesSign = "Y";
         private const string k_NoSign = "N";
-        private const string k_TypeGuessStatement = "Please type your next guess <{0}> or 'Q' to quit";
+        private const string k_TypeGuessStatement = "Please type your next guess <A B C D> or 'Q' to quit";
         private const string k_AskForRestartStatement = "Would you like to start a new game? <{0}/{1}>";
         private const string k_WinStatement = "You guessed after {0} steps!";
         private const string k_LostStatement = "No more guesses allowed. You Lost.";
@@ -30,19 +21,19 @@ namespace UI
         private const string k_InValidInputNotALetters = "Invalid format, letters only";
         private const string k_InValidInputNotANumber = "Invalid format, native number only";
         private const string k_InValidInputNumberOutOfRange = "Number out of range";
-        private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range";
+        private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range. please choose 4 letters from the range A-H";
         private const string k_InValidInputLNotEnoughChars = "Invalid, type {0} chars only";
         private const string k_QuitMsg = "Goodbye";
         private uint         m_GuessesNumber;
         private GameManger   m_GameManager;
-        private Board        m_Board;
+        private UIBoard      m_UIBoard;
 
         public void                      StartNewGame()
         {
             m_GuessesNumber = getGuessesNumberFromUser();
             m_GameManager = new GameManger(m_GuessesNumber, k_SequenceLength);
-            m_Board = new Board(m_GuessesNumber);
-            m_Board.PrintBoard();
+            m_UIBoard = new UIBoard(m_GuessesNumber);
+            m_UIBoard.PrintBoard();
             startGuessesInteractionsWithTheUser();
         }
 
@@ -61,9 +52,9 @@ namespace UI
                 char[] guessesInput = getUserGuess().ToCharArray();
 
                 Round newRound = m_GameManager.CreateRound(guessesInput);
-                m_Board.AddRound(newRound, i);
+                m_GameManager.EngineBoard.AddRound(newRound, i, m_UIBoard.MatrixBoard);
                 hasTheUserWon = this.hasTheUserWon(newRound.CurrentFeedback);
-                m_Board.PrintBoard();
+                m_UIBoard.PrintBoard();
             }
 
             endInteractionWithTheUser(hasTheUserWon);
@@ -107,9 +98,8 @@ namespace UI
             eInputValidCheckResponse validCheckResponse;
             string[] guessingOptionsEnumNames = Enum.GetNames(typeof(eGuessingOption));
             string guessingOptions = string.Concat(guessingOptionsEnumNames);
-            string guessingOptionsConsoleFormat = string.Join(" ", guessingOptionsEnumNames);
 
-            Console.WriteLine(string.Format(k_TypeGuessStatement, guessingOptionsConsoleFormat));
+            Console.WriteLine(k_TypeGuessStatement);
             userInput = Console.ReadLine();
             validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, guessingOptions);
             while (validCheckResponse != eInputValidCheckResponse.Valid)
@@ -121,21 +111,25 @@ namespace UI
                             closeConsole();
                             break;
                         }
+
                     case eInputValidCheckResponse.InputNotInTheRightLength:
                         {
                             Console.WriteLine(string.Format(k_InValidInputLNotEnoughChars, k_SequenceLength));
                             break;
                         }
+
                     case eInputValidCheckResponse.OutOfRange:
                         {
                             Console.WriteLine(k_InValidInputLettersOutOfRange);
                             break;
                         }
+
                     case eInputValidCheckResponse.WrongFormat:
                         {
                             Console.WriteLine(k_InValidInputNotALetters);
                             break;
                         }
+
                     default:
                         {
                             break;
@@ -173,16 +167,19 @@ namespace UI
                             Console.WriteLine(notADigitMsg);
                             break;
                         }
+
                     case eInputValidCheckResponse.OutOfRange:
                         {
                             Console.WriteLine(notInRangeMsg);
                             break;
                         }
+
                     case eInputValidCheckResponse.Quit:
                         {
                             closeConsole();
                             break;
                         }
+
                     default:
                         {
                             break;

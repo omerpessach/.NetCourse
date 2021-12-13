@@ -36,6 +36,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="eGuessingOption.cs" />
+    <Compile Include="EngineBoard.cs" />
     <Compile Include="Feedback.cs" />
     <Compile Include="GameManger.cs" />
     <Compile Include="Guess.cs" />
