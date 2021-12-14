@@ -2,8 +2,8 @@
 {
     public struct Feedback
     {
-        private byte m_AmountOfV;
-        private byte m_AmountOfX;
+        private readonly byte m_AmountOfV;
+        private readonly byte m_AmountOfX;
 
         public Feedback(uint i_AmountOfV, uint i_AmountOfX)
         {

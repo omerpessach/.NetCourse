@@ -5,15 +5,13 @@ namespace Engine
 {
     public class GameManger
     {
-        private char[]      m_RandomSequenceForComparison;
-        private Round[]     m_RoundsOfGame = null;
-        private uint        m_CurrentRound = 0;
-        private EngineBoard m_EngineBoard;
+        private readonly char[]      m_RandomSequenceForComparison;
+        private readonly Round[]     m_RoundsOfGame;
+        private uint                 m_CurrentRound = 0;
 
         public GameManger(uint i_AmountOfRounds, uint i_AmountOfLettersInSequence)
         {
-            m_EngineBoard =                 new EngineBoard();
-            m_RoundsOfGame =                new Round[i_AmountOfRounds];
+            m_RoundsOfGame = new Round[i_AmountOfRounds];
             m_RandomSequenceForComparison = createRandomSequence(i_AmountOfLettersInSequence);
         }
 
@@ -22,14 +20,6 @@ namespace Engine
             get
             {
                 return m_CurrentRound;
-            }
-        }
-
-        public EngineBoard  EngineBoard
-        {
-            get
-            {
-                return m_EngineBoard;
             }
         }
 

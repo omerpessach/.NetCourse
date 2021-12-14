@@ -9,31 +9,31 @@ namespace UI
 {
     public class BullsAndCowsGameConsole
     {
-        private const uint   k_MinNumOfAttempts = 4;
-        private const uint   k_MaxNumOfAttempts = 10;
-        private const ushort k_SequenceLength = 4;
-        private const string k_QuitSign = "Q";
-        private const string k_YesSign = "Y";
-        private const string k_NoSign = "N";
-        private const string k_TypeGuessStatement = "Please type your next guess <A B C D> or 'Q' to quit";
-        private const string k_AskForRestartStatement = "Would you like to start a new game? <{0}/{1}>";
-        private const string k_WinStatement = "You guessed after {0} steps!";
-        private const string k_LostStatement = "No more guesses allowed. You Lost.";
-        private const string k_NumberOfGuessesRequest = "Please enter number of guesses between {0} to {1}";
-        private const string k_InValidInputNotALetters = "Invalid format, letters only";
-        private const string k_InValidInputNotANumber = "Invalid format, native number only";
-        private const string k_InValidInputNumberOutOfRange = "Number out of range";
-        private const string k_InValidInputLettersOutOfRange = "Invalid, letters out of range. please choose 4 letters from the range A-H";
-        private const string k_InValidInputLNotEnoughChars = "Invalid, type {0} chars only";
-        private const string k_QuitMsg = "Goodbye";
-        private string       m_GuessingOptions;
-        private uint         m_GuessesNumber;
-        private GameManger   m_GameManager;
-        private UIBoard      m_UIBoard;
+        private const uint      k_MinNumOfAttempts = 4;
+        private const uint      k_MaxNumOfAttempts = 10;
+        private const ushort    k_SequenceLength = 4;
+        private const string    k_QuitSign = "Q";
+        private const string    k_YesSign = "Y";
+        private const string    k_NoSign = "N";
+        private const string    k_TypeGuessStatement = "Please type your next guess <A B C D> or 'Q' to quit";
+        private const string    k_AskForRestartStatement = "Would you like to start a new game? <{0}/{1}>";
+        private const string    k_WinStatement = "You guessed after {0} steps!";
+        private const string    k_LostStatement = "No more guesses allowed. You Lost.";
+        private const string    k_NumberOfGuessesRequest = "Please enter number of guesses between {0} to {1}";
+        private const string    k_InValidInputNotALetters = "Invalid format, letters only";
+        private const string    k_InValidInputNotANumber = "Invalid format, native number only";
+        private const string    k_InValidInputNumberOutOfRange = "Number out of range";
+        private const string    k_InValidInputLettersOutOfRange = "Invalid, letters out of range. please choose 4 letters from the range A-H";
+        private const string    k_InValidInputLNotEnoughChars = "Invalid, type {0} chars only";
+        private const string    k_QuitMsg = "Goodbye";
+        private readonly string r_GuessingOptions;
+        private uint            m_GuessesNumber;
+        private GameManger      m_GameManager;
+        private UIBoard         m_UIBoard;
 
         public BullsAndCowsGameConsole()
         {
-            initGuessingOptions();
+            initGuessingOptions(out r_GuessingOptions);
         }
 
         public void                      StartNewGame()
@@ -45,11 +45,11 @@ namespace UI
             startGuessesInteractionsWithTheUser();
         }
 
-        private void                     initGuessingOptions()
+        private void                     initGuessingOptions(out string o_GuessingOptions)
         {
             string[] guessingOptionsEnumNames = Enum.GetNames(typeof(eGuessingOption));
 
-            m_GuessingOptions = string.Concat(guessingOptionsEnumNames);
+            o_GuessingOptions = string.Concat(guessingOptionsEnumNames);
         }
 
         private void                     closeConsole()
@@ -60,19 +60,19 @@ namespace UI
 
         private void                     startGuessesInteractionsWithTheUser()
         {
-            bool hasTheUserWon = false;
+            bool hasWon = false;
 
-            for (int i = 0; i < m_GuessesNumber && !hasTheUserWon; i++)
+            for (int i = 0; i < m_GuessesNumber && !hasWon; i++)
             {
                 char[] guessesInput = getUserGuess().ToCharArray();
 
                 Round newRound = m_GameManager.CreateRound(guessesInput);
-                m_GameManager.EngineBoard.AddRound(newRound, i, m_UIBoard.MatrixBoard);
-                hasTheUserWon = this.hasTheUserWon(newRound.CurrentFeedback);
+                m_UIBoard.AddRound(newRound, i);
+                hasWon = hasTheUserWon(newRound.CurrentFeedback);
                 m_UIBoard.PrintBoard();
             }
 
-            endInteractionWithTheUser(hasTheUserWon);
+            endInteractionWithTheUser(hasWon);
         }
 
         private void                     endInteractionWithTheUser(bool i_HasTheUserWon)
@@ -114,7 +114,7 @@ namespace UI
 
             Console.WriteLine(k_TypeGuessStatement);
             userInput = Console.ReadLine();
-            validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, m_GuessingOptions);
+            validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, r_GuessingOptions);
             while (validCheckResponse != eInputValidCheckResponse.Valid)
             {
                 switch (validCheckResponse)
@@ -146,7 +146,7 @@ namespace UI
                 }
 
                 userInput = Console.ReadLine();
-                validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, m_GuessingOptions);
+                validCheckResponse = isStringContainsLetterAndSpecCharsOnly(userInput, r_GuessingOptions);
             }
 
             return userInput;

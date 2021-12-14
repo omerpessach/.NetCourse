@@ -2,8 +2,8 @@
 {
     public class Round
     {
-        private Guess    m_CurrentGuess;
-        private Feedback m_CurrentFeedback;
+        private readonly Guess    m_CurrentGuess;
+        private readonly Feedback m_CurrentFeedback;
 
         public Round(Guess i_CurrentGuss, Feedback i_CurrentFeedback)
         {

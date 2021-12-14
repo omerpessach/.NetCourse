@@ -37,7 +37,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Enums\eGuessingOption.cs" />
-    <Compile Include="EngineBoard.cs" />
     <Compile Include="Feedback.cs" />
     <Compile Include="GameManger.cs" />
     <Compile Include="Guess.cs" />
