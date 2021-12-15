@@ -33,7 +33,7 @@ namespace UI
 
         public BullsAndCowsGameConsole()
         {
-            initGuessingOptions(out r_GuessingOptions);
+            r_GuessingOptions= getGuessingOptions();
         }
 
         public void                      StartNewGame()
@@ -45,11 +45,11 @@ namespace UI
             startGuessesInteractionsWithTheUser();
         }
 
-        private void                     initGuessingOptions(out string o_GuessingOptions)
+        private string                   getGuessingOptions()
         {
             string[] guessingOptionsEnumNames = Enum.GetNames(typeof(eGuessingOption));
 
-            o_GuessingOptions = string.Concat(guessingOptionsEnumNames);
+            return string.Concat(guessingOptionsEnumNames);
         }
 
         private void                     closeConsole()
