@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace Ex03.GarageLogic
+namespace Ex03.GarageLogic.Models
 {
-    public class Class1
+    internal class GarageVehical
     {
     }
 }
