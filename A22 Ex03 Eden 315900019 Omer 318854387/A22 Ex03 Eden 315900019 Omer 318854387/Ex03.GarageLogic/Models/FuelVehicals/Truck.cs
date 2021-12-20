@@ -8,6 +8,10 @@ namespace Ex03.GarageLogic.Models.FuelVehicals
 {
     public class Truck : IFuel
     {
+        protected readonly bool  r_DoesDriveRefrigeratedContents;
+        protected readonly float r_LuggageCapacity;
+
+
         public eFuelType FuelType => throw new NotImplementedException();
 
         public float CurrentFuelAmount => throw new NotImplementedException();

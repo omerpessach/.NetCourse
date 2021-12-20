@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Models
 {
-    internal class Tier
+    public class Tier
     {
         private readonly string r_Manufacturer;
         private readonly float r_MaxAirPressure;
@@ -16,6 +16,14 @@ namespace Ex03.GarageLogic.Models
             r_Manufacturer = i_Manufacturer;
             r_MaxAirPressure = i_MaxAirPressure;
             m_CurrentAirPressure = i_currentAirPressure;
+        }
+
+        public float MaxAirPressure
+        {
+            get
+            {
+                return r_MaxAirPressure;
+            }
         }
 
         public float CurrentAirPressure
@@ -40,7 +48,7 @@ namespace Ex03.GarageLogic.Models
             {
                 throw new ValueOutOfRangeException("Negative number is not allowed");
             }
-            else if (i_AirToAdd + m_CurrentAirPressure > r_MaxAirPressure)
+            else if (m_CurrentAirPressure + i_AirToAdd > r_MaxAirPressure)
             {
                 throw new ValueOutOfRangeException("The value is too high");
             }

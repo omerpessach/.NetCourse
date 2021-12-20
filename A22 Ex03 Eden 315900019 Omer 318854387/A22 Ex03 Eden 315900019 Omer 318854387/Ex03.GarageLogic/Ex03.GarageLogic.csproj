@@ -36,24 +36,32 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\CarColor.cs" />
     <Compile Include="Enums\eVehicalType.cs" />
     <Compile Include="Enums\eVehicalStatus.cs" />
     <Compile Include="Enums\eDoorPossibleOptions.cs" />
     <Compile Include="Enums\eCarColor.cs" />
     <Compile Include="Enums\eLicenceType.cs" />
     <Compile Include="Enums\eFuelType.cs" />
+    <Compile Include="Enums\FuelType.cs" />
+    <Compile Include="Enums\LicenceType.cs" />
+    <Compile Include="Enums\NumberOfDoors.cs" />
+    <Compile Include="Enums\VehicalStatus.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="GarageManager.cs" />
     <Compile Include="Interfaces\IElectricity.cs" />
     <Compile Include="Interfaces\IFuel.cs" />
+    <Compile Include="Models\Car.cs" />
     <Compile Include="Models\ElectricVehicals\ElectricCar.cs" />
     <Compile Include="Models\ElectricVehicals\ElectricMotorcycle.cs" />
     <Compile Include="Models\FuelVehicals\FuelCar.cs" />
     <Compile Include="Models\FuelVehicals\FuelMotorcycle.cs" />
     <Compile Include="Models\FuelVehicals\Truck.cs" />
     <Compile Include="Models\GarageVehical.cs" />
+    <Compile Include="Models\Motorcycle.cs" />
     <Compile Include="Models\Tier.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Models\Vehical.cs" />
     <Compile Include="VehicalFactory.cs" />
   </ItemGroup>
   <ItemGroup />
