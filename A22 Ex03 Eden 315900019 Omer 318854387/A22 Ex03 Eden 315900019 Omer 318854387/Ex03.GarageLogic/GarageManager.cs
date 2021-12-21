@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
             GarageVehical currentVehicalToChange;
 
             // Should this part be separate to a new private method and to be called in each method?
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehicalToChange)) 
+            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehicalToChange))
             {
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
@@ -96,7 +96,7 @@ namespace Ex03.GarageLogic
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
 
-            (currentVehical.Vehicle.Engine as ElectricEngine).Charge(i_MinToCharge);
+            (currentVehical.Vehicle.Engine as ElectricEngine).Charge(i_MinToCharge / 60);
         }
 
         public string GetVehicalDetails(string i_LicenseID)
