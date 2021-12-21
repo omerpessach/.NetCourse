@@ -7,38 +7,39 @@ namespace Ex03.GarageLogic.Models
 {
     public class GarageVehical
     {
-        private readonly Vehicle r_CurrentVehicle;
+        private readonly Vehicle r_Vehicle;
         private readonly PersonInfo r_Owner;
-        private eVehicalStatus m_currentStatus = eVehicalStatus.InRepair;
+        private eVehicalStatus m_Status = eVehicalStatus.InRepair;
 
-        public GarageVehical(PersonInfo i_OwnerInfo)
+        public GarageVehical(PersonInfo i_OwnerInfo, Vehicle i_Vehicle)
         {
             r_Owner = i_OwnerInfo;
+            r_Vehicle = i_Vehicle;
         }
 
-        public eVehicalStatus CurrentStatus
+        public eVehicalStatus Status
         {
             get
             {
-                return m_currentStatus;
+                return m_Status;
             }
             set
             {
-                m_currentStatus = value;
+                m_Status = value;
             }
         }
 
-        public Vehicle CurrentVehicle
+        public Vehicle Vehicle
         {
             get
             {
-                return r_CurrentVehicle;
+                return r_Vehicle;
             }
         }
 
         public override string ToString()
         {
-            return string.Format(@"{0}, vehicle detailes: {1}, {2}, status in garage: {3}", r_Owner.ToString(), CurrentVehicle.LicenceID, CurrentVehicle.ModelName, CurrentStatus);
+            return string.Format(@"{0}, vehicle detailes: {1}, status in garage: {2}", r_Owner.ToString(), Vehicle.ToString(), Status);
         }
     }
 }
