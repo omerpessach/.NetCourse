@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic.Models
 {
     internal abstract class Car
     {
-        protected CarColor      m_CarColor;
-        protected NumberOfDoors m_DoorAmount;
+        protected eCarColor      m_CarColor;
+        protected eDoorPossibleOptions m_DoorAmount;
 
         public Car()
         {

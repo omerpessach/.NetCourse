@@ -7,7 +7,7 @@ namespace Ex03.GarageLogic.Models
 {
     internal abstract class Motorcycle
     {
-        protected LicenceType m_LicenceType;
+        protected eLicenceType m_LicenceType;
         protected int         m_EngineVolume;
 
     }

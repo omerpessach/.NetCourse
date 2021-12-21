@@ -4,11 +4,8 @@ using System.Text;
 
 namespace Ex03.ConsoleUI
 {
-    public class Program
+    class eMenuOptions
     {
-        public static void Main()
-        {
-            
-        }
+
     }
 }
