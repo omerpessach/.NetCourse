@@ -1,11 +1,10 @@
-﻿using Ex03.GarageLogic.Interfaces;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Ex03.GarageLogic.Models.ElectricVehicals
 {
-    public class ElectricMotorcycle : IElectricity
+    public class ElectricMotorcycle 
     {
         public float RemainingBatteryTime => throw new NotImplementedException();
 

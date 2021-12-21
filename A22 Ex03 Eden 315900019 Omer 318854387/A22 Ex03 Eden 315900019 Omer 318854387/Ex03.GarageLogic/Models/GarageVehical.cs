@@ -7,32 +7,13 @@ namespace Ex03.GarageLogic.Models
 {
     public class GarageVehical
     {
-        private readonly string  r_OwnerName;
         private readonly Vehicle r_CurrentVehicle;
-        private readonly string  r_PhoneNumberOwner;
-        private eVehicalStatus   m_currentStatus;
+        private readonly PersonInfo r_Owner;
+        private eVehicalStatus m_currentStatus = eVehicalStatus.InRepair;
 
-        public GarageVehical(string i_NameOfOwner, string i_PhoneNumberOwner)
+        public GarageVehical(PersonInfo i_OwnerInfo)
         {
-            m_currentStatus = eVehicalStatus.InRepair;
-            r_OwnerName = i_NameOfOwner;
-            r_PhoneNumberOwner = i_PhoneNumberOwner;
-        }
-
-        public string OwnerName
-        {
-            get
-            {
-                return r_OwnerName;
-            }
-        }
-
-        public string PhoneNumberOwner
-        {
-            get
-            {
-                return r_PhoneNumberOwner;
-            }
+            r_Owner = i_OwnerInfo;
         }
 
         public eVehicalStatus CurrentStatus
@@ -43,7 +24,7 @@ namespace Ex03.GarageLogic.Models
             }
             set
             {
-                m_currentStatus = value; 
+                m_currentStatus = value;
             }
         }
 
@@ -57,7 +38,7 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format(@"Owner name:{0}, owner phone:{1}, vehicle detailes: {2}, {3}, status in garage: {4}", OwnerName, PhoneNumberOwner, CurrentVehicle.LicenceID, CurrentVehicle.ModelName, CurrentStatus);
+            return string.Format(@"{0}, vehicle detailes: {1}, {2}, status in garage: {3}", r_Owner.ToString(), CurrentVehicle.LicenceID, CurrentVehicle.ModelName, CurrentStatus);
         }
     }
 }

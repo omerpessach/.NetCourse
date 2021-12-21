@@ -8,14 +8,14 @@ namespace Ex03.GarageLogic.Models
     {
         protected readonly string   r_ModelName;
         protected readonly string   r_LicenceID;
-        protected float             m_CurrentEnergy;
-        protected float             m_MaxEnergyCapacity;
+        protected readonly Engine r_Engine;
         protected readonly List<Tier> r_Tiers; 
 
-        protected Vehicle(string i_ModelName, string i_LicenceID) //should we use here in prop?
+        protected Vehicle(string i_ModelName, string i_LicenceID, Engine i_Engine) //should we use here in prop? no 
         {
             r_ModelName = i_ModelName;
             r_LicenceID = i_LicenceID;
+            r_Engine = i_Engine;
         }
 
         public List<Tier> Tiers

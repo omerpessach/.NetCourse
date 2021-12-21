@@ -1,12 +1,11 @@
 ﻿using Ex03.GarageLogic.Enums;
-using Ex03.GarageLogic.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
 namespace Ex03.GarageLogic.Models.FuelVehicals
 {
-    public class FuelCar : IFuel
+    public class FuelCar 
     {
         public eFuelType FuelType => throw new NotImplementedException();
 
