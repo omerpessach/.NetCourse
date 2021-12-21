@@ -8,12 +8,7 @@ namespace Ex03.GarageLogic
 {
     public sealed class GarageManager
     {
-        readonly Dictionary<string, GarageVehical> r_GarageVehicals;
-
-        public GarageManager()
-        {
-            r_GarageVehicals = new Dictionary<string, GarageVehical>();
-        }
+        readonly Dictionary<string, GarageVehical> r_GarageVehicals = new Dictionary<string, GarageVehical>();
 
         public bool AddNewCar(string i_LicenseID, GarageVehical i_VehicalToAdd)
         {
