@@ -10,46 +10,10 @@ namespace Ex03.GarageLogic.Models
         private eLicenceType m_LicenceType;
         private int m_EngineVolume;
 
-        public Motorcycle(string i_ModelName, string i_LicenceID, Engine i_Engine, eLicenceType i_LicenceType, int i_EngineVolume)
-            : base(i_ModelName, i_LicenceID, i_Engine)
+        public Motorcycle(Engine i_Engine, List<Tier> i_Tiers)
+            : base(i_Engine, i_Tiers)
         {
-            float MaxAirPressureOfTier = 30;
-
-            m_LicenceType = i_LicenceType;
-            m_EngineVolume = i_EngineVolume;
-            this.NumberOfWheels = 2;  
         }
-
-        protected override void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData)
-        {
-            io_RequiredData.Add("Motorcycle license type: [1 = A, 2 = A2, 3 = AA, 4 = B]");
-            io_RequiredData.Add("Engine size:");
-        }
-
-        public override void SetEngineInformation(float i_CurrentEngineCapcityLeft)
-        {
-            float engineMaxCapacity = getMaxEngineCapacity();
-
-            SetEnergyEngineCapacity(i_CurrentEngineCapcityLeft, engineMaxCapacity);
-        }
-
-        protected override float getMaxEngineCapacity()
-        {
-            float MaxEngineCapacity;
-            FuelEngine fuelMotorcycleEngine = this.Engine as FuelEngine;
-
-            if (fuelMotorcycleEngine != null)
-            {
-                MaxEngineCapacity = 5.8f; //max capacity of car as fuel engine 
-            }
-            else
-            {
-                MaxEngineCapacity = 2.3f; //max capacity of car as elctric engine
-            }
-
-            return MaxEngineCapacity;
-        }
-
 
         public override string ToString()
         {

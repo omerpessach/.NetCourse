@@ -6,29 +6,15 @@ namespace Ex03.GarageLogic.Models
 {
     public abstract class Vehicle
     {
-        protected int             m_NumberOfWheels; //should it be readonly
-        protected readonly string r_ModelName;
-        protected readonly string r_LicenceID;
-        protected readonly Engine r_Engine;
-        protected readonly List<Tier> r_Tiers;
+        protected string m_ModelName;
+        protected string r_LicenceID;
+        protected Engine m_Engine;
+        protected List<Tier> r_Tiers;
 
-        protected Vehicle(string i_ModelName, string i_LicenceID, Engine i_Engine)
+        protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
-            r_ModelName = i_ModelName;
-            r_LicenceID = i_LicenceID;
-            r_Engine = i_Engine;
-        }
-
-        public int NumberOfWheels
-        {
-            get
-            {
-                return m_NumberOfWheels;
-            }
-            set
-            {
-                m_NumberOfWheels = value;
-            }
+            m_Engine = i_Engine;
+            r_Tiers = i_Tiers;
         }
 
         public List<Tier> Tiers
@@ -41,14 +27,21 @@ namespace Ex03.GarageLogic.Models
 
         public int TiersAmount
         {
-            get => Tiers.Count;
+            get
+            {
+                return Tiers.Count;
+            }
         }
 
         public string ModelName
         {
             get
             {
-                return r_ModelName;
+                return m_ModelName;
+            }
+            set
+            {
+                m_ModelName = value;
             }
         }
 
@@ -58,32 +51,19 @@ namespace Ex03.GarageLogic.Models
             {
                 return r_LicenceID;
             }
+            set
+            {
+                r_LicenceID = value;
+            }
         }
 
         public Engine Engine
         {
             get
             {
-                return r_Engine;
+                return m_Engine;
             }
         }
-
-        protected void SetEnergyEngineCapacity(float i_EnergyEngineCapacityLeft, float i_EngineMaxCapacity)
-        {
-            Engine.SetEnergyLeftAndMaxCapacity(i_EnergyEngineCapacityLeft, i_EngineMaxCapacity);
-        }
-        protected abstract void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData);
-
-        public void SetrequiredDataForTiers(string i_ManufacturerName, float i_CurrentAirPressure)
-        {
-            for(int i = 0; i < Tiers.Count; i++)
-            {
-                r_Tiers[i].SetrequiredDataForTier(i_ManufacturerName, i_CurrentAirPressure);
-            }
-        }
-        public abstract void SetEngineInformation(float i_CurrentEngineCapcityLeft);
-
-        protected abstract float getMaxEngineCapacity();
 
         public override string ToString()
         {

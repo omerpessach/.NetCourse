@@ -25,23 +25,5 @@ namespace Ex03.GarageLogic.Models
         {
             return string.Format("Max energy capacity: {0}, Current energy: {1}, percent of energy left: {2}", m_MaxEnergyCapacity, m_CurrentEnergy, m_PercentOfEnergyLeft);
         }
-
-        public void SetEnergyLeftAndMaxCapacity(float i_EnergyEngineCapacityLeft, float i_EngineMaxCapacity)
-        {
-            if ((i_EnergyEngineCapacityLeft < 0) || (i_EnergyEngineCapacityLeft > i_EngineMaxCapacity))
-            {
-                throw new ValueOutOfRangeException(string.Format(@"the current capacity: {0} is invalid!", i_EnergyEngineCapacityLeft));
-            }
-
-            m_MaxEnergyCapacity = i_EngineMaxCapacity;
-            m_CurrentEnergy = i_EnergyEngineCapacityLeft;
-            SetPrecentOfEnergyLeft();
-        }
-
-        private void SetPrecentOfEnergyLeft()
-        {
-            m_PercentOfEnergyLeft = m_CurrentEnergy / m_MaxEnergyCapacity;
-            m_PercentOfEnergyLeft = m_CurrentEnergy / m_MaxEnergyCapacity;
-        }
     }
 }

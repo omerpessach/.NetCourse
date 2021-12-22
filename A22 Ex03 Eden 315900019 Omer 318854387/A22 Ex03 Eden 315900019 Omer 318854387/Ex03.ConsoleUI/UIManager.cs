@@ -1,54 +1,72 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using Ex03.GarageLogic;
 using Ex03.GarageLogic.Models;
 using Ex03.GarageLogic.Enums;
+using System.Text;
 
 namespace Ex03.ConsoleUI
 {
     public class UIManager
     {
-        public readonly GarageManager r_GarageManger = new GarageManager();
-        private eMenuOptions m_CurrentChoice;
+        private readonly GarageManager r_GarageManger = new GarageManager();
+        private const string k_AskForLicenseID = "Please insert license ID";
+        private const string k_LicenseIDNotFoundMsg = "Vehical with license ID: {0} not found in our garage";
+        private const string k_Done = "Done!";
 
         public void RunApp()
         {
             bool exitProgram = false;
+            eMenuOptions userChoice;
 
             Console.WriteLine("Welecom to our Garage!");
             do
             {
-                DisplayMenuToUser();
-                m_CurrentChoice = (eMenuOptions)UIHelper.GetUserInputToMenuOption();
-                switch (m_CurrentChoice)
+                displayMenuToUser();
+                userChoice = (eMenuOptions)UIHelper.GetUserInputToMenuOption();
+                switch (userChoice)
                 {
                     case eMenuOptions.AddNewVehical:
-                        AddNewVehical();
-                        break;
+                        {
+                            AddNewVehical();
+                            break;
+                        }
                     case eMenuOptions.GetLicencesIDsFilterByStatus:
-                        GetLicencesIDsFilterByStatus();
-                        break;
+                        {
+                            getLicencesIDsFilterByStatus();
+                            break;
+                        }
                     case eMenuOptions.ChangeVehicalStatus:
-                        ChangeVehicalStatus();
-                        break;
+                        {
+                            changeVehicalStatus();
+                            break;
+                        }
                     case eMenuOptions.FillAirToMax:
-                        FillAirToMax();
-                        break;
+                        {
+                            fillAirToMax();
+                            break;
+                        }
                     case eMenuOptions.FuelCar:
-                        FuelCar();
-                        break;
+                        {
+                            fuelCar();
+                            break;
+                        }
                     case eMenuOptions.ChargeCar:
-                        ChargeCar();
-                        break;
+                        {
+                            chargeCar();
+                            break;
+                        }
                     case eMenuOptions.GetAllVehicalDetails:
-                        GetAllVehicalDetails();
-                        break;
+                        {
+                            getAllVehicalDetails();
+                            break;
+                        }
                     case eMenuOptions.Exit:
-                        exitProgram = true;
-                        break;
+                        {
+                            exitProgram = true;
+                            break;
+                        }
                 }
-
             }
             while (!exitProgram);
         }
@@ -77,11 +95,11 @@ namespace Ex03.ConsoleUI
         private List<string> askForMoreDataAccordingToVehicalType(eVehicalType i_chosenVehicalType)
         {
             List<string> requiredData = new List<string>();
-            switch(i_chosenVehicalType)
+            switch (i_chosenVehicalType)
             {
                 case eVehicalType.ElectircCar:
-                    
-                        break;
+
+                    break;
                 case eVehicalType.FuelCar:
                     break;
                 case eVehicalType.FuelMotocycle:
@@ -138,55 +156,41 @@ namespace Ex03.ConsoleUI
             phoneNumber = Console.ReadLine();
             o_NewOwner = new PersonInfo(ownerName, phoneNumber);
         }
-        private string getOwnerPhoneNumber()
+
+        private void getAllVehicalDetails()
         {
-            return "";
+            string licenseID = GetLicenseIDFromUser();
+            Console.WriteLine(r_GarageManger.GetVehicalDetails(licenseID));
         }
 
-        private string getOwnerName()
-        {
-            return "";
-        }
-
-        private string getValidInput()
-        {
-            Console.WriteLine("please insert license ID");
-            Console.ReadLine();
-
-            return "";
-        }
-
-        private void GetAllVehicalDetails()
+        private void chargeCar()
         {
             throw new NotImplementedException();
         }
 
-        private void ChargeCar()
+        private void fuelCar()
         {
             throw new NotImplementedException();
         }
 
-        private void FuelCar()
+        private void fillAirToMax()
+        {
+            string licenseID = GetLicenseIDFromUser();
+            r_GarageManger.FillAirToMax(licenseID);
+            Console.WriteLine(k_Done);
+        }
+
+        private void changeVehicalStatus()
         {
             throw new NotImplementedException();
         }
 
-        private void FillAirToMax()
+        private void getLicencesIDsFilterByStatus()
         {
             throw new NotImplementedException();
         }
 
-        private void ChangeVehicalStatus()
-        {
-            throw new NotImplementedException();
-        }
-
-        private void GetLicencesIDsFilterByStatus()
-        {
-            throw new NotImplementedException();
-        }
-
-        public static void DisplayMenuToUser()
+        private void displayMenuToUser()
         {
             string MenuOptions = string.Format(
                 @"Which opartion would you like to execute?
@@ -201,6 +205,21 @@ press 8 - exit application");
             Console.WriteLine(MenuOptions);
         }
 
+        private string GetLicenseIDFromUser()
+        {
+            string inputFromUser;
+            StringBuilder licenseExsitsAlreadyOutput = new StringBuilder(k_AskForLicenseID);
+            licenseExsitsAlreadyOutput.AppendLine(k_AskForLicenseID);
 
+            Console.WriteLine(k_AskForLicenseID);
+            inputFromUser = Console.ReadLine();
+            while (r_GarageManger.IsLicenseIDExsists(inputFromUser))
+            {
+                Console.WriteLine(string.Format(licenseExsitsAlreadyOutput.ToString()), inputFromUser);
+                inputFromUser = Console.ReadLine();
+            }
+
+            return inputFromUser;
+        }
     }
 }

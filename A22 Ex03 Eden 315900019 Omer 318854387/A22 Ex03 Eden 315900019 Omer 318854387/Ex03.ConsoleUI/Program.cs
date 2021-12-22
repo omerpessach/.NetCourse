@@ -8,7 +8,8 @@ namespace Ex03.ConsoleUI
     {
         public static void Main()
         {
-            
+            UIManager ui = new UIManager();
+            ui.RunApp();
         }
     }
 }

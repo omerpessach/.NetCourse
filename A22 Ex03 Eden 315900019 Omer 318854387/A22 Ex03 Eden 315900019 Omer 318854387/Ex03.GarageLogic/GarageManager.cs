@@ -8,34 +8,30 @@ namespace Ex03.GarageLogic
 {
     public sealed class GarageManager
     {
-        readonly Dictionary<string, GarageVehical> r_GarageVehicals = new Dictionary<string, GarageVehical>();
+        private readonly Dictionary<string, GarageVehical> r_GarageVehicals = new Dictionary<string, GarageVehical>();
 
-        public bool AddNewCar(string i_LicenseID, GarageVehical i_VehicalToAdd)
+        public void AddNewCar(string i_LicenseID, GarageVehical i_VehicalToAdd)
         {
-            bool isReEnteredForRepair = false;
-
-            if (r_GarageVehicals.ContainsKey(i_LicenseID))
+            if (IsLicenseIDExsists(i_LicenseID))
             {
-                i_VehicalToAdd.Status = eVehicalStatus.InRepair;
-                isReEnteredForRepair = true;
+                r_GarageVehicals[i_LicenseID].Status = eVehicalStatus.InRepair;
+                throw new ArgumentException("License ID already exists");
             }
             else
             {
                 r_GarageVehicals.Add(i_LicenseID, i_VehicalToAdd);
             }
-
-            return isReEnteredForRepair;
         }
 
         public List<string> GetLicencesIDsByStatus(eVehicalStatus i_FilterStatus)
         {
             List<string> allLicensesIDAfterFilter = new List<string>();
 
-            foreach (KeyValuePair<string, GarageVehical> currentVehical in r_GarageVehicals)
+            foreach (KeyValuePair<string, GarageVehical> vehical in r_GarageVehicals)
             {
-                if (currentVehical.Value.Status == i_FilterStatus)
+                if (vehical.Value.Status == i_FilterStatus)
                 {
-                    allLicensesIDAfterFilter.Add(currentVehical.Key);
+                    allLicensesIDAfterFilter.Add(vehical.Key);
                 }
             }
 
@@ -44,71 +40,66 @@ namespace Ex03.GarageLogic
 
         public void ChangeVehicalStatus(string i_LicenseID, eVehicalStatus i_NewStatus)
         {
-            GarageVehical currentVehicalToChange;
-
-            // Should this part be separate to a new private method and to be called in each method?
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehicalToChange))
-            {
-                throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
-            }
-
-            currentVehicalToChange.Status = i_NewStatus;
+            throwExceptionIfLicenseIDNotFound(i_LicenseID);
+            r_GarageVehicals[i_LicenseID].Status = i_NewStatus;
         }
 
         public void FillAirToMax(string i_LicenseID)
         {
-            GarageVehical currentVehicalToFillAir;
-
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehicalToFillAir))
+            throwExceptionIfLicenseIDNotFound(i_LicenseID);
+            foreach (Tier currentTier in r_GarageVehicals[i_LicenseID].Vehicle.Tiers)
             {
-                throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
-            }
-
-            foreach (Tier currentTier in currentVehicalToFillAir.Vehicle.Tiers)
-            {
-                currentTier.Blow(currentTier.MaxAirPressure);
+                currentTier.BlowToMax();
             }
         }
 
         public void Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
         {
-            GarageVehical currentVehicalToFuel;
+            throwExceptionIfLicenseIDNotFound(i_LicenseID);
+            Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
 
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehicalToFuel))
+            if (currentEngine is FuelEngine)
             {
-                throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
+                (currentEngine as FuelEngine).Fuel(i_AmoutToFuel, i_FuelType);
             }
-
-            (currentVehicalToFuel.Vehicle.Engine as FuelEngine).Fuel(i_AmoutToFuel, i_FuelType);
+            else
+            {
+                throw new ArgumentException("The engine isnt a fuel engine.");
+            }
         }
 
         public void Charge(string i_LicenseID, float i_MinToCharge)
         {
-            GarageVehical currentVehical;
+            throwExceptionIfLicenseIDNotFound(i_LicenseID);
+            Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
 
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out currentVehical))
+            if (currentEngine is ElectricEngine)
             {
-                throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
+                (currentEngine as ElectricEngine).Charge(i_MinToCharge / 60);
             }
-
-            (currentVehical.Vehicle.Engine as ElectricEngine).Charge(i_MinToCharge / 60);
+            else
+            {
+                throw new ArgumentException("The engine isnt an electric engine.");
+            }
         }
 
         public string GetVehicalDetails(string i_LicenseID)
         {
-            GarageVehical vehicalDetails;
+            throwExceptionIfLicenseIDNotFound(i_LicenseID);
+            return r_GarageVehicals[i_LicenseID].ToString();
+        }
 
-            if (!r_GarageVehicals.TryGetValue(i_LicenseID, out vehicalDetails))
+        public bool IsLicenseIDExsists(string i_LicenseID)
+        {
+            return r_GarageVehicals.ContainsKey(i_LicenseID);
+        }
+
+        private void throwExceptionIfLicenseIDNotFound(string i_LicenseID)
+        {
+            if (!IsLicenseIDExsists(i_LicenseID))
             {
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
-
-            return vehicalDetails.ToString();
-        }
-
-        public bool isVehicalExsistInGarage(string i_LicenseID)
-        {
-            return r_GarageVehicals.ContainsKey(i_LicenseID);
         }
     }
 }
