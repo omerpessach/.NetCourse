@@ -16,7 +16,7 @@ namespace Ex03.GarageLogic
 
             if (r_GarageVehicals.ContainsKey(i_LicenseID))
             {
-                i_VehicalToAdd.Status = eVehicalStatus.InRepair;
+                i_VehicalToAdd.CurrentStatus = eVehicalStatus.InRepair;
                 isReEnteredForRepair = true;
             }
             else
@@ -33,7 +33,7 @@ namespace Ex03.GarageLogic
 
             foreach (KeyValuePair<string, GarageVehical> currentVehical in r_GarageVehicals)
             {
-                if (currentVehical.Value.Status == i_FilterStatus)
+                if (currentVehical.Value.CurrentStatus == i_FilterStatus)
                 {
                     allLicensesIDAfterFilter.Add(currentVehical.Key);
                 }
@@ -52,7 +52,7 @@ namespace Ex03.GarageLogic
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
 
-            currentVehicalToChange.Status = i_NewStatus;
+            currentVehicalToChange.CurrentStatus = i_NewStatus;
         }
 
         public void FillAirToMax(string i_LicenseID)
@@ -64,9 +64,9 @@ namespace Ex03.GarageLogic
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
 
-            foreach (Tier currentTier in currentVehicalToFillAir.Vehicle.Tiers)
+            foreach (Tier currentTier in currentVehicalToFillAir.CurrentVehicle.Tiers)
             {
-                currentTier.BlowToMax();
+                currentTier.Blow(currentTier.MaxAirPressure);
             }
         }
 
@@ -79,7 +79,7 @@ namespace Ex03.GarageLogic
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
 
-            (currentVehicalToFuel.Vehicle.Engine as FuelEngine).Fuel(i_AmoutToFuel, i_FuelType);
+            (currentVehicalToFuel.CurrentVehicle.Engine as FuelEngine).Fuel(i_AmoutToFuel, i_FuelType);
         }
 
         public void Charge(string i_LicenseID, float i_MinToCharge)
@@ -91,7 +91,7 @@ namespace Ex03.GarageLogic
                 throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
             }
 
-            (currentVehical.Vehicle.Engine as ElectricEngine).Charge(i_MinToCharge / 60);
+            (currentVehical.CurrentVehicle.Engine as ElectricEngine).Charge(i_MinToCharge / 60);
         }
 
         public string GetVehicalDetails(string i_LicenseID)

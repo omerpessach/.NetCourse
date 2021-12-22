@@ -6,11 +6,11 @@ using Ex03.GarageLogic.Models;
 
 namespace Ex03.GarageLogic
 {
-    internal sealed class VehicalFactory
+    public class VehicalFactory
     {
         public static Vehicle MakeVehicle(eVehicalType i_CurrentVehicalType)
         {
-            //Vehicle newVehicle;
+            Vehicle newVehicle;
 
             switch(i_CurrentVehicalType)
             {
@@ -25,6 +25,8 @@ namespace Ex03.GarageLogic
                 case eVehicalType.Truck:
                     break;
             }
+
+            return newVehicle;
         }
     }
 }

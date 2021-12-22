@@ -7,15 +7,13 @@ namespace Ex03.GarageLogic.Models
 {
     public class Tier
     {
-        private readonly string r_Manufacturer;
+        private string r_Manufacturer;
         private readonly float r_MaxAirPressure;
         private float m_CurrentAirPressure;
 
-        public Tier(string i_Manufacturer, float i_MaxAirPressure, float i_currentAirPressure)
+        public Tier(float i_MaxAirPressure)
         {
-            r_Manufacturer = i_Manufacturer;
             r_MaxAirPressure = i_MaxAirPressure;
-            m_CurrentAirPressure = i_currentAirPressure;
         }
 
         public float MaxAirPressure
@@ -32,6 +30,10 @@ namespace Ex03.GarageLogic.Models
             {
                 return m_CurrentAirPressure;
             }
+            set
+            {
+                m_CurrentAirPressure = value;
+            }
         }
 
         public string Manufacturer
@@ -39,6 +41,23 @@ namespace Ex03.GarageLogic.Models
             get
             {
                 return r_Manufacturer;
+            }
+            set
+            {
+                r_Manufacturer = value;
+            }
+        }
+
+        public void SetrequiredDataForTier(string i_Manufacturer, float i_CurrentAirPressure)
+        {
+            if((i_CurrentAirPressure< 0) || (i_CurrentAirPressure > r_MaxAirPressure))
+            {
+                throw new ValueOutOfRangeException(string.Format(@"the current air pressure {0} isn't valid", i_CurrentAirPressure));
+            }
+            else
+            {
+                Manufacturer = i_Manufacturer;
+                CurrentAirPressure = i_CurrentAirPressure;
             }
         }
 
@@ -56,16 +75,6 @@ namespace Ex03.GarageLogic.Models
             {
                 m_CurrentAirPressure += i_AirToAdd;
             }
-        }
-
-        public void BlowToMax()
-        {
-            m_CurrentAirPressure = r_MaxAirPressure;
-        }
-
-        public override string ToString()
-        {
-            return string.Format("Manufacturer: {0}, r_Max Air Pressure: {1}, Current Air Pressure {2}", r_Manufacturer, r_MaxAirPressure, m_CurrentAirPressure);
         }
     }
 }

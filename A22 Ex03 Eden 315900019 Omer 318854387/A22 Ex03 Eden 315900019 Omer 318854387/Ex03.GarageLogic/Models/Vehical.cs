@@ -6,6 +6,7 @@ namespace Ex03.GarageLogic.Models
 {
     public abstract class Vehicle
     {
+        protected int             m_NumberOfWheels; //should it be readonly
         protected readonly string r_ModelName;
         protected readonly string r_LicenceID;
         protected readonly Engine r_Engine;
@@ -16,6 +17,18 @@ namespace Ex03.GarageLogic.Models
             r_ModelName = i_ModelName;
             r_LicenceID = i_LicenceID;
             r_Engine = i_Engine;
+        }
+
+        public int NumberOfWheels
+        {
+            get
+            {
+                return m_NumberOfWheels;
+            }
+            set
+            {
+                m_NumberOfWheels = value;
+            }
         }
 
         public List<Tier> Tiers
@@ -52,6 +65,16 @@ namespace Ex03.GarageLogic.Models
             get
             {
                 return r_Engine;
+            }
+        }
+
+        public abstract void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData);
+
+        public void SetrequiredDataForTiers(string i_ManufacturerName, float i_CurrentAirPressure)
+        {
+            for(int i = 0; i < Tiers.Count; i++)
+            {
+                r_Tiers[i].
             }
         }
 

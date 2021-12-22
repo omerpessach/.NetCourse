@@ -12,8 +12,17 @@ namespace Ex03.GarageLogic.Models
         public Truck(string i_ModelName, string i_LicenceID, Engine i_Engine, bool i_DoesDriveRefrigeratedContents, float i_LuggageCapacity)
             : base(i_ModelName, i_LicenceID, i_Engine)
         {
+            float MaxAirPressureOfTier = 25;
+
             r_DoesDriveRefrigeratedContents = i_DoesDriveRefrigeratedContents;
             r_LuggageCapacity = i_LuggageCapacity;
+            this.NumberOfWheels = 16;
+        }
+
+        public override void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData)
+        {
+            io_RequiredData.Add("Does drive refrigerated contents? : [Yes = Type 'True' ; No = 'False']");
+            io_RequiredData.Add("Cargo volume:");
         }
 
         public override string ToString()
