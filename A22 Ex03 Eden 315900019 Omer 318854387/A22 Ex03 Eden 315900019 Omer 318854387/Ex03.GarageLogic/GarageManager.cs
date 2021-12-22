@@ -111,5 +111,10 @@ namespace Ex03.GarageLogic
             return vehicalDetails.ToString();
         }
 
+        public bool isVehicalExsistInGarage(string i_LicenseID)
+        {
+            return r_GarageVehicals.ContainsKey(i_LicenseID);
+        }
     }
 }
+

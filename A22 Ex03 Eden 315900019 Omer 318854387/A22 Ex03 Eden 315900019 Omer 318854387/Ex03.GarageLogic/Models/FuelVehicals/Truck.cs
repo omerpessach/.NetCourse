@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Ex03.GarageLogic.Models.FuelVehicals
 {
-    public class Truck 
+    public class Truck : Vehicle
     {
         protected readonly bool  r_DoesDriveRefrigeratedContents;
         protected readonly float r_LuggageCapacity;
