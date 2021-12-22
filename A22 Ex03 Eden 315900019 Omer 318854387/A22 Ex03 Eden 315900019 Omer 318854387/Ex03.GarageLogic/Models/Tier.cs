@@ -11,7 +11,7 @@ namespace Ex03.GarageLogic.Models
         private readonly float r_MaxAirPressure;
         private float m_CurrentAirPressure;
 
-        public Tier(string i_Manufacturer, float i_MaxAirPressure, float i_currentAirPressure = 0)
+        public Tier(string i_Manufacturer, float i_MaxAirPressure, float i_currentAirPressure)
         {
             r_Manufacturer = i_Manufacturer;
             r_MaxAirPressure = i_MaxAirPressure;
@@ -56,6 +56,16 @@ namespace Ex03.GarageLogic.Models
             {
                 m_CurrentAirPressure += i_AirToAdd;
             }
+        }
+
+        public void BlowToMax()
+        {
+            m_CurrentAirPressure = r_MaxAirPressure;
+        }
+
+        public override string ToString()
+        {
+            return string.Format("Manufacturer: {0}, r_Max Air Pressure: {1}, Current Air Pressure {2}", r_Manufacturer, r_MaxAirPressure, m_CurrentAirPressure);
         }
     }
 }

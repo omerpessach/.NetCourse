@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -12,6 +13,15 @@ namespace Ex03.GarageLogic.Models
 
         public void Charge(float i_AmountOfHoursToAdd)
         {
+            if (m_CurrentEnergy + i_AmountOfHoursToAdd > m_MaxEnergyCapacity)
+            {
+                throw new ValueOutOfRangeException("");
+            }
+            else
+            {
+                m_CurrentEnergy += i_AmountOfHoursToAdd;
+                CalculatePercentOfEnergyLeft();
+            }
         }
     }
 }
