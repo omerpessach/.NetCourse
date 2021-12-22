@@ -4,8 +4,8 @@ namespace Ex03.GarageLogic.Models
 {
     public class Tier
     {
-        private string r_Manufacturer;
         private readonly float r_MaxAirPressure;
+        private string m_Manufacturer;
         private float m_CurrentAirPressure;
 
         public Tier(float i_MaxAirPressure)
@@ -37,11 +37,11 @@ namespace Ex03.GarageLogic.Models
         {
             get
             {
-                return r_Manufacturer;
+                return m_Manufacturer;
             }
             set
             {
-                r_Manufacturer = value;
+                m_Manufacturer = value;
             }
         }
 
