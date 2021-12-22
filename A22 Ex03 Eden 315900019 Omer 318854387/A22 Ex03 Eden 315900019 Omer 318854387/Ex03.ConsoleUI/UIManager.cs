@@ -77,11 +77,11 @@ namespace Ex03.ConsoleUI
         private List<string> askForMoreDataAccordingToVehicalType(eVehicalType i_chosenVehicalType)
         {
             List<string> requiredData = new List<string>();
-
             switch(i_chosenVehicalType)
             {
                 case eVehicalType.ElectircCar:
-                    break;
+                    
+                        break;
                 case eVehicalType.FuelCar:
                     break;
                 case eVehicalType.FuelMotocycle:

@@ -15,6 +15,7 @@ namespace Ex03.GarageLogic
             switch(i_CurrentVehicalType)
             {
                 case eVehicalType.FuelCar:
+
                     break;
                 case eVehicalType.ElectircCar:
                     break;

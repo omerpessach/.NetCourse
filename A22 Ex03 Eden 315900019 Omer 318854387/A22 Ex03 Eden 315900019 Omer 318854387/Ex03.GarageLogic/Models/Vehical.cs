@@ -68,15 +68,22 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public abstract void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData);
+        protected void SetEnergyEngineCapacity(float i_EnergyEngineCapacityLeft, float i_EngineMaxCapacity)
+        {
+            Engine.SetEnergyLeftAndMaxCapacity(i_EnergyEngineCapacityLeft, i_EngineMaxCapacity);
+        }
+        protected abstract void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData);
 
         public void SetrequiredDataForTiers(string i_ManufacturerName, float i_CurrentAirPressure)
         {
             for(int i = 0; i < Tiers.Count; i++)
             {
-                r_Tiers[i].
+                r_Tiers[i].SetrequiredDataForTier(i_ManufacturerName, i_CurrentAirPressure);
             }
         }
+        public abstract void SetEngineInformation(float i_CurrentEngineCapcityLeft);
+
+        protected abstract float getMaxEngineCapacity();
 
         public override string ToString()
         {
