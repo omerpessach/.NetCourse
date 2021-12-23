@@ -7,7 +7,7 @@ namespace Ex04.Menus.Delegates
     public class MainMenu : MenuItem
     {
         private readonly List<MenuItem> r_AllMenus;
-        private bool m_IsMenuEnded;      //exit or back
+        private bool                    m_IsMenuEnded;      //exit or back
 
         public MainMenu(eMenuType i_CurrentMenuType, string i_CurrentTitle) : base(i_CurrentTitle)
         {
@@ -21,11 +21,12 @@ namespace Ex04.Menus.Delegates
             r_AllMenus.Add(currentExitItem);
         }
 
-        public void addMenuItemToList(MenuItem i_CurremtMenuItem)
+        public void     AddMenuItemToList(MenuItem i_CurremtMenuItem)
         {
             r_AllMenus.Add(i_CurremtMenuItem);
         }
-        public void RunMenu()
+
+        public void     RunMenu()
         {
             string descriptionOfMenu = getDescriptionOfMenu();
             int userInput = 0;
@@ -53,7 +54,7 @@ namespace Ex04.Menus.Delegates
             }
         }
 
-        private void activateCurrentMenuItem(MenuItem i_CurrentItemToBeActivated)
+        private void    activateCurrentMenuItem(MenuItem i_CurrentItemToBeActivated)
         {
             if (i_CurrentItemToBeActivated is ExitItem)
             {
@@ -69,7 +70,7 @@ namespace Ex04.Menus.Delegates
             }
         }
 
-        private int getInputFromUser()
+        private int     getInputFromUser()
         {
             string inputUserAsString;
             bool isValidInput;
@@ -90,7 +91,7 @@ namespace Ex04.Menus.Delegates
             return userChoice;
         }
 
-        private string getDescriptionOfMenu()
+        private string  getDescriptionOfMenu()
         {
             StringBuilder descriptionOfMenu = new StringBuilder();
             int optionInMenu = 0;

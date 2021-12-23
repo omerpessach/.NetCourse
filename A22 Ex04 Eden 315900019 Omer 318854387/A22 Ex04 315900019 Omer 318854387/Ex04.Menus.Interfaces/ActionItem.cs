@@ -13,12 +13,12 @@ namespace Ex04.Menus.Interfaces
             r_ActionListnerList = new List<IActionListner>();
         }
 
-        public void AddListner(IActionListner i_CurrentActionListner)
+        public void  AddListner(IActionListner i_CurrentActionListner)
         {
             r_ActionListnerList.Add(i_CurrentActionListner);
         }
 
-        public void ActivateWhanActionOccured()
+        public void  ActivateWhanActionOccured()
         {
             notifyAllListeners();
         }

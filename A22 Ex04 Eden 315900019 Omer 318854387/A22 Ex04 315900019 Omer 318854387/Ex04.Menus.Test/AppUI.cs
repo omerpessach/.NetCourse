@@ -7,10 +7,10 @@ namespace Ex04.Menus.Test
 {
     public class AppUI
     {
-        CountCapitlas m_CountCapitlasAction;
-        ShowVersion m_ShowVersionAction;
-        ShowDate m_ShowDateAction;
-        ShowTime m_ShowTimeAction;
+        CountCapitlas   m_CountCapitlasAction;
+        ShowVersion     m_ShowVersionAction;
+        ShowDate        m_ShowDateAction;
+        ShowTime        m_ShowTimeAction;
 
         public AppUI()
         {
@@ -20,7 +20,7 @@ namespace Ex04.Menus.Test
             m_ShowVersionAction = new ShowVersion();
         }
 
-        public void Run()
+        public void  Run()
         {
             Delegates.MainMenu delegateMenu;
             createMenuToDelgates(out delegateMenu);
@@ -41,12 +41,12 @@ namespace Ex04.Menus.Test
             Delegates.MenuItem showDateActionItem = new Delegates.MenuItem("Show Date");
             Delegates.MenuItem showTimeActionItem = new Delegates.MenuItem("Show Time");
 
-            o_CurrentMenuToCreate.addMenuItemToList(versionAndCapitalsMenu);
-            o_CurrentMenuToCreate.addMenuItemToList(dateAndTimeMenu);
-            versionAndCapitalsMenu.addMenuItemToList(countCapitalsActionItem);
-            versionAndCapitalsMenu.addMenuItemToList(showVersionActionItem);
-            dateAndTimeMenu.addMenuItemToList(showDateActionItem);
-            dateAndTimeMenu.addMenuItemToList(showTimeActionItem);
+            o_CurrentMenuToCreate.AddMenuItemToList(versionAndCapitalsMenu);
+            o_CurrentMenuToCreate.AddMenuItemToList(dateAndTimeMenu);
+            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
+            dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
+            dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
 
             countCapitalsActionItem.MenuSelected += m_CountCapitlasAction.ReportAction;
             showVersionActionItem.MenuSelected += m_ShowVersionAction.ReportAction;
@@ -64,17 +64,17 @@ namespace Ex04.Menus.Test
             countCapitalsActionItem.AddListner(m_CountCapitlasAction);
             Interfaces.ActionItem showVersionActionItem = new Interfaces.ActionItem("Show version");
             showVersionActionItem.AddListner(m_ShowVersionAction);
-            versionAndCapitalsMenu.addMenuItemToList(countCapitalsActionItem);
-            versionAndCapitalsMenu.addMenuItemToList(showVersionActionItem);
-            o_CurrentMenuToCreate.addMenuItemToList(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
+            o_CurrentMenuToCreate.AddMenuItemToList(countCapitalsActionItem);
             Interfaces.MainMenu dateAndTimeMenu = new Interfaces.MainMenu(Interfaces.eMenuType.SecondaryMenu, "Show Date/Time");
             Interfaces.ActionItem showDateActionItem = new Interfaces.ActionItem("Show Date");
             showDateActionItem.AddListner(m_ShowDateAction);
             Interfaces.ActionItem showTimeActionItem = new Interfaces.ActionItem("Show Time");
             showTimeActionItem.AddListner(m_ShowTimeAction);
-            dateAndTimeMenu.addMenuItemToList(showDateActionItem);
-            dateAndTimeMenu.addMenuItemToList(showTimeActionItem);
-            o_CurrentMenuToCreate.addMenuItemToList(dateAndTimeMenu);
+            dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
+            dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
+            o_CurrentMenuToCreate.AddMenuItemToList(dateAndTimeMenu);
         }
     }
 }

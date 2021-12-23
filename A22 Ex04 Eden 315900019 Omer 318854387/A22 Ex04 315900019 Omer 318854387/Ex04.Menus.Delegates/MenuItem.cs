@@ -9,14 +9,14 @@ namespace Ex04.Menus.Delegates
     {
         public event SelectedEventHandler MenuSelected;
 
-        private string m_CurrentTitle;
+        private string                    m_CurrentTitle;
 
         public MenuItem(string i_Title)
         {
             CurrentTitle = i_Title;
         }
 
-        public string CurrentTitle
+        public string   CurrentTitle
         {
             get
             {
@@ -28,7 +28,7 @@ namespace Ex04.Menus.Delegates
             }
         }
 
-        public void OnMenuSelected()
+        public void     OnMenuSelected()
         {
             if(MenuSelected != null)
             {
