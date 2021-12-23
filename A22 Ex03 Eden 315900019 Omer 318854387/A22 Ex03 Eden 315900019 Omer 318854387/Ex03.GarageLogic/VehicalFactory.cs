@@ -1,4 +1,5 @@
-﻿using Ex03.GarageLogic.Models;
+﻿using Ex03.GarageLogic.Enums;
+using Ex03.GarageLogic.Models;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic
@@ -52,7 +53,7 @@ namespace Ex03.GarageLogic
 
         private static Car createFuelCar()
         {
-            FuelEngine engine = new FuelEngine(48, FuelEngine.eFuelType.Octan95);
+            FuelEngine engine = new FuelEngine(48, eFuelType.Octan95);
 
             return createCar(engine);
         }
@@ -78,7 +79,7 @@ namespace Ex03.GarageLogic
 
         private static Motorcycle createFuelMotocycle()
         {
-            FuelEngine engine = new FuelEngine(5.8f, FuelEngine.eFuelType.Octan98);
+            FuelEngine engine = new FuelEngine(5.8f, eFuelType.Octan98);
 
             return createMotocycle(engine);
         }
@@ -111,7 +112,7 @@ namespace Ex03.GarageLogic
                 tiers.Add(new Tier(25));
             }
 
-            return new Truck(new FuelEngine(130, FuelEngine.eFuelType.Soler), tiers);
+            return new Truck(new FuelEngine(130, eFuelType.Soler), tiers);
         }
     }
 }
