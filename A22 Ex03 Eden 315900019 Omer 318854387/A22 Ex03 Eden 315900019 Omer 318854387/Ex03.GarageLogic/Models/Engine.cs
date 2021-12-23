@@ -36,7 +36,9 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format("Max energy capacity: {0}, Current energy: {1}, percent of energy left: {2}", m_MaxEnergyCapacity, m_CurrentEnergy, m_PercentOfEnergyLeft);
+            return string.Format(@"Max energy capacity: {0}
+Current energy: {1}
+Percent of energy left: {2}", m_MaxEnergyCapacity, m_CurrentEnergy, m_PercentOfEnergyLeft);
         }
     }
 }

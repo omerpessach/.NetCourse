@@ -40,7 +40,9 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format(@"{0}, vehicle detailes: {1}, status in garage: {2}", r_Owner.ToString(), Vehicle.ToString(), Status);
+            return string.Format(@"{0}
+vehicle detailes: {1}
+status in garage: {2}", r_Owner.ToString(), Vehicle.ToString(), Status);
         }
     }
 }

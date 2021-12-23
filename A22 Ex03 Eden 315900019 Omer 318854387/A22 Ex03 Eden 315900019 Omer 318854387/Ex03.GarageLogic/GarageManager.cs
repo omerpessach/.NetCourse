@@ -1,14 +1,16 @@
-﻿using Ex03.GarageLogic.Models;
+﻿using Ex03.GarageLogic.Enums;
+using Ex03.GarageLogic.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
     public sealed class GarageManager
     {
         private readonly Dictionary<string, GarageVehical> r_GarageVehicals = new Dictionary<string, GarageVehical>();
+        private const string                               k_ArgumentExceptionEngineIsntFuelMsg = "The engine isnt a fuel one.";
+        private const string                               k_ArgumentExceptionEngineIsntElectricMsg = "The engine isnt a electic one.";
+        private const string                               k_LicenseNotFoundExceptionMsg = "Vehical with license ID: {0} not found in our garage";
 
         public Vehicle MakeVehicle(eVehicalType i_VehicalType)
         {
@@ -52,7 +54,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Fuel(string i_LicenseID, FuelEngine.eFuelType i_FuelType, float i_AmoutToFuel)
+        public void Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
@@ -63,7 +65,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("The engine isnt a fuel engine.");
+                throw new ArgumentException(k_ArgumentExceptionEngineIsntFuelMsg);
             }
         }
 
@@ -78,7 +80,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("The engine of the requested vehicle isnt an electric engine.");
+                throw new ArgumentException(k_ArgumentExceptionEngineIsntElectricMsg);
             }
         }
 
@@ -97,7 +99,7 @@ namespace Ex03.GarageLogic
         {
             if (!IsLicenseIDExsists(i_LicenseID))
             {
-                throw new KeyNotFoundException(string.Format(@"Vehical with license ID: {0} not found in our garage", i_LicenseID));
+                throw new KeyNotFoundException(string.Format(k_LicenseNotFoundExceptionMsg, i_LicenseID));
             }
         }
     }

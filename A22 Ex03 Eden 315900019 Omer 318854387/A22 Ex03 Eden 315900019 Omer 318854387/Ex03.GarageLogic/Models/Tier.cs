@@ -16,7 +16,6 @@ namespace Ex03.GarageLogic.Models
 
         public string          Manufacturer
         {
-            get => m_Manufacturer;
             set => m_Manufacturer = value;
         }
 
@@ -43,7 +42,10 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format("Manufacturer: {0}, r_Max Air Pressure: {1}, Current Air Pressure {2}", m_Manufacturer, r_MaxAirPressure, m_CurrentAirPressure);
+            return string.Format(
+@"Manufacturer: {0},
+Max Air Pressure: {1},
+Current Air Pressure {2}", m_Manufacturer, r_MaxAirPressure, m_CurrentAirPressure);
         }
     }
 }

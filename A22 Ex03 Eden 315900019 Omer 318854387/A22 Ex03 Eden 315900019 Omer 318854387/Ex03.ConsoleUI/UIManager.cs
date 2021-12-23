@@ -85,7 +85,7 @@ namespace Ex03.ConsoleUI
             licenseID = UIHelper.GetNotEmptyOrWhiteSpacesString(k_AskForLicenseID);
             if (r_GarageManger.IsLicenseIDExsists(licenseID))
             {
-                r_GarageManger.ChangeVehicalStatus(licenseID, GarageVehical.eVehicalStatus.InRepair);
+                r_GarageManger.ChangeVehicalStatus(licenseID, eVehicalStatus.InRepair);
                 Console.WriteLine("The Vehicle already exsists in the system, status changed to in repair");
             }
             else
@@ -250,7 +250,7 @@ namespace Ex03.ConsoleUI
         {
             string licenseID;
             float inputNumber;
-            FuelEngine.eFuelType fuelType;
+            eFuelType fuelType;
             bool hasSucceed = false;
             bool doesWantToGoBackToMenu = false;
 
@@ -258,7 +258,7 @@ namespace Ex03.ConsoleUI
             {
                 licenseID = getLicenseIDFromUser();
                 inputNumber = UIHelper.GetFloatFromUser(k_RequestMinToCharge);
-                fuelType = UIHelper.GetEnumFromUser<FuelEngine.eFuelType>("Select fuel type");
+                fuelType = UIHelper.GetEnumFromUser<eFuelType>("Select fuel type");
                 try
                 {
                     r_GarageManger.Fuel(licenseID, fuelType, inputNumber);
@@ -310,14 +310,14 @@ namespace Ex03.ConsoleUI
         private void changeVehicalStatus()
         {
             string licenseID;
-            GarageVehical.eVehicalStatus requestedStatus;
+            eVehicalStatus requestedStatus;
             bool hasSucceed = false;
             bool doesWantToGoBackToMenu = false;
 
             do
             {
                 licenseID = getLicenseIDFromUser();
-                requestedStatus = UIHelper.GetEnumFromUser<GarageVehical.eVehicalStatus>("Select status");
+                requestedStatus = UIHelper.GetEnumFromUser<eVehicalStatus>("Select status");
                 try
                 {
                     r_GarageManger.ChangeVehicalStatus(licenseID, requestedStatus);
@@ -340,9 +340,9 @@ namespace Ex03.ConsoleUI
 
         private void getLicensesIDsFilterByStatus()
         {
-            GarageVehical.eVehicalStatus requestedStatus;
+            eVehicalStatus requestedStatus;
 
-            requestedStatus = UIHelper.GetEnumFromUser<GarageVehical.eVehicalStatus>("Select status");
+            requestedStatus = UIHelper.GetEnumFromUser<eVehicalStatus>("Select status");
             r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
         }
 

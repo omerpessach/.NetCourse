@@ -30,7 +30,8 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format("{0}, fuel type: {1}", base.ToString(), r_FuelType);
+            return string.Format(@"{0}
+fuel type: {1}", base.ToString(), r_FuelType);
         }
     }
 }
