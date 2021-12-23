@@ -45,7 +45,7 @@ namespace Ex03.GarageLogic
 
         private static Car           createFuelCar()
         {
-            FuelEngine engine = new FuelEngine(48, FuelEngine.eFuelType.Octan95);
+            FuelEngine engine = new FuelEngine(48, eFuelType.Octan95);
 
             return createCar(engine);
         }
@@ -71,7 +71,7 @@ namespace Ex03.GarageLogic
 
         private static Motorcycle    createFuelMotocycle()
         {
-            FuelEngine engine = new FuelEngine(5.8f, FuelEngine.eFuelType.Octan98);
+            FuelEngine engine = new FuelEngine(5.8f, eFuelType.Octan98);
 
             return createMotocycle(engine);
         }
