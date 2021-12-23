@@ -17,7 +17,9 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format("Full name: {0}, Phone number: {1}", r_FullName, r_PhoneNumber);
+            return string.Format(
+@"Full name: {0}
+Phone number: {1}", r_FullName, r_PhoneNumber);
         }
     }
 }

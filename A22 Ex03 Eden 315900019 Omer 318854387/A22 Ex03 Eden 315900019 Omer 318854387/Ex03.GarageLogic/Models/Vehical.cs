@@ -6,11 +6,11 @@ namespace Ex03.GarageLogic.Models
 {
     public abstract class Vehicle
     {
-        protected string m_ModelName;
-        protected string r_LicenseID;
-        protected Engine m_Engine;
-        protected List<Tier> r_Tiers;
-        protected string[] m_UniqeMembersToInitInfo;
+        private readonly List<Tier> r_Tiers;
+        private string              m_ModelName;
+        private string              m_LicenseID;
+        private Engine              m_Engine;
+        protected string[]          m_UniqeMembersToInitInfo;
 
         protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
@@ -26,19 +26,11 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal int TiersAmount
-        {
-            get
-            {
-                return Tiers.Count;
-            }
-        }
-
         internal string LicenseID
         {
             get
             {
-                return r_LicenseID;
+                return m_LicenseID;
             }
         }
 
@@ -58,9 +50,16 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
+        private string getTiersInfo()
+        {
+            return r_Tiers[0].ToString();
+        }
+
+        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
+
         public void InitBasicInfo(string i_LicenseID, string i_ModelName)
         {
-            r_LicenseID = i_LicenseID;
+            m_LicenseID = i_LicenseID;
             m_ModelName = i_ModelName;
         }
 
@@ -73,11 +72,12 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
-
         public override string ToString()
         {
-            return string.Format("License ID: {0}, Model name: {1}", r_LicenseID, m_ModelName);
+            return string.Format(
+@"License ID: {0}
+Model name: {1}
+Tiers Info: {2}", m_LicenseID, m_ModelName, getTiersInfo());
         }
     }
 }

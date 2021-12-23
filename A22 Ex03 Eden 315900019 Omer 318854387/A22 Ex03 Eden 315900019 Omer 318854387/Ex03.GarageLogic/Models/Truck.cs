@@ -59,7 +59,10 @@ namespace Ex03.GarageLogic.Models
 
         public override string ToString()
         {
-            return string.Format("{0}, Does drive refrigerated contents: {1}, Luggage capacity: {2}", base.ToString(), r_DoesDriveRefrigeratedContents, r_LuggageCapacity);
+            return string.Format(
+@"{0}
+Does drive refrigerated contents: {1}
+Luggage capacity: {2}", base.ToString(), r_DoesDriveRefrigeratedContents, r_LuggageCapacity);
         }
     }
 }
