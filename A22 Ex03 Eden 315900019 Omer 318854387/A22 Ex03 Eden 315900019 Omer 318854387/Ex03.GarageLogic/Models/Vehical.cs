@@ -6,11 +6,11 @@ namespace Ex03.GarageLogic.Models
 {
     public abstract class Vehicle
     {
-        protected string m_ModelName;
-        protected string r_LicenseID;
-        protected Engine m_Engine;
-        protected List<Tier> r_Tiers;
-        protected string[] m_UniqeMembersToInitInfo;
+        protected string              m_ModelName;
+        protected string              m_LicenseID;
+        protected Engine              m_Engine;
+        protected readonly List<Tier> r_Tiers;
+        protected string[]            m_UniqeMembersToInitInfo;
 
         protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic.Models
             r_Tiers = i_Tiers;
         }
 
-        internal List<Tier> Tiers
+        internal List<Tier>    Tiers
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal int TiersAmount
+        internal int           TiersAmount
         {
             get
             {
@@ -34,15 +34,15 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal string LicenseID
+        internal string        LicenseID
         {
             get
             {
-                return r_LicenseID;
+                return m_LicenseID;
             }
         }
 
-        internal Engine Engine
+        internal Engine        Engine
         {
             get
             {
@@ -50,7 +50,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public string[] UniqeMembersToInitInfo
+        public string[]        UniqeMembersToInitInfo
         {
             get
             {
@@ -58,13 +58,13 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public void InitBasicInfo(string i_LicenseID, string i_ModelName)
+        public void            InitBasicInfo(string i_LicenseID, string i_ModelName)
         {
-            r_LicenseID = i_LicenseID;
+            m_LicenseID = i_LicenseID;
             m_ModelName = i_ModelName;
         }
 
-        public void InitTierInfo(string i_Manufacturer, float i_AirToAdd)
+        public void            InitTierInfo(string i_Manufacturer, float i_AirToAdd)
         {
             foreach (Tier tier in r_Tiers)
             {
@@ -73,11 +73,11 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
+        public abstract void   SetUniqeMembers(List<string> i_UniqeMembers);
 
         public override string ToString()
         {
-            return string.Format("License ID: {0}, Model name: {1}", r_LicenseID, m_ModelName);
+            return string.Format("License ID: {0}, Model name: {1}", m_LicenseID, m_ModelName);
         }
     }
 }

@@ -38,6 +38,7 @@
   <ItemGroup>
     <Compile Include="Enums\eDoorPossibleOptions.cs" />
     <Compile Include="Enums\eCarColor.cs" />
+    <Compile Include="Enums\eFuelType.cs" />
     <Compile Include="Enums\eLicenseType.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="GarageHelper.cs" />
