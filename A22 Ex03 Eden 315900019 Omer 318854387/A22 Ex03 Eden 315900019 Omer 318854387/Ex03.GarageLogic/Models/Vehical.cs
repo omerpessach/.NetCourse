@@ -7,9 +7,10 @@ namespace Ex03.GarageLogic.Models
     public abstract class Vehicle
     {
         protected string m_ModelName;
-        protected string r_LicenceID;
+        protected string r_LicenseID;
         protected Engine m_Engine;
         protected List<Tier> r_Tiers;
+        protected string[] m_UniqeMembersToInitInfo;
 
         protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
@@ -17,7 +18,7 @@ namespace Ex03.GarageLogic.Models
             r_Tiers = i_Tiers;
         }
 
-        public List<Tier> Tiers
+        internal List<Tier> Tiers
         {
             get
             {
@@ -25,7 +26,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public int TiersAmount
+        internal int TiersAmount
         {
             get
             {
@@ -33,31 +34,15 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public string ModelName
+        internal string LicenseID
         {
             get
             {
-                return m_ModelName;
-            }
-            set
-            {
-                m_ModelName = value;
+                return r_LicenseID;
             }
         }
 
-        public string LicenceID
-        {
-            get
-            {
-                return r_LicenceID;
-            }
-            set
-            {
-                r_LicenceID = value;
-            }
-        }
-
-        public Engine Engine
+        internal Engine Engine
         {
             get
             {
@@ -65,9 +50,34 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
+        public string[] UniqeMembersToInitInfo
+        {
+            get
+            {
+                return m_UniqeMembersToInitInfo;
+            }
+        }
+
+        public void InitBasicInfo(string i_LicenseID, string i_ModelName)
+        {
+            r_LicenseID = i_LicenseID;
+            m_ModelName = i_ModelName;
+        }
+
+        public void InitTierInfo(string i_Manufacturer, float i_AirToAdd)
+        {
+            foreach (Tier tier in r_Tiers)
+            {
+                tier.Blow(i_AirToAdd);
+                tier.Manufacturer = i_Manufacturer;
+            }
+        }
+
+        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
+
         public override string ToString()
         {
-            return string.Format("Licence ID: {0}, Model name: {1}", LicenceID, ModelName);
+            return string.Format("License ID: {0}, Model name: {1}", r_LicenseID, m_ModelName);
         }
     }
 }

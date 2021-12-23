@@ -10,20 +10,19 @@ namespace Ex03.GarageLogic
     {
         private readonly Dictionary<string, GarageVehical> r_GarageVehicals = new Dictionary<string, GarageVehical>();
 
-        public void AddNewCar(string i_LicenseID, GarageVehical i_VehicalToAdd)
+        public Vehicle MakeVehicle(eVehicalType i_VehicalType)
         {
-            if (IsLicenseIDExsists(i_LicenseID))
-            {
-                r_GarageVehicals[i_LicenseID].Status = eVehicalStatus.InRepair;
-                throw new ArgumentException("License ID already exists");
-            }
-            else
-            {
-                r_GarageVehicals.Add(i_LicenseID, i_VehicalToAdd);
-            }
+            return VehicalFactory.MakeVehicle(i_VehicalType);
         }
 
-        public List<string> GetLicencesIDsByStatus(eVehicalStatus i_FilterStatus)
+        public void InsertNewVehicle(PersonInfo i_OwnerInfo, Vehicle i_Vehicle)
+        {
+            GarageVehical newGarageVehical = new GarageVehical(i_OwnerInfo, i_Vehicle);
+
+            r_GarageVehicals.Add(i_Vehicle.LicenseID, newGarageVehical);
+        }
+
+        public List<string> GetLicensesIDsByStatus(GarageVehical.eVehicalStatus i_FilterStatus)
         {
             List<string> allLicensesIDAfterFilter = new List<string>();
 
@@ -38,7 +37,7 @@ namespace Ex03.GarageLogic
             return allLicensesIDAfterFilter;
         }
 
-        public void ChangeVehicalStatus(string i_LicenseID, eVehicalStatus i_NewStatus)
+        public void ChangeVehicalStatus(string i_LicenseID, GarageVehical.eVehicalStatus i_NewStatus)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             r_GarageVehicals[i_LicenseID].Status = i_NewStatus;
@@ -53,7 +52,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
+        public void Fuel(string i_LicenseID, FuelEngine.eFuelType i_FuelType, float i_AmoutToFuel)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
@@ -79,7 +78,7 @@ namespace Ex03.GarageLogic
             }
             else
             {
-                throw new ArgumentException("The engine isnt an electric engine.");
+                throw new ArgumentException("The engine of the requested vehicle isnt an electric engine.");
             }
         }
 

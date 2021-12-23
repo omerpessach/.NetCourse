@@ -1,4 +1,5 @@
 ﻿using Ex03.GarageLogic.Exceptions;
+using System;
 
 namespace Ex03.GarageLogic.Models
 {
@@ -13,15 +14,21 @@ namespace Ex03.GarageLogic.Models
             r_MaxAirPressure = i_MaxAirPressure;
         }
 
+        public string Manufacturer
+        {
+            get => m_Manufacturer;
+            set => m_Manufacturer = value;
+        }
+
         public void Blow(float i_AirToAdd)
         {
             if (i_AirToAdd < 0)
             {
-                throw new ValueOutOfRangeException("Negative number is not allowed");
+                throw new ArgumentException("Negative number is not allowed");
             }
             else if (m_CurrentAirPressure + i_AirToAdd > r_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException("The value is too high");
+                throw new ValueOutOfRangeException("The value is too high", 0, r_MaxAirPressure);
             }
             else
             {

@@ -16,9 +16,22 @@ namespace Ex03.GarageLogic.Models
             m_MaxEnergyCapacity = i_MaxEnergyCapacity;
         }
 
-        public void CalculatePercentOfEnergyLeft()
+        private void calculatePercentOfEnergyLeft()
         {
             m_PercentOfEnergyLeft = 100 / (m_MaxEnergyCapacity / m_CurrentEnergy);
+        }
+
+        protected void AddEnergy(float i_Energy)
+        {
+            if (m_CurrentEnergy + i_Energy > m_MaxEnergyCapacity)
+            {
+                throw new ValueOutOfRangeException("Too many energy", 0, m_MaxEnergyCapacity);
+            }
+            else
+            {
+                m_CurrentEnergy += i_Energy;
+                calculatePercentOfEnergyLeft();
+            }
         }
 
         public override string ToString()

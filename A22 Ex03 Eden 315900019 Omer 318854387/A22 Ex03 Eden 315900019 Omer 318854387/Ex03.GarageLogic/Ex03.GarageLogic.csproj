@@ -36,12 +36,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Enums\eVehicalType.cs" />
-    <Compile Include="Enums\eVehicalStatus.cs" />
     <Compile Include="Enums\eDoorPossibleOptions.cs" />
     <Compile Include="Enums\eCarColor.cs" />
-    <Compile Include="Enums\eLicenceType.cs" />
-    <Compile Include="Enums\eFuelType.cs" />
+    <Compile Include="Enums\eLicenseType.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="GarageManager.cs" />
     <Compile Include="Models\Car.cs" />
