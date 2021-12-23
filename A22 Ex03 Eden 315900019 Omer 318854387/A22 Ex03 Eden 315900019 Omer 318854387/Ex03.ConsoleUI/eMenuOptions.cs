@@ -1,18 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex03.ConsoleUI
+﻿namespace Ex03.ConsoleUI
 {
-    enum eMenuOptions
+    public enum eMenuOptions
     {
-        AddNewVehical = 1,
-        GetLicencesIDsFilterByStatus,
-        ChangeVehicalStatus,
-        FillAirToMax,
-        FuelCar,
-        ChargeCar,
-        GetAllVehicalDetails,
-        Exit                //we need to implement exit?
+        AddNewVehical                = 1,
+        GetLicensesIDsFilterByStatus = 2,
+        ChangeVehicalStatus          = 3,
+        FillAirToMax                 = 4,
+        FuelCar                      = 5,
+        ChargeCar                    = 6,
+        GetAllVehicalDetails         = 7,
+        Exit                         = 8
     }
 }

@@ -6,32 +6,19 @@ namespace Ex03.GarageLogic.Models
 {
     public abstract class Vehicle
     {
-        protected int             m_NumberOfWheels; //should it be readonly
-        protected readonly string r_ModelName;
-        protected readonly string r_LicenceID;
-        protected readonly Engine r_Engine;
-        protected readonly List<Tier> r_Tiers;
+        protected string m_ModelName;
+        protected string r_LicenseID;
+        protected Engine m_Engine;
+        protected List<Tier> r_Tiers;
+        protected string[] m_UniqeMembersToInitInfo;
 
-        protected Vehicle(string i_ModelName, string i_LicenceID, Engine i_Engine)
+        protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
-            r_ModelName = i_ModelName;
-            r_LicenceID = i_LicenceID;
-            r_Engine = i_Engine;
+            m_Engine = i_Engine;
+            r_Tiers = i_Tiers;
         }
 
-        public int NumberOfWheels
-        {
-            get
-            {
-                return m_NumberOfWheels;
-            }
-            set
-            {
-                m_NumberOfWheels = value;
-            }
-        }
-
-        public List<Tier> Tiers
+        internal List<Tier> Tiers
         {
             get
             {
@@ -39,55 +26,58 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public int TiersAmount
-        {
-            get => Tiers.Count;
-        }
-
-        public string ModelName
+        internal int TiersAmount
         {
             get
             {
-                return r_ModelName;
+                return Tiers.Count;
             }
         }
 
-        public string LicenceID
+        internal string LicenseID
         {
             get
             {
-                return r_LicenceID;
+                return r_LicenseID;
             }
         }
 
-        public Engine Engine
+        internal Engine Engine
         {
             get
             {
-                return r_Engine;
+                return m_Engine;
             }
         }
 
-        protected void SetEnergyEngineCapacity(float i_EnergyEngineCapacityLeft, float i_EngineMaxCapacity)
+        public string[] UniqeMembersToInitInfo
         {
-            Engine.SetEnergyLeftAndMaxCapacity(i_EnergyEngineCapacityLeft, i_EngineMaxCapacity);
-        }
-        protected abstract void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData);
-
-        public void SetrequiredDataForTiers(string i_ManufacturerName, float i_CurrentAirPressure)
-        {
-            for(int i = 0; i < Tiers.Count; i++)
+            get
             {
-                r_Tiers[i].SetrequiredDataForTier(i_ManufacturerName, i_CurrentAirPressure);
+                return m_UniqeMembersToInitInfo;
             }
         }
-        public abstract void SetEngineInformation(float i_CurrentEngineCapcityLeft);
 
-        protected abstract float getMaxEngineCapacity();
+        public void InitBasicInfo(string i_LicenseID, string i_ModelName)
+        {
+            r_LicenseID = i_LicenseID;
+            m_ModelName = i_ModelName;
+        }
+
+        public void InitTierInfo(string i_Manufacturer, float i_AirToAdd)
+        {
+            foreach (Tier tier in r_Tiers)
+            {
+                tier.Blow(i_AirToAdd);
+                tier.Manufacturer = i_Manufacturer;
+            }
+        }
+
+        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
 
         public override string ToString()
         {
-            return string.Format("Licence ID: {0}, Model name: {1}", LicenceID, ModelName);
+            return string.Format("License ID: {0}, Model name: {1}", r_LicenseID, m_ModelName);
         }
     }
 }

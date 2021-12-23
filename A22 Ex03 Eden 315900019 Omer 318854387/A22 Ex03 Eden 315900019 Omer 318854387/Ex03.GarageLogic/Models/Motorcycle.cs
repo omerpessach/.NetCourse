@@ -7,53 +7,59 @@ namespace Ex03.GarageLogic.Models
 {
     public class Motorcycle : Vehicle
     {
-        private eLicenceType m_LicenceType;
+        private eLicenseType m_LicenseType;
         private int m_EngineVolume;
+        private const string k_LicenseTypeInitInfoMsg = "Enter license type: 1 for A, 2 for AA, 3 for A2, 4 for B";
+        private const string k_EngineVolumeInitInfoMsg = "Enter engine volume";
 
-        public Motorcycle(string i_ModelName, string i_LicenceID, Engine i_Engine, eLicenceType i_LicenceType, int i_EngineVolume)
-            : base(i_ModelName, i_LicenceID, i_Engine)
+        public Motorcycle(Engine i_Engine, List<Tier> i_Tiers)
+            : base(i_Engine, i_Tiers)
         {
-            float MaxAirPressureOfTier = 30;
-
-            m_LicenceType = i_LicenceType;
-            m_EngineVolume = i_EngineVolume;
-            this.NumberOfWheels = 2;  
+            m_UniqeMembersToInitInfo = new string[] { k_LicenseTypeInitInfoMsg, k_EngineVolumeInitInfoMsg };
         }
-
-        protected override void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData)
-        {
-            io_RequiredData.Add("Motorcycle license type: [1 = A, 2 = A2, 3 = AA, 4 = B]");
-            io_RequiredData.Add("Engine size:");
-        }
-
-        public override void SetEngineInformation(float i_CurrentEngineCapcityLeft)
-        {
-            float engineMaxCapacity = getMaxEngineCapacity();
-
-            SetEnergyEngineCapacity(i_CurrentEngineCapcityLeft, engineMaxCapacity);
-        }
-
-        protected override float getMaxEngineCapacity()
-        {
-            float MaxEngineCapacity;
-            FuelEngine fuelMotorcycleEngine = this.Engine as FuelEngine;
-
-            if (fuelMotorcycleEngine != null)
-            {
-                MaxEngineCapacity = 5.8f; //max capacity of car as fuel engine 
-            }
-            else
-            {
-                MaxEngineCapacity = 2.3f; //max capacity of car as elctric engine
-            }
-
-            return MaxEngineCapacity;
-        }
-
 
         public override string ToString()
         {
-            return string.Format("{0}, Licence type: {1}, Engine Volume {2}", base.ToString(), m_LicenceType, m_EngineVolume);
+            return string.Format("{0}, License type: {1}, Engine Volume {2}", base.ToString(), m_LicenseType, m_EngineVolume);
+        }
+
+        private void SetLicenseType(string i_Value)
+        {
+            if (Enum.IsDefined(typeof(eLicenseType), i_Value))
+            {
+                m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), i_Value);
+            }
+            else
+            {
+                throw new ArgumentException("Invalid value by setting License type");
+            }
+        }
+
+        private void SetEngineVolume(string i_Value)
+        {
+            int engineVolume;
+
+            if (int.TryParse(i_Value, out engineVolume))
+            {
+                if (engineVolume > 0)
+                {
+                    m_EngineVolume = engineVolume;
+                }
+                else
+                {
+                    throw new ArgumentException("The value is negative");
+                }
+            }
+            else
+            {
+                throw new FormatException("Cannot set engine volume by invalid value");
+            }
+        }
+
+        public override void SetUniqeMembers(List<string> i_UniqeMembers)
+        {
+            SetLicenseType(i_UniqeMembers[0]);
+            SetEngineVolume(i_UniqeMembers[1]);
         }
     }
 }

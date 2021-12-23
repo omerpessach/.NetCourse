@@ -1,4 +1,5 @@
 ﻿using Ex03.GarageLogic.Enums;
+using System;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic.Models
@@ -7,48 +8,62 @@ namespace Ex03.GarageLogic.Models
     {
         private eCarColor m_CarColor;
         private eDoorPossibleOptions m_DoorAmount;
+        private const string k_CarColorInitInfoMsg = "Enter car's color: 1 for Red, 2 for White, 3 for Black, 4 for Blue";
+        private const string k_DoorAmountInitInfoMsg = "Enter amount of doors between 2 to 5 (2,3,4,5)";
+        private const string k_DoorAmountArgumentExceptionMsg = "Invalid value by setting door amount";
+        private const string k_CarColorArgumentExceptionMsg = "Invalid value by setting car color";
+        private const string k_DoorAmountFormatExceptionMsg = "Wrong format by setting door amount";
+        private const string k_CarColorFormatExceptionMsg = "Wrong format by setting car color";
 
-        public Car(string i_ModelName, string i_LicenceID, Engine i_Engine, eCarColor i_Color, eDoorPossibleOptions i_DoorsAmount)
-            : base(i_ModelName, i_LicenceID, i_Engine)
+        public Car(Engine i_Engine, List<Tier> i_Tiers)
+            : base(i_Engine, i_Tiers)
         {
-            float MaxAirPressureOfTier = 29;
-
-            m_CarColor = i_Color;
-            m_DoorAmount = i_DoorsAmount;
-            this.NumberOfWheels = 4;
+            m_UniqeMembersToInitInfo = new string[] { k_DoorAmountInitInfoMsg, k_CarColorInitInfoMsg };
         }
 
-        public eCarColor CarColor { get => m_CarColor; set => m_CarColor = value; }
-        public eDoorPossibleOptions DoorAmount { get => m_DoorAmount; set => m_DoorAmount = value; }
-
-        protected override void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData)
+        public override void SetUniqeMembers(List<string> i_UniqeMembers)
         {
-            io_RequiredData.Add("Car color: [1 = Red , 2 = White , 3 = Black, 4 = Blue]");
-            io_RequiredData.Add("Number of doors: [2 = Min ; 5 = Max]");
+            SetDoorAmount(i_UniqeMembers[0]);
+            SetCarColor(i_UniqeMembers[1]);
         }
 
-        public override void SetEngineInformation(float i_CurrentEngineCapcityLeft)
+        private void SetCarColor(string i_Value)
         {
-            float engineMaxCapacity = getMaxEngineCapacity();
-
-            SetEnergyEngineCapacity(i_CurrentEngineCapcityLeft, engineMaxCapacity);
+            m_CarColor = (eCarColor)getEnumValueOtherwiseThrowException<eCarColor>(i_Value, k_CarColorArgumentExceptionMsg, k_CarColorFormatExceptionMsg);
         }
 
-        protected override float getMaxEngineCapacity()
+        private void SetDoorAmount(string i_Value)
         {
-            float MaxEngineCapacity;
-            FuelEngine fuelCarEngine = this.Engine as FuelEngine;
+            m_DoorAmount = (eDoorPossibleOptions)getEnumValueOtherwiseThrowException<eDoorPossibleOptions>(i_Value, k_DoorAmountArgumentExceptionMsg, k_DoorAmountFormatExceptionMsg);
+        }
 
-            if(fuelCarEngine != null)
+        private int getEnumValueOtherwiseThrowException<T>(string i_Value, string i_ArgumentExceptionMsg, string i_FormatExceptionMsg)
+        {
+            int valueAsInt;
+            bool isRepresnetAnEnum = false;
+
+            if (int.TryParse(i_Value, out valueAsInt))
             {
-                MaxEngineCapacity = 48f; //max capacity of car as fuel engine 
+                foreach (int doorOption in Enum.GetValues(typeof(T)))
+                {
+                    if (doorOption == valueAsInt)
+                    {
+                        isRepresnetAnEnum = true;
+                        break;
+                    }
+                }
+
+                if (!isRepresnetAnEnum)
+                {
+                    throw new ArgumentException(i_ArgumentExceptionMsg);
+                }
             }
             else
             {
-                MaxEngineCapacity = 2.6f; //max capacity of car as elctric engine
+                throw new FormatException(i_FormatExceptionMsg);
             }
 
-            return MaxEngineCapacity;
+            return valueAsInt;
         }
 
         public override string ToString()

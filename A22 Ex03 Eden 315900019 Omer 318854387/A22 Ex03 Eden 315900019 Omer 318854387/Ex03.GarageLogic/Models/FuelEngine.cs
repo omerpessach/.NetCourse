@@ -8,6 +8,14 @@ namespace Ex03.GarageLogic.Models
 {
     public class FuelEngine : Engine
     {
+        public enum eFuelType
+        {
+            Octan98,
+            Octan96,
+            Octan95,
+            Soler,
+        }
+
         private readonly eFuelType r_FuelType;
 
         public FuelEngine(float i_MaxEnergyCapacity, eFuelType i_FuelType)
@@ -20,16 +28,11 @@ namespace Ex03.GarageLogic.Models
         {
             if (i_FuelType != r_FuelType)
             {
-                throw new ValueOutOfRangeException("Wrong fuel type");
-            }
-            else if (m_CurrentEnergy + i_LitersToAdd > m_MaxEnergyCapacity)
-            {
-                throw new ValueOutOfRangeException("Too many liters");
+                throw new ArgumentException("Wrong fuel type");
             }
             else
             {
-                m_CurrentEnergy += i_LitersToAdd;
-                CalculatePercentOfEnergyLeft();
+                AddEnergy(i_LitersToAdd);
             }
         }
 

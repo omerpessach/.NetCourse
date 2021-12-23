@@ -7,6 +7,13 @@ namespace Ex03.GarageLogic.Models
 {
     public class GarageVehical
     {
+        public enum eVehicalStatus
+        {
+            InRepair,
+            Fixed,
+            Paid,
+        }
+
         private readonly Vehicle r_Vehicle;
         private readonly PersonInfo r_Owner;
         private eVehicalStatus m_Status = eVehicalStatus.InRepair;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ex03.GarageLogic.Exceptions;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -6,41 +7,55 @@ namespace Ex03.GarageLogic.Models
 {
     public class Truck : Vehicle
     {
-        private readonly bool r_DoesDriveRefrigeratedContents;
-        private readonly float r_LuggageCapacity;
+        private bool r_DoesDriveRefrigeratedContents;
+        private float r_LuggageCapacity;
+        private const string k_DoesDriveRefrigeratedContentsInitInfoMsg = "Does drive refrigerated contents? Y/N";
+        private const string k_LuggageCapacityInitInfoMsg = "Type luggage capacity";
 
-        public Truck(string i_ModelName, string i_LicenceID, Engine i_Engine, bool i_DoesDriveRefrigeratedContents, float i_LuggageCapacity)
-            : base(i_ModelName, i_LicenceID, i_Engine)
+        public Truck(Engine i_Engine, List<Tier> i_Tiers)
+            : base(i_Engine, i_Tiers)
         {
-            float MaxAirPressureOfTier = 25;
-
-            r_DoesDriveRefrigeratedContents = i_DoesDriveRefrigeratedContents;
-            r_LuggageCapacity = i_LuggageCapacity;
-            this.NumberOfWheels = 16;
+            m_UniqeMembersToInitInfo = new string[] { k_DoesDriveRefrigeratedContentsInitInfoMsg, k_LuggageCapacityInitInfoMsg };
         }
 
-        protected override void GetrequiredDataAccorrdingToVehical(ref List<string> io_RequiredData)
+        public override void SetUniqeMembers(List<string> i_UniqeMembers)
         {
-            io_RequiredData.Add("Does drive refrigerated contents? : [Yes = Type 'True' ; No = 'False']");
-            io_RequiredData.Add("Cargo volume:");
+            SetDoesDriveRefrigeratedContents(i_UniqeMembers[0]);
+            SetLuggageCapacity(i_UniqeMembers[1]);
         }
 
-        public override void SetEngineInformation(float i_CurrentEngineCapcityLeft)
+        private void SetDoesDriveRefrigeratedContents(string i_Value)
         {
-            float engineMaxCapacity = getMaxEngineCapacity();
-
-            SetEnergyEngineCapacity(i_CurrentEngineCapcityLeft, engineMaxCapacity);
+            if (i_Value.ToUpper().Equals("Y") || i_Value.ToUpper().Equals("N"))
+            {
+                r_DoesDriveRefrigeratedContents = i_Value.ToUpper().Equals("Y");
+            }
+            else
+            {
+                throw new FormatException("Invalid value, the value should be Y or N");
+            }
         }
 
-        protected override float getMaxEngineCapacity()
+        private void SetLuggageCapacity(string i_Value)
         {
-            float MaxEngineCapacity;
-            FuelEngine fuelCarEngine = this.Engine as FuelEngine;
-            MaxEngineCapacity = 130f; //max capacity of car as fuel engine 
+            float valueAsFloat;
 
-            return MaxEngineCapacity;
+            if (float.TryParse(i_Value, out valueAsFloat))
+            {
+                if (valueAsFloat >= 0)
+                {
+                    r_LuggageCapacity = valueAsFloat;
+                }
+                else
+                {
+                    throw new ValueOutOfRangeException("The value is lower than 0", 0, float.MaxValue);
+                }
+            }
+            else
+            {
+                throw new FormatException("The input is not a number");
+            }
         }
-
 
         public override string ToString()
         {
