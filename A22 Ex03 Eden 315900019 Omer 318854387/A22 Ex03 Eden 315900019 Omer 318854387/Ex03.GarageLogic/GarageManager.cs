@@ -1,4 +1,5 @@
-﻿using Ex03.GarageLogic.Models;
+﻿using Ex03.GarageLogic.Enums;
+using Ex03.GarageLogic.Models;
 using System;
 using System.Collections.Generic;
 
@@ -53,7 +54,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Fuel(string i_LicenseID, FuelEngine.eFuelType i_FuelType, float i_AmoutToFuel)
+        public void Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;

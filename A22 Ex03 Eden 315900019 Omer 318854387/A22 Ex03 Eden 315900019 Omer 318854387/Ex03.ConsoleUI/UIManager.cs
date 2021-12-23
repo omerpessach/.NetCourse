@@ -250,7 +250,7 @@ namespace Ex03.ConsoleUI
         {
             string licenseID;
             float inputNumber;
-            FuelEngine.eFuelType fuelType;
+            eFuelType fuelType;
             bool hasSucceed = false;
             bool doesWantToGoBackToMenu = false;
 
@@ -258,7 +258,7 @@ namespace Ex03.ConsoleUI
             {
                 licenseID = getLicenseIDFromUser();
                 inputNumber = UIHelper.GetFloatFromUser(k_RequestMinToCharge);
-                fuelType = UIHelper.GetEnumFromUser<FuelEngine.eFuelType>("Select fuel type");
+                fuelType = UIHelper.GetEnumFromUser<eFuelType>("Select fuel type");
                 try
                 {
                     r_GarageManger.Fuel(licenseID, fuelType, inputNumber);
