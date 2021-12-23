@@ -12,7 +12,7 @@ namespace Ex03.ConsoleUI
         private const string k_RegexAlphaOnly = "^[a-zA-Z]+$";
         private const string k_RegexDigitOnly = "^[0-9]*$";
 
-        public static int GetUserInputToMenuOption()
+        public static int        GetUserInputToMenuOption()
         {
             string userChoiceAsString;
             bool isValidInput = false;
@@ -38,12 +38,12 @@ namespace Ex03.ConsoleUI
             return userChoiceAsInt;
         }
 
-        public static bool IsStringValid(string i_Input)
+        public static bool       IsStringValid(string i_Input)
         {
             return !(string.IsNullOrEmpty(i_Input) || i_Input.Replace(" ", "").Length == 0);
         }
 
-        public static string GetNotEmptyOrWhiteSpacesString(string i_RequestMsg)
+        public static string     GetNotEmptyOrWhiteSpacesString(string i_RequestMsg)
         {
             Console.WriteLine(i_RequestMsg);
             string userInput = Console.ReadLine();
@@ -57,7 +57,7 @@ namespace Ex03.ConsoleUI
             return userInput;
         }
 
-        public static float GetFloatFromUser(string i_RequestMsg)
+        public static float      GetFloatFromUser(string i_RequestMsg)
         {
             float number;
             string userInput;
@@ -73,7 +73,7 @@ namespace Ex03.ConsoleUI
             return number;
         }
 
-        public static void HandleValueOutOfRangeException(ValueOutOfRangeException i_Ex)
+        public static void       HandleValueOutOfRangeException(ValueOutOfRangeException i_Ex)
         {
             StringBuilder output = new StringBuilder(i_Ex.Message);
             output.AppendLine(string.Format("The range is between {0} to {1}", i_Ex.MinValue, i_Ex.MaxValue));
@@ -81,14 +81,14 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(output);
         }
 
-        public static void HandleGenericInfoException(Exception i_Ex)
+        public static void       HandleGenericInfoException(Exception i_Ex)
         {
             StringBuilder output = new StringBuilder(i_Ex.Message);
             output.AppendLine(k_TryAgainMsg);
             Console.WriteLine(output);
         }
 
-        public static T GetEnumFromUser<T>(string i_RequestMsg)
+        public static T          GetEnumFromUser<T>(string i_RequestMsg)
         {
             string userInput;
             T returnType;
@@ -107,7 +107,7 @@ namespace Ex03.ConsoleUI
             return returnType;
         }
 
-        private static bool TryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
+        private static bool      TryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
         {
             int inputAsInt;
             bool hasSucceed = int.TryParse(i_Input, out inputAsInt) && Enum.IsDefined(typeof(T), inputAsInt);
@@ -121,7 +121,7 @@ namespace Ex03.ConsoleUI
             return hasSucceed;
         }
 
-        public static void PrintEnumOptions<T>()
+        public static void       PrintEnumOptions<T>()
         {
             foreach (string name in Enum.GetNames(typeof(T)))
             {
@@ -129,7 +129,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        public static string GetStringContainsOnlyLetters(string i_GuideMsg)
+        public static string     GetStringContainsOnlyLetters(string i_GuideMsg)
         {
             string input;
 
@@ -145,7 +145,7 @@ namespace Ex03.ConsoleUI
             return input;
         }
 
-        public static string GetStringContainsOnlyDigits(string i_GuideMsg)
+        public static string     GetStringContainsOnlyDigits(string i_GuideMsg)
         {
             string input;
 
@@ -161,17 +161,17 @@ namespace Ex03.ConsoleUI
             return input;
         }
 
-        public static bool IsAlpha(string i_Input)
+        public static bool       IsAlpha(string i_Input)
         {
             return Regex.IsMatch(i_Input, k_RegexAlphaOnly);
         }
 
-        public static bool IsContainsOnlyDigits(string i_Input)
+        public static bool       IsContainsOnlyDigits(string i_Input)
         {
             return Regex.IsMatch(i_Input, k_RegexDigitOnly);
         }
 
-        public static bool DoesWantToGoBackToMenu(string i_SymbolToGoBackToMenu)
+        public static bool       DoesWantToGoBackToMenu(string i_SymbolToGoBackToMenu)
         {
             bool doesWannaGoBack = false;
 

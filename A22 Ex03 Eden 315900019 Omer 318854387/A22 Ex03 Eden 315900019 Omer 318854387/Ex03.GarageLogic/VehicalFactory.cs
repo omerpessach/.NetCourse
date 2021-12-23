@@ -1,20 +1,12 @@
 ﻿using Ex03.GarageLogic.Models;
 using System.Collections.Generic;
+using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic
 {
-    public enum eVehicalType
-    {
-        FuelCar = 1,
-        ElectircCar,
-        FuelMotocycle,
-        ElectricMotocycle,
-        Truck,
-    }
-
     internal static class VehicalFactory
     {
-        internal static Vehicle MakeVehicle(eVehicalType i_CurrentVehicalType)
+        internal static Vehicle      MakeVehicle(eVehicalType i_CurrentVehicalType)
         {
             Vehicle newVehicle = null;
 
@@ -50,21 +42,21 @@ namespace Ex03.GarageLogic
             return newVehicle;
         }
 
-        private static Car createFuelCar()
+        private static Car           createFuelCar()
         {
-            FuelEngine engine = new FuelEngine(48, FuelEngine.eFuelType.Octan95);
+            FuelEngine engine = new FuelEngine(48,eFuelType.Octan95);
 
             return createCar(engine);
         }
 
-        private static Car createElectircCar()
+        private static Car           createElectircCar()
         {
             ElectricEngine engine = new ElectricEngine(2.6f);
 
             return createCar(engine);
         }
 
-        private static Car createCar(Engine i_Engine)
+        private static Car           createCar(Engine i_Engine)
         {
             List<Tier> tiers = new List<Tier>();
 
@@ -76,21 +68,21 @@ namespace Ex03.GarageLogic
             return new Car(i_Engine, tiers);
         }
 
-        private static Motorcycle createFuelMotocycle()
+        private static Motorcycle    createFuelMotocycle()
         {
-            FuelEngine engine = new FuelEngine(5.8f, FuelEngine.eFuelType.Octan98);
+            FuelEngine engine = new FuelEngine(5.8f,eFuelType.Octan98);
 
             return createMotocycle(engine);
         }
 
-        private static Motorcycle createElectricMotocycle()
+        private static Motorcycle    createElectricMotocycle()
         {
             ElectricEngine engine = new ElectricEngine(2.3f);
 
             return createMotocycle(engine);
         }
 
-        private static Motorcycle createMotocycle(Engine i_Engine)
+        private static Motorcycle    createMotocycle(Engine i_Engine)
         {
             List<Tier> tiers = new List<Tier>();
 
@@ -102,7 +94,7 @@ namespace Ex03.GarageLogic
             return new Motorcycle(i_Engine, tiers);
         }
 
-        private static Truck createTruck()
+        private static Truck         createTruck()
         {
             List<Tier> tiers = new List<Tier>();
 
@@ -111,7 +103,7 @@ namespace Ex03.GarageLogic
                 tiers.Add(new Tier(25));
             }
 
-            return new Truck(new FuelEngine(130, FuelEngine.eFuelType.Soler), tiers);
+            return new Truck(new FuelEngine(130, eFuelType.Soler), tiers);
         }
     }
 }

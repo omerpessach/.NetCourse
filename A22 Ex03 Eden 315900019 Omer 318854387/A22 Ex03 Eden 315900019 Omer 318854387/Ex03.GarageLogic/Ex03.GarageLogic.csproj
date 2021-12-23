@@ -36,6 +36,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Enums\eVehicalType.cs" />
     <Compile Include="Enums\eDoorPossibleOptions.cs" />
     <Compile Include="Enums\eCarColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />

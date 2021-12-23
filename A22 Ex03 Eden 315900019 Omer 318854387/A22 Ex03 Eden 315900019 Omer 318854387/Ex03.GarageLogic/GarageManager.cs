@@ -12,19 +12,19 @@ namespace Ex03.GarageLogic
         private const string                               k_ArgumentExceptionEngineIsntElectricMsg = "The engine isnt a electic one.";
         private const string                               k_LicenseNotFoundExceptionMsg = "Vehical with license ID: {0} not found in our garage";
 
-        public Vehicle MakeVehicle(eVehicalType i_VehicalType)
+        public Vehicle       MakeVehicle(eVehicalType i_VehicalType)
         {
             return VehicalFactory.MakeVehicle(i_VehicalType);
         }
 
-        public void InsertNewVehicle(PersonInfo i_OwnerInfo, Vehicle i_Vehicle)
+        public void          InsertNewVehicle(PersonInfo i_OwnerInfo, Vehicle i_Vehicle)
         {
             GarageVehical newGarageVehical = new GarageVehical(i_OwnerInfo, i_Vehicle);
 
             r_GarageVehicals.Add(i_Vehicle.LicenseID, newGarageVehical);
         }
 
-        public List<string> GetLicensesIDsByStatus(GarageVehical.eVehicalStatus i_FilterStatus)
+        public List<string>  GetLicensesIDsByStatus(eVehicalStatus i_FilterStatus)
         {
             List<string> allLicensesIDAfterFilter = new List<string>();
 
@@ -39,13 +39,13 @@ namespace Ex03.GarageLogic
             return allLicensesIDAfterFilter;
         }
 
-        public void ChangeVehicalStatus(string i_LicenseID, GarageVehical.eVehicalStatus i_NewStatus)
+        public void          ChangeVehicalStatus(string i_LicenseID, eVehicalStatus i_NewStatus)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             r_GarageVehicals[i_LicenseID].Status = i_NewStatus;
         }
 
-        public void FillAirToMax(string i_LicenseID)
+        public void          FillAirToMax(string i_LicenseID)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             foreach (Tier currentTier in r_GarageVehicals[i_LicenseID].Vehicle.Tiers)
@@ -54,7 +54,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
+        public void          Fuel(string i_LicenseID, eFuelType i_FuelType, float i_AmoutToFuel)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
@@ -69,7 +69,7 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public void Charge(string i_LicenseID, float i_MinToCharge)
+        public void          Charge(string i_LicenseID, float i_MinToCharge)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             Engine currentEngine = r_GarageVehicals[i_LicenseID].Vehicle.Engine;
@@ -84,18 +84,18 @@ namespace Ex03.GarageLogic
             }
         }
 
-        public string GetVehicalDetails(string i_LicenseID)
+        public string        GetVehicalDetails(string i_LicenseID)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);
             return r_GarageVehicals[i_LicenseID].ToString();
         }
 
-        public bool IsLicenseIDExsists(string i_LicenseID)
+        public bool          IsLicenseIDExsists(string i_LicenseID)
         {
             return r_GarageVehicals.ContainsKey(i_LicenseID);
         }
 
-        private void throwExceptionIfLicenseIDNotFound(string i_LicenseID)
+        private void         throwExceptionIfLicenseIDNotFound(string i_LicenseID)
         {
             if (!IsLicenseIDExsists(i_LicenseID))
             {

@@ -11,15 +11,15 @@ namespace Ex03.ConsoleUI
     public class UIManager
     {
         private readonly GarageManager r_GarageManger = new GarageManager();
-        private const string k_AskForLicenseID = "Please insert license ID";
-        private const string k_AskForTierManufacturer = "Please insert tiers' manufacturer";
-        private const string k_LicenseIDNotFoundMsg = "Vehical with license ID: {0} not found in our garage";
-        private const string k_RequestMinToCharge = "Enter amount of minutes that tou want to charge";
-        private const string k_AskForTierAirPressure = "Enter tiers' air pressure";
-        private const string k_Done = "Done!";
-        private const string k_GoBackToMenuSymbol = "Q";
+        private const string           k_AskForLicenseID = "Please insert license ID";
+        private const string           k_AskForTierManufacturer = "Please insert tiers' manufacturer";
+        private const string           k_LicenseIDNotFoundMsg = "Vehical with license ID: {0} not found in our garage";
+        private const string           k_RequestMinToCharge = "Enter amount of minutes that tou want to charge";
+        private const string           k_AskForTierAirPressure = "Enter tiers' air pressure";
+        private const string           k_Done = "Done!";
+        private const string           k_GoBackToMenuSymbol = "Q";
 
-        public void RunApp()
+        public void          RunApp()
         {
             bool exitProgram = false;
             eMenuOptions userChoice;
@@ -76,7 +76,7 @@ namespace Ex03.ConsoleUI
             while (!exitProgram);
         }
 
-        private void addNewVehical()
+        private void         addNewVehical()
         {
             string licenseID;
             Vehicle vehicle;
@@ -97,7 +97,7 @@ namespace Ex03.ConsoleUI
             }
         }
 
-        private Vehicle makeVehicleAccordingToUser(string i_LicenseID)
+        private Vehicle      makeVehicleAccordingToUser(string i_LicenseID)
         {
             string modelName;
             eVehicalType vehicalType;
@@ -113,7 +113,7 @@ namespace Ex03.ConsoleUI
             return vehicle;
         }
 
-        private void initTiersInfo(Vehicle i_Vehicle)
+        private void         initTiersInfo(Vehicle i_Vehicle)
         {
             bool doesWantToGoBackToMenu = false;
             bool hasSucceed = false;
@@ -142,7 +142,7 @@ namespace Ex03.ConsoleUI
             } while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private void initVehicleUniqeMembers(Vehicle i_Vehicle)
+        private void         initVehicleUniqeMembers(Vehicle i_Vehicle)
         {
             bool doesWantToGoBackToMenu = false;
             string[] uniqeMembersInfo = i_Vehicle.UniqeMembersToInitInfo;
@@ -178,7 +178,7 @@ namespace Ex03.ConsoleUI
             } while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private PersonInfo GetPersonInfoFromUser()
+        private PersonInfo   GetPersonInfoFromUser()
         {
             string name = UIHelper.GetStringContainsOnlyLetters("Please enter name");
             string phoneNumber = UIHelper.GetStringContainsOnlyDigits("Please enter phone number");
@@ -186,7 +186,7 @@ namespace Ex03.ConsoleUI
             return new PersonInfo(name, phoneNumber);
         }
 
-        private void getVehicalDetails()
+        private void         getVehicalDetails()
         {
             bool doesWantToGoBackToMenu = false;
             string licenseID;
@@ -208,7 +208,7 @@ namespace Ex03.ConsoleUI
             } while (!doesWantToGoBackToMenu && !isDone);
         }
 
-        private void chargeCar()
+        private void         chargeCar()
         {
             string licenseID;
             float inputNumber;
@@ -246,7 +246,7 @@ namespace Ex03.ConsoleUI
             while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private void fuelCar()
+        private void         fuelCar()
         {
             string licenseID;
             float inputNumber;
@@ -283,7 +283,7 @@ namespace Ex03.ConsoleUI
             while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private void fillAirToMax()
+        private void         fillAirToMax()
         {
             string licenseID;
             bool hasSucceed = false;
@@ -307,7 +307,7 @@ namespace Ex03.ConsoleUI
             while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private void changeVehicalStatus()
+        private void         changeVehicalStatus()
         {
             string licenseID;
             eVehicalStatus requestedStatus;
@@ -338,7 +338,7 @@ namespace Ex03.ConsoleUI
             return UIHelper.GetEnumFromUser<eVehicalType>("Select vehical type");
         }
 
-        private void getLicensesIDsFilterByStatus()
+        private void         getLicensesIDsFilterByStatus()
         {
             eVehicalStatus requestedStatus;
 
@@ -346,7 +346,7 @@ namespace Ex03.ConsoleUI
             r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
         }
 
-        private void displayMenuToUser()
+        private void         displayMenuToUser()
         {
             string MenuOptions = string.Format(
                 @"Which opartion would you like to execute?
@@ -362,7 +362,7 @@ press 8 - exit application");
             Console.WriteLine(MenuOptions);
         }
 
-        private string getLicenseIDFromUser()
+        private string       getLicenseIDFromUser()
         {
             string inputFromUser = UIHelper.GetNotEmptyOrWhiteSpacesString(k_AskForLicenseID);
             return inputFromUser;
