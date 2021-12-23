@@ -7,16 +7,10 @@ namespace Ex03.GarageLogic.Models
 {
     public class GarageVehical
     {
-        public enum eVehicalStatus
-        {
-            InRepair,
-            Fixed,
-            Paid,
-        }
 
-        private readonly Vehicle r_Vehicle;
-        private readonly PersonInfo r_Owner;
-        private eVehicalStatus m_Status = eVehicalStatus.InRepair;
+        private readonly Vehicle     r_Vehicle;
+        private readonly PersonInfo  r_Owner;
+        private eVehicalStatus       m_Status = eVehicalStatus.InRepair;
 
         public GarageVehical(PersonInfo i_OwnerInfo, Vehicle i_Vehicle)
         {
@@ -24,7 +18,7 @@ namespace Ex03.GarageLogic.Models
             r_Vehicle = i_Vehicle;
         }
 
-        public eVehicalStatus Status
+        public eVehicalStatus  Status
         {
             get
             {
@@ -36,7 +30,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public Vehicle Vehicle
+        public Vehicle         Vehicle
         {
             get
             {
