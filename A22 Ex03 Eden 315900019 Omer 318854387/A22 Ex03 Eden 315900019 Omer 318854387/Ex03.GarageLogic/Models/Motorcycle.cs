@@ -8,7 +8,7 @@ namespace Ex03.GarageLogic.Models
     public class Motorcycle : Vehicle
     {
         private eLicenseType m_LicenseType;
-        private int m_EngineVolume;
+        private int          m_EngineVolume;
         private const string k_LicenseTypeInitInfoMsg = "Enter license type: 1 for A, 2 for AA, 3 for A2, 4 for B";
         private const string k_EngineVolumeInitInfoMsg = "Enter engine volume";
         private const string k_LicenseTypeArgumentExceptionMsg = "Invalid value by setting license type";
@@ -20,12 +20,12 @@ namespace Ex03.GarageLogic.Models
             m_UniqeMembersToInitInfo = new string[] { k_LicenseTypeInitInfoMsg, k_EngineVolumeInitInfoMsg };
         }
 
-        private void setLicenseType(string i_Value)
+        private void           setLicenseType(string i_Value)
         {
             m_LicenseType = (eLicenseType)GarageHelper.GetEnumValueOtherwiseThrowException<eLicenseType>(i_Value, k_LicenseTypeArgumentExceptionMsg, k_LicenseTypeFormatExceptionMsg);
         }
 
-        private void setEngineVolume(string i_Value)
+        private void           setEngineVolume(string i_Value)
         {
             int engineVolume;
 
@@ -46,7 +46,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public override void SetUniqeMembers(List<string> i_UniqeMembers)
+        public override void   SetUniqeMembers(List<string> i_UniqeMembers)
         {
             setLicenseType(i_UniqeMembers[0]);
             setEngineVolume(i_UniqeMembers[1]);

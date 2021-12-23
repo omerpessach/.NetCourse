@@ -8,14 +8,6 @@ namespace Ex03.GarageLogic.Models
 {
     public class FuelEngine : Engine
     {
-        public enum eFuelType
-        {
-            Octan98,
-            Octan96,
-            Octan95,
-            Soler,
-        }
-
         private readonly eFuelType r_FuelType;
 
         public FuelEngine(float i_MaxEnergyCapacity, eFuelType i_FuelType)
@@ -24,7 +16,7 @@ namespace Ex03.GarageLogic.Models
             r_FuelType = i_FuelType;
         }
 
-        public void Fuel(float i_LitersToAdd, eFuelType i_FuelType)
+        public void            Fuel(float i_LitersToAdd, eFuelType i_FuelType)
         {
             if (i_FuelType != r_FuelType)
             {

@@ -18,7 +18,7 @@ namespace Ex03.GarageLogic.Models
             r_Tiers = i_Tiers;
         }
 
-        internal List<Tier> Tiers
+        internal List<Tier>    Tiers
         {
             get
             {
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal string LicenseID
+        internal string      LicenseID
         {
             get
             {
@@ -34,7 +34,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal Engine Engine
+        internal Engine        Engine
         {
             get
             {
@@ -42,7 +42,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        public string[] UniqeMembersToInitInfo
+        public string[]        UniqeMembersToInitInfo
         {
             get
             {
@@ -63,7 +63,7 @@ namespace Ex03.GarageLogic.Models
             m_ModelName = i_ModelName;
         }
 
-        public void InitTierInfo(string i_Manufacturer, float i_AirToAdd)
+        public void            InitTierInfo(string i_Manufacturer, float i_AirToAdd)
         {
             foreach (Tier tier in r_Tiers)
             {
