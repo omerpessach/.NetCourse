@@ -40,6 +40,7 @@
     <Compile Include="Enums\eCarColor.cs" />
     <Compile Include="Enums\eFuelType.cs" />
     <Compile Include="Enums\eLicenseType.cs" />
+    <Compile Include="Enums\eVehicalStatus.cs" />
     <Compile Include="Exceptions\ValueOutOfRangeException.cs" />
     <Compile Include="GarageHelper.cs" />
     <Compile Include="GarageManager.cs" />
