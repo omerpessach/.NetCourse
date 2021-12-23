@@ -21,49 +21,20 @@ namespace Ex03.GarageLogic.Models
             m_UniqeMembersToInitInfo = new string[] { k_DoorAmountInitInfoMsg, k_CarColorInitInfoMsg };
         }
 
+        private void setCarColor(string i_Value)
+        {
+            m_CarColor = (eCarColor)GarageHelper.GetEnumValueOtherwiseThrowException<eCarColor>(i_Value, k_CarColorArgumentExceptionMsg, k_CarColorFormatExceptionMsg);
+        }
+
+        private void setDoorAmount(string i_Value)
+        {
+            m_DoorAmount = (eDoorPossibleOptions)GarageHelper.GetEnumValueOtherwiseThrowException<eDoorPossibleOptions>(i_Value, k_DoorAmountArgumentExceptionMsg, k_DoorAmountFormatExceptionMsg);
+        }
+
         public override void SetUniqeMembers(List<string> i_UniqeMembers)
         {
-            SetDoorAmount(i_UniqeMembers[0]);
-            SetCarColor(i_UniqeMembers[1]);
-        }
-
-        private void SetCarColor(string i_Value)
-        {
-            m_CarColor = (eCarColor)getEnumValueOtherwiseThrowException<eCarColor>(i_Value, k_CarColorArgumentExceptionMsg, k_CarColorFormatExceptionMsg);
-        }
-
-        private void SetDoorAmount(string i_Value)
-        {
-            m_DoorAmount = (eDoorPossibleOptions)getEnumValueOtherwiseThrowException<eDoorPossibleOptions>(i_Value, k_DoorAmountArgumentExceptionMsg, k_DoorAmountFormatExceptionMsg);
-        }
-
-        private int getEnumValueOtherwiseThrowException<T>(string i_Value, string i_ArgumentExceptionMsg, string i_FormatExceptionMsg)
-        {
-            int valueAsInt;
-            bool isRepresnetAnEnum = false;
-
-            if (int.TryParse(i_Value, out valueAsInt))
-            {
-                foreach (int doorOption in Enum.GetValues(typeof(T)))
-                {
-                    if (doorOption == valueAsInt)
-                    {
-                        isRepresnetAnEnum = true;
-                        break;
-                    }
-                }
-
-                if (!isRepresnetAnEnum)
-                {
-                    throw new ArgumentException(i_ArgumentExceptionMsg);
-                }
-            }
-            else
-            {
-                throw new FormatException(i_FormatExceptionMsg);
-            }
-
-            return valueAsInt;
+            setDoorAmount(i_UniqeMembers[0]);
+            setCarColor(i_UniqeMembers[1]);
         }
 
         public override string ToString()

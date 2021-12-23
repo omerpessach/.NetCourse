@@ -11,6 +11,8 @@ namespace Ex03.GarageLogic.Models
         private int m_EngineVolume;
         private const string k_LicenseTypeInitInfoMsg = "Enter license type: 1 for A, 2 for AA, 3 for A2, 4 for B";
         private const string k_EngineVolumeInitInfoMsg = "Enter engine volume";
+        private const string k_LicenseTypeArgumentExceptionMsg = "Invalid value by setting license type";
+        private const string k_LicenseTypeFormatExceptionMsg = "Wrong format by setting license type";
 
         public Motorcycle(Engine i_Engine, List<Tier> i_Tiers)
             : base(i_Engine, i_Tiers)
@@ -18,24 +20,12 @@ namespace Ex03.GarageLogic.Models
             m_UniqeMembersToInitInfo = new string[] { k_LicenseTypeInitInfoMsg, k_EngineVolumeInitInfoMsg };
         }
 
-        public override string ToString()
+        private void setLicenseType(string i_Value)
         {
-            return string.Format("{0}, License type: {1}, Engine Volume {2}", base.ToString(), m_LicenseType, m_EngineVolume);
+            m_LicenseType = (eLicenseType)GarageHelper.GetEnumValueOtherwiseThrowException<eLicenseType>(i_Value, k_LicenseTypeArgumentExceptionMsg, k_LicenseTypeFormatExceptionMsg);
         }
 
-        private void SetLicenseType(string i_Value)
-        {
-            if (Enum.IsDefined(typeof(eLicenseType), i_Value))
-            {
-                m_LicenseType = (eLicenseType)Enum.Parse(typeof(eLicenseType), i_Value);
-            }
-            else
-            {
-                throw new ArgumentException("Invalid value by setting License type");
-            }
-        }
-
-        private void SetEngineVolume(string i_Value)
+        private void setEngineVolume(string i_Value)
         {
             int engineVolume;
 
@@ -58,8 +48,13 @@ namespace Ex03.GarageLogic.Models
 
         public override void SetUniqeMembers(List<string> i_UniqeMembers)
         {
-            SetLicenseType(i_UniqeMembers[0]);
-            SetEngineVolume(i_UniqeMembers[1]);
+            setLicenseType(i_UniqeMembers[0]);
+            setEngineVolume(i_UniqeMembers[1]);
+        }
+
+        public override string ToString()
+        {
+            return string.Format("{0}, License type: {1}, Engine Volume {2}", base.ToString(), m_LicenseType, m_EngineVolume);
         }
     }
 }
