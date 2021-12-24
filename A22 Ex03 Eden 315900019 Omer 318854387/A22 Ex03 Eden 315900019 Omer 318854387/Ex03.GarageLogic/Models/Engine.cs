@@ -1,15 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Exceptions;
+﻿using Ex03.GarageLogic.Exceptions;
 
 namespace Ex03.GarageLogic.Models
 {
     public abstract class Engine
     {
-        protected float m_MaxEnergyCapacity;
-        protected float m_CurrentEnergy;
-        protected float m_PercentOfEnergyLeft = 100;
+        protected float      m_MaxEnergyCapacity;
+        protected float      m_CurrentEnergy;
+        protected float      m_PercentOfEnergyLeft = 100;
+        private const string k_ValueOutOfRangeExceptionAddEnergy = "Too many energy";
 
         protected Engine(float i_MaxEnergyCapacity)
         {
@@ -25,7 +23,7 @@ namespace Ex03.GarageLogic.Models
         {
             if (m_CurrentEnergy + i_Energy > m_MaxEnergyCapacity)
             {
-                throw new ValueOutOfRangeException("Too many energy", 0, m_MaxEnergyCapacity);
+                throw new ValueOutOfRangeException(k_ValueOutOfRangeExceptionAddEnergy, 0, m_MaxEnergyCapacity);
             }
             else
             {

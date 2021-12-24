@@ -1,9 +1,4 @@
-﻿using Ex03.GarageLogic.Exceptions;
-using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex03.GarageLogic.Models
+﻿namespace Ex03.GarageLogic.Models
 {
     public class ElectricEngine : Engine
     {

@@ -8,6 +8,8 @@ namespace Ex03.GarageLogic.Models
         private readonly float r_MaxAirPressure;
         private string         m_Manufacturer;
         private float          m_CurrentAirPressure;
+        private const string   k_BlowArgumentExceptionMsg = "Negative number is not allowed";
+        private const string   k_BlowValueOutOfRangeExceptionMsg = "The value is too high";
 
         public Tier(float i_MaxAirPressure)
         {
@@ -23,11 +25,11 @@ namespace Ex03.GarageLogic.Models
         {
             if (i_AirToAdd < 0)
             {
-                throw new ArgumentException("Negative number is not allowed");
+                throw new ArgumentException(k_BlowArgumentExceptionMsg);
             }
             else if (m_CurrentAirPressure + i_AirToAdd > r_MaxAirPressure)
             {
-                throw new ValueOutOfRangeException("The value is too high", 0, r_MaxAirPressure);
+                throw new ValueOutOfRangeException(k_BlowValueOutOfRangeExceptionMsg, 0, r_MaxAirPressure);
             }
             else
             {

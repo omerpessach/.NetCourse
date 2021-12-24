@@ -1,10 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using Ex03.GarageLogic;
-using Ex03.GarageLogic.Models;
+﻿using Ex03.GarageLogic;
 using Ex03.GarageLogic.Enums;
-using System.Text;
 using Ex03.GarageLogic.Exceptions;
+using Ex03.GarageLogic.Models;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
 namespace Ex03.ConsoleUI
 {
@@ -13,8 +13,8 @@ namespace Ex03.ConsoleUI
         private readonly GarageManager r_GarageManger = new GarageManager();
         private const string           k_AskForLicenseID = "Please insert license ID";
         private const string           k_AskForTierManufacturer = "Please insert tiers' manufacturer";
-        private const string           k_LicenseIDNotFoundMsg = "Vehical with license ID: {0} not found in our garage";
         private const string           k_RequestMinToCharge = "Enter amount of minutes that tou want to charge";
+        private const string           k_RequestLiterToFuel = "Enter amount of liters to fuel";
         private const string           k_AskForTierAirPressure = "Enter tiers' air pressure";
         private const string           k_Done = "Done!";
         private const string           k_GoBackToMenuSymbol = "Q";
@@ -91,7 +91,7 @@ namespace Ex03.ConsoleUI
             else
             {
                 vehicle = makeVehicleAccordingToUser(licenseID);
-                personInfo = GetPersonInfoFromUser();
+                personInfo = getPersonInfoFromUser();
                 r_GarageManger.InsertNewVehicle(personInfo, vehicle);
                 Console.WriteLine("The vehicle successfully added");
             }
@@ -178,10 +178,10 @@ namespace Ex03.ConsoleUI
             } while (!hasSucceed && !doesWantToGoBackToMenu);
         }
 
-        private PersonInfo   GetPersonInfoFromUser()
+        private PersonInfo   getPersonInfoFromUser()
         {
-            string name = UIHelper.GetStringContainsOnlyLetters("Please enter name");
-            string phoneNumber = UIHelper.GetStringContainsOnlyDigits("Please enter phone number");
+            string name = UIHelper.GetStringContainsOnlyLetters("Please enter your name");
+            string phoneNumber = UIHelper.GetStringContainsOnlyDigits("Please enter your phone number");
 
             return new PersonInfo(name, phoneNumber);
         }
@@ -257,7 +257,7 @@ namespace Ex03.ConsoleUI
             do
             {
                 licenseID = getLicenseIDFromUser();
-                inputNumber = UIHelper.GetFloatFromUser(k_RequestMinToCharge);
+                inputNumber = UIHelper.GetFloatFromUser(k_RequestLiterToFuel);
                 fuelType = UIHelper.GetEnumFromUser<eFuelType>("Select fuel type");
                 try
                 {
@@ -342,8 +342,16 @@ namespace Ex03.ConsoleUI
         {
             eVehicalStatus requestedStatus;
 
+            StringBuilder licenseIDsOutput = new StringBuilder();
+
             requestedStatus = UIHelper.GetEnumFromUser<eVehicalStatus>("Select status");
-            r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
+            List<string> licenseIDs =  r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
+            foreach (string licenseId in licenseIDs)
+            {
+                licenseIDsOutput.AppendLine(licenseId);
+            }
+
+            Console.WriteLine(licenseIDsOutput);
         }
 
         private void         displayMenuToUser()

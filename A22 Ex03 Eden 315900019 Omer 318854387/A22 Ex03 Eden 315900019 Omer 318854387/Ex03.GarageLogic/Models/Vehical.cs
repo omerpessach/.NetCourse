@@ -1,6 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ex03.GarageLogic.Models
 {
@@ -26,7 +24,7 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        internal string      LicenseID
+        internal string        LicenseID
         {
             get
             {
@@ -50,14 +48,14 @@ namespace Ex03.GarageLogic.Models
             }
         }
 
-        private string getTiersInfo()
+        private string         getTiersInfo()
         {
             return r_Tiers[0].ToString();
         }
 
-        public abstract void SetUniqeMembers(List<string> i_UniqeMembers);
+        public abstract void   SetUniqeMembers(List<string> i_UniqeMembers);
 
-        public void InitBasicInfo(string i_LicenseID, string i_ModelName)
+        public void            InitBasicInfo(string i_LicenseID, string i_ModelName)
         {
             m_LicenseID = i_LicenseID;
             m_ModelName = i_ModelName;
@@ -77,7 +75,8 @@ namespace Ex03.GarageLogic.Models
             return string.Format(
 @"License ID: {0}
 Model name: {1}
-Tiers Info: {2}", m_LicenseID, m_ModelName, getTiersInfo());
+Tiers info: {2}
+Engine info: {3}", m_LicenseID, m_ModelName, getTiersInfo(), m_Engine.ToString());
         }
     }
 }

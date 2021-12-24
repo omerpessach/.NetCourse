@@ -1,7 +1,6 @@
 ﻿using Ex03.GarageLogic.Exceptions;
 using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace Ex03.GarageLogic.Models
 {
@@ -11,6 +10,9 @@ namespace Ex03.GarageLogic.Models
         private float        m_LuggageCapacity;
         private const string k_DoesDriveRefrigeratedContentsInitInfoMsg = "Does drive refrigerated contents? Y/N";
         private const string k_LuggageCapacityInitInfoMsg = "Type luggage capacity";
+        private const string k_LuggageCapacityInitValueOutOfRangeExceptionMsg = "The value is lower than 0";
+        private const string k_LuggageCapacityInitFormatExceptionMsg = "The input is not a number";
+        private const string k_DoesDriveRefrigeratedContentsInitFormatExceptionMsg = "Invalid value, the value should be Y or N";
 
         public Truck(Engine i_Engine, List<Tier> i_Tiers)
             : base(i_Engine, i_Tiers)
@@ -32,7 +34,7 @@ namespace Ex03.GarageLogic.Models
             }
             else
             {
-                throw new FormatException("Invalid value, the value should be Y or N");
+                throw new FormatException(k_DoesDriveRefrigeratedContentsInitFormatExceptionMsg);
             }
         }
 
@@ -48,12 +50,12 @@ namespace Ex03.GarageLogic.Models
                 }
                 else
                 {
-                    throw new ValueOutOfRangeException("The value is lower than 0", 0, float.MaxValue);
+                    throw new ValueOutOfRangeException(k_LuggageCapacityInitValueOutOfRangeExceptionMsg, 0, float.MaxValue);
                 }
             }
             else
             {
-                throw new FormatException("The input is not a number");
+                throw new FormatException(k_LuggageCapacityInitFormatExceptionMsg);
             }
         }
 

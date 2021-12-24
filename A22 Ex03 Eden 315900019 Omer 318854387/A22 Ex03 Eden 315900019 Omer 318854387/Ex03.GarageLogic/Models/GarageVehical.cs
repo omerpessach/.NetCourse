@@ -1,13 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Enums;
+﻿using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic.Models
 {
     public class GarageVehical
     {
-
         private readonly Vehicle     r_Vehicle;
         private readonly PersonInfo  r_Owner;
         private eVehicalStatus       m_Status = eVehicalStatus.InRepair;

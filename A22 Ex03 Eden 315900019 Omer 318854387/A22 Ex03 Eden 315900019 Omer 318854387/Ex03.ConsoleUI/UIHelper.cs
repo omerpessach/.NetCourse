@@ -1,6 +1,5 @@
 ﻿using Ex03.GarageLogic.Exceptions;
 using System;
-using System.Collections.Generic;
 using System.Text;
 using System.Text.RegularExpressions;
 
@@ -10,7 +9,7 @@ namespace Ex03.ConsoleUI
     {
         private const string k_TryAgainMsg = "Please try again";
         private const string k_RegexAlphaOnly = "^[a-zA-Z]+$";
-        private const string k_RegexDigitOnly = "^[0-9]*$";
+        private const string k_RegexDigitOnly = "^[0-9]+$";
 
         public static int        GetUserInputToMenuOption()
         {
@@ -21,7 +20,7 @@ namespace Ex03.ConsoleUI
 
             do
             {
-                Console.WriteLine("please enter your choice");
+                Console.WriteLine("Please enter your choice");
                 userChoiceAsString = Console.ReadLine();
                 isValidInput = int.TryParse(userChoiceAsString, out userChoiceAsInt);
                 if ((userChoiceAsInt >= 1 && userChoiceAsInt <= amountOfMenuOptions) && isValidInput)
@@ -30,7 +29,7 @@ namespace Ex03.ConsoleUI
                 }
                 else
                 {
-                    Console.WriteLine(string.Format("the input {0} you have entered is invalid", userChoiceAsString));
+                    Console.WriteLine(string.Format("The input {0} you have entered is invalid", userChoiceAsString));
                 }
             }
             while (!isValidInput);
@@ -45,9 +44,11 @@ namespace Ex03.ConsoleUI
 
         public static string     GetNotEmptyOrWhiteSpacesString(string i_RequestMsg)
         {
+            string userInput;
+
             Console.WriteLine(i_RequestMsg);
-            string userInput = Console.ReadLine();
-            while (!UIHelper.IsStringValid(userInput))
+            userInput = Console.ReadLine();
+            while (!IsStringValid(userInput))
             {
                 Console.WriteLine(string.Format(@"The string isnt valid.
 {0}", i_RequestMsg));
@@ -66,7 +67,9 @@ namespace Ex03.ConsoleUI
             userInput = Console.ReadLine();
             while (!float.TryParse(userInput, out number) || number < 0)
             {
-                Console.WriteLine(string.Format("you didnt enter a posstive number, please try again, {0}", i_RequestMsg));
+                Console.WriteLine(string.Format(@"You didnt enter a posstive number
+{0}
+{1}",k_TryAgainMsg, i_RequestMsg));
                 userInput = Console.ReadLine();
             }
 
@@ -75,7 +78,9 @@ namespace Ex03.ConsoleUI
 
         public static void       HandleValueOutOfRangeException(ValueOutOfRangeException i_Ex)
         {
-            StringBuilder output = new StringBuilder(i_Ex.Message);
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine(i_Ex.Message);
             output.AppendLine(string.Format("The range is between {0} to {1}", i_Ex.MinValue, i_Ex.MaxValue));
             output.AppendLine(k_TryAgainMsg);
             Console.WriteLine(output);
@@ -83,7 +88,9 @@ namespace Ex03.ConsoleUI
 
         public static void       HandleGenericInfoException(Exception i_Ex)
         {
-            StringBuilder output = new StringBuilder(i_Ex.Message);
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine(i_Ex.Message);
             output.AppendLine(k_TryAgainMsg);
             Console.WriteLine(output);
         }
@@ -92,7 +99,6 @@ namespace Ex03.ConsoleUI
         {
             string userInput;
             T returnType;
-            int enumNamesLength = Enum.GetNames(typeof(T)).Length;
 
             Console.WriteLine(i_RequestMsg);
             PrintEnumOptions<T>();
@@ -110,9 +116,10 @@ namespace Ex03.ConsoleUI
         private static bool      TryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
         {
             int inputAsInt;
-            bool hasSucceed = int.TryParse(i_Input, out inputAsInt) && Enum.IsDefined(typeof(T), inputAsInt);
-            o_requestedEnum = default;
+            bool hasSucceed;
 
+            o_requestedEnum = default;
+            hasSucceed = int.TryParse(i_Input, out inputAsInt) && Enum.IsDefined(typeof(T), inputAsInt);
             if (hasSucceed)
             {
                 o_requestedEnum = (T)Enum.ToObject(typeof(T), inputAsInt);
@@ -138,7 +145,8 @@ namespace Ex03.ConsoleUI
 
             while (!IsAlpha(input))
             {
-                Console.WriteLine("Invalid name, please try again");
+                Console.WriteLine(@"Invalid name
+{0}",k_TryAgainMsg);
                 input = Console.ReadLine();
             }
 
@@ -154,7 +162,8 @@ namespace Ex03.ConsoleUI
 
             while (!IsContainsOnlyDigits(input))
             {
-                Console.WriteLine("Invalid name, please try again");
+                Console.WriteLine(@"Invalid number
+{0}",k_TryAgainMsg);
                 input = Console.ReadLine();
             }
 
@@ -175,7 +184,8 @@ namespace Ex03.ConsoleUI
         {
             bool doesWannaGoBack = false;
 
-            Console.WriteLine(string.Format("To go back to the menu press {0}, to try again enter anything", i_SymbolToGoBackToMenu));
+            Console.WriteLine(string.Format(@"To go back to the menu press {0}
+to try again enter anything", i_SymbolToGoBackToMenu));
             doesWannaGoBack = Console.ReadLine().Equals(i_SymbolToGoBackToMenu);
             if (doesWannaGoBack)
             {

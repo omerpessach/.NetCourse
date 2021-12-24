@@ -1,5 +1,4 @@
 ﻿using Ex03.GarageLogic.Enums;
-using System;
 using System.Collections.Generic;
 
 namespace Ex03.GarageLogic.Models
@@ -15,8 +14,7 @@ namespace Ex03.GarageLogic.Models
         private const string         k_DoorAmountFormatExceptionMsg = "Wrong format by setting door amount";
         private const string         k_CarColorFormatExceptionMsg = "Wrong format by setting car color";
 
-        public Car(Engine i_Engine, List<Tier> i_Tiers)
-            : base(i_Engine, i_Tiers)
+        public Car(Engine i_Engine, List<Tier> i_Tiers): base(i_Engine, i_Tiers)
         {
             m_UniqeMembersToInitInfo = new string[] { k_DoorAmountInitInfoMsg, k_CarColorInitInfoMsg };
         }
@@ -41,7 +39,7 @@ namespace Ex03.GarageLogic.Models
         {
             return string.Format(@"{0}
 Color: {1}
-Doors amount: {2}", base.ToString(), nameof(m_CarColor), m_DoorAmount);
+Doors amount: {2}", base.ToString(), m_CarColor, m_DoorAmount);
         }
     }
 }

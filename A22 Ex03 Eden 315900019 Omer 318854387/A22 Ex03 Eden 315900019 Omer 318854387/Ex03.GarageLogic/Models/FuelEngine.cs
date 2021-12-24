@@ -1,14 +1,12 @@
 ﻿using Ex03.GarageLogic.Enums;
-using Ex03.GarageLogic.Exceptions;
 using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace Ex03.GarageLogic.Models
 {
     public class FuelEngine : Engine
     {
         private readonly eFuelType r_FuelType;
+        private const string       k_ArgumentExceptionFuel = "Wrong fuel type";
 
         public FuelEngine(float i_MaxEnergyCapacity, eFuelType i_FuelType)
             : base(i_MaxEnergyCapacity)
@@ -20,7 +18,7 @@ namespace Ex03.GarageLogic.Models
         {
             if (i_FuelType != r_FuelType)
             {
-                throw new ArgumentException("Wrong fuel type");
+                throw new ArgumentException(k_ArgumentExceptionFuel);
             }
             else
             {

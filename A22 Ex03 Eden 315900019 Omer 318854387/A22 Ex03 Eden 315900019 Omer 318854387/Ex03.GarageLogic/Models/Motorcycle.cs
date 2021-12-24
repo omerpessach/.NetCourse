@@ -1,7 +1,6 @@
-﻿using System;
+﻿using Ex03.GarageLogic.Enums;
+using System;
 using System.Collections.Generic;
-using System.Text;
-using Ex03.GarageLogic.Enums;
 
 namespace Ex03.GarageLogic.Models
 {
@@ -13,6 +12,8 @@ namespace Ex03.GarageLogic.Models
         private const string k_EngineVolumeInitInfoMsg = "Enter engine volume";
         private const string k_LicenseTypeArgumentExceptionMsg = "Invalid value by setting license type";
         private const string k_LicenseTypeFormatExceptionMsg = "Wrong format by setting license type";
+        private const string k_EngineVolumeArgumentExceptionMsg = "The value is negative";
+        private const string k_EngineVolumeFormatExceptionMsg = "Cannot set engine volume by invalid value";
 
         public Motorcycle(Engine i_Engine, List<Tier> i_Tiers)
             : base(i_Engine, i_Tiers)
@@ -37,12 +38,12 @@ namespace Ex03.GarageLogic.Models
                 }
                 else
                 {
-                    throw new ArgumentException("The value is negative");
+                    throw new ArgumentException(k_EngineVolumeArgumentExceptionMsg);
                 }
             }
             else
             {
-                throw new FormatException("Cannot set engine volume by invalid value");
+                throw new FormatException(k_EngineVolumeFormatExceptionMsg);
             }
         }
 
