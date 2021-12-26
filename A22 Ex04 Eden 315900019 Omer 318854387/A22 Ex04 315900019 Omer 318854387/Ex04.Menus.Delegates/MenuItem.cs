@@ -13,7 +13,7 @@ namespace Ex04.Menus.Delegates
 
         public MenuItem(string i_Title)
         {
-            CurrentTitle = i_Title;
+            m_CurrentTitle = i_Title;
         }
 
         public string   CurrentTitle
@@ -30,10 +30,7 @@ namespace Ex04.Menus.Delegates
 
         public void     OnMenuSelected()
         {
-            if(MenuSelected != null)
-            {
-                MenuSelected.Invoke();
-            }
+            MenuSelected?.Invoke();
         }
     }
 }

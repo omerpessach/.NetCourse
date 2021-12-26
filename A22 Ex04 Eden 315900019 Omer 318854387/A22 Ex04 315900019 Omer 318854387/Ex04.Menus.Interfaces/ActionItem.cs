@@ -6,11 +6,10 @@ namespace Ex04.Menus.Interfaces
 {
     public class ActionItem : MenuItem
     {
-        private readonly List<IActionListner> r_ActionListnerList;
+        private readonly List<IActionListner> r_ActionListnerList = new List<IActionListner>();
 
         public ActionItem(string i_CurrentTitle) : base(i_CurrentTitle)
         {
-            r_ActionListnerList = new List<IActionListner>();
         }
 
         public void  AddListner(IActionListner i_CurrentActionListner)
