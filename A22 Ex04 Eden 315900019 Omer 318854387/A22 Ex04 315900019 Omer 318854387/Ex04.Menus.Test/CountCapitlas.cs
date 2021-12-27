@@ -21,7 +21,7 @@ namespace Ex04.Menus.Test
 
             foreach (char currentChar in i_CurrentSentence)
             {
-                if (Char.IsUpper(currentChar))
+                if (char.IsUpper(currentChar))
                 {
                     amountOfCapitalLetters++;
                 }

@@ -10,7 +10,7 @@ namespace Ex04.Menus.Interfaces
 
         public MenuItem(string i_Title)
         {
-            CurrentTitle = i_Title;
+            m_CurrentTitle = i_Title;
         }
 
         public string CurrentTitle
@@ -18,10 +18,6 @@ namespace Ex04.Menus.Interfaces
             get
             {
                 return m_CurrentTitle;
-            }
-            set
-            {
-                m_CurrentTitle = value;
             }
         }
     }

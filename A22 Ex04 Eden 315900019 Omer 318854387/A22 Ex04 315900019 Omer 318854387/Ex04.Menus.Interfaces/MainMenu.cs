@@ -6,15 +6,12 @@ namespace Ex04.Menus.Interfaces
 {
     public class MainMenu : MenuItem
     {
-        private readonly List<MenuItem> r_AllMenus;
-        private bool                    m_IsMenuEnded;      //exit or back
+        private readonly List<MenuItem> r_AllMenus = new List<MenuItem>();
+        private bool                    m_IsMenuEnded = false;      //exit or back
 
         public MainMenu(eMenuType i_CurrentMenuType, string i_CurrentTitle) : base(i_CurrentTitle)
         {
             string endItemTitle;
-
-            r_AllMenus = new List<MenuItem>();
-            m_IsMenuEnded = false;
 
             endItemTitle = i_CurrentMenuType == eMenuType.PrimMenu ? "Exit" : "Back";
             ExitItem currentExitItem = new ExitItem(endItemTitle); //exit/ back need to be in place zero at menu
@@ -41,10 +38,11 @@ namespace Ex04.Menus.Interfaces
                 }
                 catch (Exception exception)
                 {
-                    Console.WriteLine(String.Format("{0}, press any key to continue", exception.Message));
+                    Console.WriteLine(string.Format("{0}, press any key to continue", exception.Message));
                     Console.ReadKey();
                     continue;
                 }
+
                 activateCurrentMenuItem(r_AllMenus[userInput]);
                 if (m_IsMenuEnded)
                 {
@@ -103,6 +101,7 @@ namespace Ex04.Menus.Interfaces
                 descriptionOfMenu.AppendLine(string.Format("{0} -> {1}", optionInMenu, currentItem.CurrentTitle));
                 optionInMenu++;
             }
+
             descriptionOfMenu.AppendLine("--------------------------");
 
             return descriptionOfMenu.ToString();

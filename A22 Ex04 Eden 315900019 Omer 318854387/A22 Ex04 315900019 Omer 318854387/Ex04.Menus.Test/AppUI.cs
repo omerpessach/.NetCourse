@@ -7,33 +7,23 @@ namespace Ex04.Menus.Test
 {
     public class AppUI
     {
-        CountCapitlas   m_CountCapitlasAction;
-        ShowVersion     m_ShowVersionAction;
-        ShowDate        m_ShowDateAction;
-        ShowTime        m_ShowTimeAction;
-
-        public AppUI()
-        {
-            m_CountCapitlasAction = new CountCapitlas();
-            m_ShowDateAction = new ShowDate();
-            m_ShowTimeAction = new ShowTime();
-            m_ShowVersionAction = new ShowVersion();
-        }
+        private readonly CountCapitlas       r_CountCapitlasAction = new CountCapitlas();
+        private readonly ShowVersion         r_ShowVersionAction = new ShowVersion();
+        private readonly ShowDate            r_ShowDateAction = new ShowDate();
+        private readonly ShowTime            r_ShowTimeAction = new ShowTime();
+        private readonly Delegates.MainMenu  r_DelegateMenu = new Delegates.MainMenu(Delegates.eMenuType.PrimMenu, "**Delegates Main Menu**");
+        private readonly Interfaces.MainMenu r_InterfacesMenu = new Interfaces.MainMenu(Interfaces.eMenuType.PrimMenu, "**Interfaces Main Menu**");
 
         public void  Run()
         {
-            Delegates.MainMenu delegateMenu;
-            createMenuToDelgates(out delegateMenu);
-            delegateMenu.RunMenu();
-
-            Interfaces.MainMenu interfacesMenu;
-            createMenuToInterfaces(out interfacesMenu);
-            interfacesMenu.RunMenu();
+            initDelgatsMenu();
+            initInterfacesMenu();
+            r_DelegateMenu.RunMenu();
+            r_InterfacesMenu.RunMenu();
         }
 
-        private void createMenuToDelgates(out Delegates.MainMenu o_CurrentMenuToCreate)
+        private void initDelgatsMenu()
         {
-            o_CurrentMenuToCreate = new Delegates.MainMenu(Delegates.eMenuType.PrimMenu, "**Delegates Main Menu**");
             Delegates.MainMenu versionAndCapitalsMenu = new Delegates.MainMenu(Delegates.eMenuType.SecondaryMenu, "Version and Capitals");
             Delegates.MenuItem countCapitalsActionItem = new Delegates.MenuItem("Count Capitals");
             Delegates.MenuItem showVersionActionItem = new Delegates.MenuItem("Show version");
@@ -41,40 +31,38 @@ namespace Ex04.Menus.Test
             Delegates.MenuItem showDateActionItem = new Delegates.MenuItem("Show Date");
             Delegates.MenuItem showTimeActionItem = new Delegates.MenuItem("Show Time");
 
-            o_CurrentMenuToCreate.AddMenuItemToList(versionAndCapitalsMenu);
-            o_CurrentMenuToCreate.AddMenuItemToList(dateAndTimeMenu);
             versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
             versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
             dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
             dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
 
-            countCapitalsActionItem.MenuSelected += m_CountCapitlasAction.ReportAction;
-            showVersionActionItem.MenuSelected += m_ShowVersionAction.ReportAction;
-            showDateActionItem.MenuSelected += m_ShowDateAction.ReportAction;
-            showTimeActionItem.MenuSelected += m_ShowTimeAction.ReportAction;
+            countCapitalsActionItem.MenuSelected += r_CountCapitlasAction.ReportAction;
+            showVersionActionItem.MenuSelected += r_ShowVersionAction.ReportAction;
+            showDateActionItem.MenuSelected += r_ShowDateAction.ReportAction;
+            showTimeActionItem.MenuSelected += r_ShowTimeAction.ReportAction;
+
+            r_DelegateMenu.AddMenuItemToList(versionAndCapitalsMenu);
+            r_DelegateMenu.AddMenuItemToList(dateAndTimeMenu);
         }
 
-        private void createMenuToInterfaces(out Interfaces.MainMenu o_CurrentMenuToCreate)
+        private void initInterfacesMenu()
         {
-
-            o_CurrentMenuToCreate = new Interfaces.MainMenu(Interfaces.eMenuType.PrimMenu, "**Main Menu Interfaces**");
-          
             Interfaces.MainMenu versionAndCapitalsMenu = new Interfaces.MainMenu(Interfaces.eMenuType.SecondaryMenu, "Version and Capitals");
             Interfaces.ActionItem countCapitalsActionItem = new Interfaces.ActionItem("Count Capitals");
-            countCapitalsActionItem.AddListner(m_CountCapitlasAction);
             Interfaces.ActionItem showVersionActionItem = new Interfaces.ActionItem("Show version");
-            showVersionActionItem.AddListner(m_ShowVersionAction);
-            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
-            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
-            o_CurrentMenuToCreate.AddMenuItemToList(countCapitalsActionItem);
             Interfaces.MainMenu dateAndTimeMenu = new Interfaces.MainMenu(Interfaces.eMenuType.SecondaryMenu, "Show Date/Time");
             Interfaces.ActionItem showDateActionItem = new Interfaces.ActionItem("Show Date");
-            showDateActionItem.AddListner(m_ShowDateAction);
             Interfaces.ActionItem showTimeActionItem = new Interfaces.ActionItem("Show Time");
-            showTimeActionItem.AddListner(m_ShowTimeAction);
+            countCapitalsActionItem.AddListner(r_CountCapitlasAction);
+            showVersionActionItem.AddListner(r_ShowVersionAction);
+            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
+            showDateActionItem.AddListner(r_ShowDateAction);
+            showTimeActionItem.AddListner(r_ShowTimeAction);
             dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
             dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
-            o_CurrentMenuToCreate.AddMenuItemToList(dateAndTimeMenu);
+            r_InterfacesMenu.AddMenuItemToList(countCapitalsActionItem);
+            r_InterfacesMenu.AddMenuItemToList(dateAndTimeMenu);
         }
     }
 }
