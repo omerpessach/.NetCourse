@@ -39,6 +39,23 @@ namespace Ex03.GarageLogic
             return allLicensesIDAfterFilter;
         }
 
+        public List<string> GetLicensesIDs()
+        {
+            List<string> allLicensesIDs = new List<string>();
+
+            foreach (string licenseId in r_GarageVehicals.Keys)
+            {
+                allLicensesIDs.Add(licenseId);
+            }
+
+            return allLicensesIDs;
+        }
+
+        public bool IsGarageContainsVehicles()
+        {
+            return r_GarageVehicals.Count > 0;
+        }
+
         public void          ChangeVehicalStatus(string i_LicenseID, eVehicalStatus i_NewStatus)
         {
             throwExceptionIfLicenseIDNotFound(i_LicenseID);

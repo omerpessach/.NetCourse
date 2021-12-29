@@ -103,7 +103,7 @@ namespace Ex03.ConsoleUI
             Console.WriteLine(i_RequestMsg);
             PrintEnumOptions<T>();
             userInput = Console.ReadLine();
-            while (!TryParseStringToEnum<T>(userInput, out returnType))
+            while (!tryParseStringToEnum<T>(userInput, out returnType))
             {
                 Console.WriteLine("Not valid value, Please select number from the list");
                 PrintEnumOptions<T>();
@@ -113,7 +113,7 @@ namespace Ex03.ConsoleUI
             return returnType;
         }
 
-        private static bool      TryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
+        private static bool      tryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
         {
             int inputAsInt;
             bool hasSucceed;

@@ -5,14 +5,14 @@ namespace Ex03.GarageLogic.Models
     public abstract class Vehicle
     {
         private readonly List<Tier> r_Tiers;
+        private readonly Engine     r_Engine;
         private string              m_ModelName;
         private string              m_LicenseID;
-        private Engine              m_Engine;
         protected string[]          m_UniqeMembersToInitInfo;
 
         protected Vehicle(Engine i_Engine, List<Tier> i_Tiers)
         {
-            m_Engine = i_Engine;
+            r_Engine = i_Engine;
             r_Tiers = i_Tiers;
         }
 
@@ -36,7 +36,7 @@ namespace Ex03.GarageLogic.Models
         {
             get
             {
-                return m_Engine;
+                return r_Engine;
             }
         }
 
@@ -76,7 +76,7 @@ namespace Ex03.GarageLogic.Models
 @"License ID: {0}
 Model name: {1}
 Tiers info: {2}
-Engine info: {3}", m_LicenseID, m_ModelName, getTiersInfo(), m_Engine.ToString());
+Engine info: {3}", m_LicenseID, m_ModelName, getTiersInfo(), r_Engine.ToString());
         }
     }
 }

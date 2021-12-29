@@ -16,6 +16,8 @@ namespace Ex03.ConsoleUI
         private const string           k_RequestMinToCharge = "Enter amount of minutes that tou want to charge";
         private const string           k_RequestLiterToFuel = "Enter amount of liters to fuel";
         private const string           k_AskForTierAirPressure = "Enter tiers' air pressure";
+        private const string           k_AskFilterByStatusOrGetAll = "Type 1 to get all license Ids or 2 to get license Ids by status";
+        private const string           k_NoWasLicensesFounded = "No was licenses founded";
         private const string           k_Done = "Done!";
         private const string           k_GoBackToMenuSymbol = "Q";
 
@@ -38,7 +40,7 @@ namespace Ex03.ConsoleUI
                         }
                     case eMenuOptions.GetLicensesIDsFilterByStatus:
                         {
-                            getLicensesIDsFilterByStatus();
+                            getLicensesIDs();
                             break;
                         }
                     case eMenuOptions.ChangeVehicalStatus:
@@ -338,20 +340,54 @@ namespace Ex03.ConsoleUI
             return UIHelper.GetEnumFromUser<eVehicalType>("Select vehical type");
         }
 
-        private void         getLicensesIDsFilterByStatus()
+        private void         getLicensesIDs()
         {
             eVehicalStatus requestedStatus;
-
             StringBuilder licenseIDsOutput = new StringBuilder();
+            List<string> licenseIDs;
+            float inputNumber;
+            bool doesWantToGoBackToMenu = false;
 
-            requestedStatus = UIHelper.GetEnumFromUser<eVehicalStatus>("Select status");
-            List<string> licenseIDs =  r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
-            foreach (string licenseId in licenseIDs)
+            if (!r_GarageManger.IsGarageContainsVehicles())
             {
-                licenseIDsOutput.AppendLine(licenseId);
+                Console.WriteLine(k_NoWasLicensesFounded);
             }
+            else
+            {
+                inputNumber = UIHelper.GetFloatFromUser(k_AskFilterByStatusOrGetAll);
+                while (inputNumber != 1 && inputNumber != 2 && !doesWantToGoBackToMenu)
+                {
+                    doesWantToGoBackToMenu = UIHelper.DoesWantToGoBackToMenu(k_GoBackToMenuSymbol);
+                    inputNumber = UIHelper.GetFloatFromUser(k_AskFilterByStatusOrGetAll);
+                }
 
-            Console.WriteLine(licenseIDsOutput);
+                if (!doesWantToGoBackToMenu)
+                {
+                    if (inputNumber == 1)
+                    {
+                        licenseIDs = r_GarageManger.GetLicensesIDs();
+                    }
+                    else
+                    {
+                        requestedStatus = UIHelper.GetEnumFromUser<eVehicalStatus>("Select status");
+                        licenseIDs = r_GarageManger.GetLicensesIDsByStatus(requestedStatus);
+                    }
+
+                    if (licenseIDs.Count == 0)
+                    {
+                        Console.WriteLine(k_NoWasLicensesFounded);
+                    }
+                    else
+                    {
+                        foreach (string licenseId in licenseIDs)
+                        {
+                            licenseIDsOutput.AppendLine(licenseId);
+                        }
+
+                        Console.WriteLine(licenseIDsOutput);
+                    }
+                }
+            }
         }
 
         private void         displayMenuToUser()
