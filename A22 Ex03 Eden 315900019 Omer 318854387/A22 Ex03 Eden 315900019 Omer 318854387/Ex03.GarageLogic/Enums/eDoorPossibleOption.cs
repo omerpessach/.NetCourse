@@ -1,6 +1,6 @@
 ﻿namespace Ex03.GarageLogic.Enums
 {
-    public enum eDoorPossibleOptions
+    public enum eDoorPossibleOption
     {
         Two = 2,
         Three,

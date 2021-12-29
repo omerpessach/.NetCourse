@@ -6,7 +6,7 @@ namespace Ex03.GarageLogic.Models
     public class Car : Vehicle
     {
         private eCarColor            m_CarColor;
-        private eDoorPossibleOptions m_DoorAmount;
+        private eDoorPossibleOption m_DoorAmount;
         private const string         k_CarColorInitInfoMsg = "Enter car's color: 1 for Red, 2 for White, 3 for Black, 4 for Blue";
         private const string         k_DoorAmountInitInfoMsg = "Enter amount of doors between 2 to 5 (2,3,4,5)";
         private const string         k_DoorAmountArgumentExceptionMsg = "Invalid value by setting door amount";
@@ -26,7 +26,7 @@ namespace Ex03.GarageLogic.Models
 
         private void            setDoorAmount(string i_Value)
         {
-            m_DoorAmount = (eDoorPossibleOptions)GarageHelper.GetEnumValueOtherwiseThrowException<eDoorPossibleOptions>(i_Value, k_DoorAmountArgumentExceptionMsg, k_DoorAmountFormatExceptionMsg);
+            m_DoorAmount = (eDoorPossibleOption)GarageHelper.GetEnumValueOtherwiseThrowException<eDoorPossibleOption>(i_Value, k_DoorAmountArgumentExceptionMsg, k_DoorAmountFormatExceptionMsg);
         }
 
         public override void    SetUniqeMembers(List<string> i_UniqeMembers)
