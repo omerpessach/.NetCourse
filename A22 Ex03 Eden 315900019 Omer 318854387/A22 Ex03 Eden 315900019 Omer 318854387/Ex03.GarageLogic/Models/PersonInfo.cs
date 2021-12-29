@@ -2,20 +2,20 @@
 {
     public class PersonInfo
     {
-        private readonly string r_FullName;
+        private readonly string r_Name;
         private readonly string r_PhoneNumber;
 
-        public PersonInfo(string i_FullName, string i_PhoneNumber)
+        public PersonInfo(string i_Name, string i_PhoneNumber)
         {
-            r_FullName = i_FullName;
+            r_Name = i_Name;
             r_PhoneNumber = i_PhoneNumber;
         }
 
         public override string ToString()
         {
             return string.Format(
-@"Full name: {0}
-Phone number: {1}", r_FullName, r_PhoneNumber);
+@"Owner name: {0}
+Phone number: {1}", r_Name, r_PhoneNumber);
         }
     }
 }

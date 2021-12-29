@@ -17,7 +17,7 @@ namespace Ex03.ConsoleUI
         private const string           k_RequestLiterToFuel = "Enter amount of liters to fuel";
         private const string           k_AskForTierAirPressure = "Enter tiers' air pressure";
         private const string           k_AskFilterByStatusOrGetAll = "Type 1 to get all license Ids or 2 to get license Ids by status";
-        private const string           k_NoWasLicensesFounded = "No licenses was founded";
+        private const string           k_NoWasLicensesFounded = "No licenses were founded";
         private const string           k_Done = "Done!";
         private const string           k_GoBackToMenuSymbol = "Q";
 
@@ -26,7 +26,7 @@ namespace Ex03.ConsoleUI
             bool exitProgram = false;
             eMenuOptions userChoice;
 
-            Console.WriteLine("Welecom to our Garage!");
+            Console.WriteLine("Welcome to our Garage!");
             do
             {
                 displayMenuToUser();
@@ -391,18 +391,15 @@ namespace Ex03.ConsoleUI
 
         private void         displayMenuToUser()
         {
-            string MenuOptions = string.Format(
-                @"Which opartion would you like to execute?
-press 1 - add new vehicle to garage
-press 2 - show license plates of the vehicles in the garage
-press 3 - change vehicle status in the gargage
-press 4 - fiil air of tiers to max
-press 5 - fuel a vehicle
-press 6 - charge a vehicle
-press 7 - desplay vehicale information
-press 8 - exit application");
-
-            Console.WriteLine(MenuOptions);
+            Console.WriteLine(@"Which opartion would you like to execute?
+Press 1 - Add new vehicle to garage
+Press 2 - Show license plates of the vehicles in the garage
+Press 3 - Change vehicle status in the gargage
+Press 4 - Fill air of tiers to max
+Press 5 - Fuel a vehicle
+Press 6 - Charge a vehicle
+Press 7 - Desplay vehicale information
+Press 8 - Exit application");
         }
 
         private string       getLicenseIDFromUser()
