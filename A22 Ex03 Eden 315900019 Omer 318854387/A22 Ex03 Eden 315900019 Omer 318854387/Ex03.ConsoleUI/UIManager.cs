@@ -111,7 +111,6 @@ namespace Ex03.ConsoleUI
             vehicle.InitBasicInfo(i_LicenseID, modelName);
             initTiersInfo(vehicle);
             initVehicleUniqeMembers(vehicle);
-
             return vehicle;
         }
 
@@ -408,8 +407,7 @@ press 8 - exit application");
 
         private string       getLicenseIDFromUser()
         {
-            string inputFromUser = UIHelper.GetNotEmptyOrWhiteSpacesString(k_AskForLicenseID);
-            return inputFromUser;
+            return UIHelper.GetNotEmptyOrWhiteSpacesString(k_AskForLicenseID);
         }
     }
 }

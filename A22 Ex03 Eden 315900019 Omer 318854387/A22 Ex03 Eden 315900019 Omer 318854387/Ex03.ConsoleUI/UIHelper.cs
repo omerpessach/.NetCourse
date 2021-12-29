@@ -113,16 +113,16 @@ namespace Ex03.ConsoleUI
             return returnType;
         }
 
-        private static bool      tryParseStringToEnum<T>(string i_Input, out T o_requestedEnum)
+        private static bool      tryParseStringToEnum<T>(string i_Input, out T o_RequestedEnum)
         {
             int inputAsInt;
             bool hasSucceed;
 
-            o_requestedEnum = default;
+            o_RequestedEnum = default;
             hasSucceed = int.TryParse(i_Input, out inputAsInt) && Enum.IsDefined(typeof(T), inputAsInt);
             if (hasSucceed)
             {
-                o_requestedEnum = (T)Enum.ToObject(typeof(T), inputAsInt);
+                o_RequestedEnum = (T)Enum.ToObject(typeof(T), inputAsInt);
             }
 
             return hasSucceed;
