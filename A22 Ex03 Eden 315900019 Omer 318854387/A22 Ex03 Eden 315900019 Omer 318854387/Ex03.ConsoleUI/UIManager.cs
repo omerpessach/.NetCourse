@@ -17,7 +17,7 @@ namespace Ex03.ConsoleUI
         private const string           k_RequestLiterToFuel = "Enter amount of liters to fuel";
         private const string           k_AskForTierAirPressure = "Enter tiers' air pressure";
         private const string           k_AskFilterByStatusOrGetAll = "Type 1 to get all license Ids or 2 to get license Ids by status";
-        private const string           k_NoWasLicensesFounded = "No was licenses founded";
+        private const string           k_NoWasLicensesFounded = "No licenses was founded";
         private const string           k_Done = "Done!";
         private const string           k_GoBackToMenuSymbol = "Q";
 
