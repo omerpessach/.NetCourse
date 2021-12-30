@@ -1,20 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace Ex04.Menus.Interfaces
 {
     public class ActionItem : MenuItem
     {
-        private readonly List<IActionListner> r_ActionListnerList = new List<IActionListner>();
+        private readonly List<IActionListner> r_ActionListners = new List<IActionListner>();
 
-        public ActionItem(string i_CurrentTitle) : base(i_CurrentTitle)
+        public ActionItem(string i_Title) : base(i_Title)
         {
         }
 
-        public void  AddListner(IActionListner i_CurrentActionListner)
+        public void  AddListner(IActionListner i_ActionListner)
         {
-            r_ActionListnerList.Add(i_CurrentActionListner);
+            r_ActionListners.Add(i_ActionListner);
         }
 
         public void  ActivateWhanActionOccured()
@@ -24,7 +22,7 @@ namespace Ex04.Menus.Interfaces
 
         private void notifyAllListeners()
         {
-            foreach(IActionListner cuurentLisetner in r_ActionListnerList)
+            foreach(IActionListner cuurentLisetner in r_ActionListners)
             {
                 cuurentLisetner.ReportAction();
             }

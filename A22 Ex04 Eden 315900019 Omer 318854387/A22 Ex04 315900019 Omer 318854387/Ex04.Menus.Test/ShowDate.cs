@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ex04.Menus.Interfaces;
+using System;
 using System.Text;
-using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
@@ -9,8 +8,11 @@ namespace Ex04.Menus.Test
     {
         public void ReportAction()
         {
-            Console.WriteLine(string.Format("The day today is {0}", DateTime.Now.Date.ToShortDateString()));
-            Console.WriteLine("Press any key to continue.");
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine(string.Format("The day today is {0}", DateTime.Now.Date.ToShortDateString()));
+            output.AppendLine("Press any key to continue.");
+            Console.WriteLine(output);
             Console.ReadKey();
         }
     }

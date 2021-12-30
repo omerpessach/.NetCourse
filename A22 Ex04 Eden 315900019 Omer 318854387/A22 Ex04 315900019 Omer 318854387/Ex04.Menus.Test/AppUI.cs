@@ -1,7 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using Ex04.Menus.Delegates;
-using Ex04.Menus.Interfaces;
+﻿using Ex04.Menus.Interfaces;
+using eMenuTypeDelegate = Ex04.Menus.Delegates.eMenuType;
+using eMenuTypeInterface = Ex04.Menus.Interfaces.eMenuType;
+using MainMenuDelegate = Ex04.Menus.Delegates.MainMenu;
+using MainMenuInterface = Ex04.Menus.Interfaces.MainMenu;
+using MenuItemDelegate = Ex04.Menus.Delegates.MenuItem;
 
 namespace Ex04.Menus.Test
 {
@@ -11,48 +13,48 @@ namespace Ex04.Menus.Test
         private readonly ShowVersion         r_ShowVersionAction = new ShowVersion();
         private readonly ShowDate            r_ShowDateAction = new ShowDate();
         private readonly ShowTime            r_ShowTimeAction = new ShowTime();
-        private readonly Delegates.MainMenu  r_DelegateMenu = new Delegates.MainMenu(Delegates.eMenuType.PrimMenu, "**Delegates Main Menu**");
-        private readonly Interfaces.MainMenu r_InterfacesMenu = new Interfaces.MainMenu(Interfaces.eMenuType.PrimMenu, "**Interfaces Main Menu**");
+        private readonly MainMenuDelegate    r_DelegatesMenu = new MainMenuDelegate(eMenuTypeDelegate.PrimMenu, "**Delegates Main Menu**");
+        private readonly MainMenuInterface   r_InterfacesMenu = new MainMenuInterface(eMenuTypeInterface.PrimMenu, "**Interfaces Main Menu**");
 
         public void  Run()
         {
             initDelgatsMenu();
             initInterfacesMenu();
-            r_DelegateMenu.RunMenu();
+            r_DelegatesMenu.RunMenu();
             r_InterfacesMenu.RunMenu();
         }
 
         private void initDelgatsMenu()
         {
-            Delegates.MainMenu versionAndCapitalsMenu = new Delegates.MainMenu(Delegates.eMenuType.SecondaryMenu, "Version and Capitals");
-            Delegates.MenuItem countCapitalsActionItem = new Delegates.MenuItem("Count Capitals");
-            Delegates.MenuItem showVersionActionItem = new Delegates.MenuItem("Show version");
-            Delegates.MainMenu dateAndTimeMenu = new Delegates.MainMenu(Delegates.eMenuType.SecondaryMenu, "Show Date/Time");
-            Delegates.MenuItem showDateActionItem = new Delegates.MenuItem("Show Date");
-            Delegates.MenuItem showTimeActionItem = new Delegates.MenuItem("Show Time");
+            MainMenuDelegate versionAndCapitalsMenu = new MainMenuDelegate(eMenuTypeDelegate.SecondaryMenu, "Version and Capitals");
+            MenuItemDelegate countCapitalsActionItem = new MenuItemDelegate("Count Capitals");
+            MenuItemDelegate showVersionActionItem = new MenuItemDelegate("Show version");
+            MainMenuDelegate dateAndTimeMenu = new MainMenuDelegate(eMenuTypeDelegate.SecondaryMenu, "Show Date/Time");
+            MenuItemDelegate showDateActionItem = new MenuItemDelegate("Show Date");
+            MenuItemDelegate showTimeActionItem = new MenuItemDelegate("Show Time");
 
-            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
-            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
-            dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
-            dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
+            versionAndCapitalsMenu.AddMenuItem(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItem(showVersionActionItem);
+            dateAndTimeMenu.AddMenuItem(showDateActionItem);
+            dateAndTimeMenu.AddMenuItem(showTimeActionItem);
 
             countCapitalsActionItem.MenuSelected += r_CountCapitlasAction.ReportAction;
             showVersionActionItem.MenuSelected += r_ShowVersionAction.ReportAction;
             showDateActionItem.MenuSelected += r_ShowDateAction.ReportAction;
             showTimeActionItem.MenuSelected += r_ShowTimeAction.ReportAction;
 
-            r_DelegateMenu.AddMenuItemToList(versionAndCapitalsMenu);
-            r_DelegateMenu.AddMenuItemToList(dateAndTimeMenu);
+            r_DelegatesMenu.AddMenuItem(versionAndCapitalsMenu);
+            r_DelegatesMenu.AddMenuItem(dateAndTimeMenu);
         }
 
         private void initInterfacesMenu()
         {
-            Interfaces.MainMenu versionAndCapitalsMenu = new Interfaces.MainMenu(Interfaces.eMenuType.SecondaryMenu, "Version and Capitals");
-            Interfaces.ActionItem countCapitalsActionItem = new Interfaces.ActionItem("Count Capitals");
-            Interfaces.ActionItem showVersionActionItem = new Interfaces.ActionItem("Show version");
-            Interfaces.MainMenu dateAndTimeMenu = new Interfaces.MainMenu(Interfaces.eMenuType.SecondaryMenu, "Show Date/Time");
-            Interfaces.ActionItem showDateActionItem = new Interfaces.ActionItem("Show Date");
-            Interfaces.ActionItem showTimeActionItem = new Interfaces.ActionItem("Show Time");
+            MainMenuInterface versionAndCapitalsMenu = new MainMenuInterface(eMenuTypeInterface.SecondaryMenu, "Version and Capitals");
+            ActionItem countCapitalsActionItem = new ActionItem("Count Capitals");
+            ActionItem showVersionActionItem = new ActionItem("Show version");
+            MainMenuInterface dateAndTimeMenu = new MainMenuInterface(eMenuTypeInterface.SecondaryMenu, "Show Date/Time");
+            ActionItem showDateActionItem = new ActionItem("Show Date");
+            ActionItem showTimeActionItem = new ActionItem("Show Time");
             countCapitalsActionItem.AddListner(r_CountCapitlasAction);
             showVersionActionItem.AddListner(r_ShowVersionAction);
             versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);

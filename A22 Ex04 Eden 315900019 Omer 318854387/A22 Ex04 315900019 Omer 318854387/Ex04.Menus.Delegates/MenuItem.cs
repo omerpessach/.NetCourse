@@ -1,30 +1,22 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Delegates
+﻿namespace Ex04.Menus.Delegates
 {
     public delegate void SelectedEventHandler();
     public class MenuItem
     {
         public event SelectedEventHandler MenuSelected;
 
-        private string                    m_CurrentTitle;
+        private readonly string           r_Title;
 
         public MenuItem(string i_Title)
         {
-            m_CurrentTitle = i_Title;
+            r_Title = i_Title;
         }
 
-        public string   CurrentTitle
+        public string   Title
         {
             get
             {
-                return m_CurrentTitle;
-            }
-            set
-            {
-                m_CurrentTitle = value;
+                return r_Title;
             }
         }
 

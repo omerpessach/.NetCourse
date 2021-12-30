@@ -6,7 +6,7 @@ namespace Ex04.Menus.Interfaces
 {
     public class MainMenu : MenuItem
     {
-        private readonly List<MenuItem> r_AllMenus = new List<MenuItem>();
+        private readonly List<MenuItem> r_InnerMenus = new List<MenuItem>();
         private bool                    m_IsMenuEnded = false;      //exit or back
 
         public MainMenu(eMenuType i_CurrentMenuType, string i_CurrentTitle) : base(i_CurrentTitle)
@@ -15,12 +15,12 @@ namespace Ex04.Menus.Interfaces
 
             endItemTitle = i_CurrentMenuType == eMenuType.PrimMenu ? "Exit" : "Back";
             ExitItem currentExitItem = new ExitItem(endItemTitle); //exit/ back need to be in place zero at menu
-            r_AllMenus.Add(currentExitItem);
+            r_InnerMenus.Add(currentExitItem);
         }
 
         public void     AddMenuItemToList(MenuItem i_CurremtMenuItem)
         {
-            r_AllMenus.Add(i_CurremtMenuItem);
+            r_InnerMenus.Add(i_CurremtMenuItem);
         }
 
         public void     RunMenu()
@@ -43,7 +43,7 @@ namespace Ex04.Menus.Interfaces
                     continue;
                 }
 
-                activateCurrentMenuItem(r_AllMenus[userInput]);
+                activateCurrentMenuItem(r_InnerMenus[userInput]);
                 if (m_IsMenuEnded)
                 {
                     m_IsMenuEnded = false;
@@ -81,7 +81,7 @@ namespace Ex04.Menus.Interfaces
             {
                 throw new Exception(string.Format("the Input {0} is not an intger", inputUserAsString));
             }
-            else if (userChoice < 0 || userChoice > (r_AllMenus.Count -1))
+            else if (userChoice < 0 || userChoice > (r_InnerMenus.Count -1))
             {
                 throw new Exception(String.Format("the Input {0} is out of range", userChoice));
             }
@@ -94,11 +94,11 @@ namespace Ex04.Menus.Interfaces
             StringBuilder descriptionOfMenu = new StringBuilder();
             int optionInMenu = 0;
 
-            descriptionOfMenu.AppendLine(string.Format("**{0}**", CurrentTitle));
+            descriptionOfMenu.AppendLine(string.Format("**{0}**", Title));
             descriptionOfMenu.AppendLine("--------------------------");
-            foreach (MenuItem currentItem in r_AllMenus)
+            foreach (MenuItem currentItem in r_InnerMenus)
             {
-                descriptionOfMenu.AppendLine(string.Format("{0} -> {1}", optionInMenu, currentItem.CurrentTitle));
+                descriptionOfMenu.AppendLine(string.Format("{0} -> {1}", optionInMenu, currentItem.Title));
                 optionInMenu++;
             }
 

@@ -9,8 +9,11 @@ namespace Ex04.Menus.Test
     {
         public void ReportAction()
         {
-            Console.WriteLine(string.Format("The time now is {0}", DateTime.Now));
-            Console.WriteLine("Press any key to continue.");
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine(string.Format("The time now is {0}", DateTime.Now));
+            output.AppendLine("Press any key to continue.");
+            Console.WriteLine(output);
             Console.ReadKey();
         }
     }

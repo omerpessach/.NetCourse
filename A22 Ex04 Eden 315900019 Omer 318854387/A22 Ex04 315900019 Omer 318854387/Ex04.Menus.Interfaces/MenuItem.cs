@@ -1,23 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace Ex04.Menus.Interfaces
+﻿namespace Ex04.Menus.Interfaces
 {
     public class MenuItem
     {
-        private string m_CurrentTitle;
+        private readonly string r_Title;
 
         public MenuItem(string i_Title)
         {
-            m_CurrentTitle = i_Title;
+            r_Title = i_Title;
         }
 
-        public string CurrentTitle
+        public string Title
         {
             get
             {
-                return m_CurrentTitle;
+                return r_Title;
             }
         }
     }

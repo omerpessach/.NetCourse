@@ -1,7 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Ex04.Menus.Interfaces;
+using System;
 using System.Text;
-using Ex04.Menus.Interfaces;
 
 namespace Ex04.Menus.Test
 {
@@ -9,8 +8,11 @@ namespace Ex04.Menus.Test
     {
         public void ReportAction()
         {
-            Console.WriteLine("Version: 22.1.4.8930");
-            Console.WriteLine("Press any key to continue.");
+            StringBuilder output = new StringBuilder();
+
+            output.AppendLine("Version: 22.1.4.8930");
+            output.AppendLine("Press any key to continue.");
+            Console.WriteLine(output);
             Console.ReadKey();
         }
     }
