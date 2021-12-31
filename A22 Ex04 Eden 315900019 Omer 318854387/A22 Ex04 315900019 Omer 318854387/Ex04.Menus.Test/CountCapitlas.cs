@@ -27,7 +27,6 @@ namespace Ex04.Menus.Test
                 {
                     amountOfCapitalLetters++;
                 }
-
             }
 
             return amountOfCapitalLetters;

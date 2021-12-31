@@ -44,11 +44,9 @@ namespace Ex04.Menus.Delegates
                 }
 
                 activateMenuItem(r_InnerMenus[userInput]);
-                if (m_IsMenuEnded)
-                {
-                    m_IsMenuEnded = false;
-                }
             }
+
+            m_IsMenuEnded = false;
         }
 
         private void    activateMenuItem(MenuItem i_ItemToBeActivated)

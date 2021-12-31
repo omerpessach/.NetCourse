@@ -37,14 +37,14 @@ namespace Ex04.Menus.Test
             versionAndCapitalsMenu.AddMenuItem(showVersionActionItem);
             dateAndTimeMenu.AddMenuItem(showDateActionItem);
             dateAndTimeMenu.AddMenuItem(showTimeActionItem);
+            r_DelegatesMenu.AddMenuItem(versionAndCapitalsMenu);
+            r_DelegatesMenu.AddMenuItem(dateAndTimeMenu);
 
             countCapitalsActionItem.MenuSelected += r_CountCapitlasAction.ReportAction;
             showVersionActionItem.MenuSelected += r_ShowVersionAction.ReportAction;
             showDateActionItem.MenuSelected += r_ShowDateAction.ReportAction;
             showTimeActionItem.MenuSelected += r_ShowTimeAction.ReportAction;
 
-            r_DelegatesMenu.AddMenuItem(versionAndCapitalsMenu);
-            r_DelegatesMenu.AddMenuItem(dateAndTimeMenu);
         }
 
         private void initInterfacesMenu()

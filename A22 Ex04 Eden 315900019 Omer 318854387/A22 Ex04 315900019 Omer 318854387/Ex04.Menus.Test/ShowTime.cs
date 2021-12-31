@@ -11,7 +11,7 @@ namespace Ex04.Menus.Test
         {
             StringBuilder output = new StringBuilder();
 
-            output.AppendLine(string.Format("The time now is {0}", DateTime.Now));
+            output.AppendLine(string.Format("The time now is {0:t}", DateTime.Now));
             output.AppendLine("Press any key to continue.");
             Console.WriteLine(output);
             Console.ReadKey();

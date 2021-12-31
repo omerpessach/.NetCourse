@@ -44,12 +44,9 @@ namespace Ex04.Menus.Interfaces
                 }
 
                 activateCurrentMenuItem(r_InnerMenus[userInput]);
-                if (m_IsMenuEnded)
-                {
-                    m_IsMenuEnded = false;
-                    break;
-                }
             }
+
+            m_IsMenuEnded = false;
         }
 
         private void    activateCurrentMenuItem(MenuItem i_CurrentItemToBeActivated)
