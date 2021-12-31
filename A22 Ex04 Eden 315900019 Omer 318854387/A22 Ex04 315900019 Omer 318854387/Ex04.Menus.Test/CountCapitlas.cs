@@ -10,7 +10,7 @@ namespace Ex04.Menus.Test
         {
             StringBuilder output = new StringBuilder();
 
-            output.AppendLine("Please enter a sentence");
+            Console.WriteLine("Please enter a sentence");
             output.AppendLine(string.Format("There are {0} upper-case letters in the given sentence.", getAmountOfCapitalsInString(Console.ReadLine())));
             output.AppendLine("Press any key to continue.");
             Console.WriteLine(output);
