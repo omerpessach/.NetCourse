@@ -7,26 +7,26 @@ namespace Ex04.Menus.Interfaces
     public class MainMenu : MenuItem
     {
         private readonly List<MenuItem> r_InnerMenus = new List<MenuItem>();
-        private bool                    m_IsMenuEnded = false;      //exit or back
+        private bool                    m_IsMenuEnded = false;      // Exit or back flag
 
-        public MainMenu(eMenuType i_CurrentMenuType, string i_CurrentTitle) : base(i_CurrentTitle)
+        public MainMenu(eMenuType i_MenuType, string i_Title) : base(i_Title)
         {
             string endItemTitle;
 
-            endItemTitle = i_CurrentMenuType == eMenuType.PrimMenu ? "Exit" : "Back";
-            ExitItem currentExitItem = new ExitItem(endItemTitle); //exit/ back need to be in place zero at menu
+            endItemTitle = i_MenuType == eMenuType.PrimMenu ? "Exit" : "Back";
+            ExitItem currentExitItem = new ExitItem(endItemTitle); // Exit or back need to be in place zero at menu
             r_InnerMenus.Add(currentExitItem);
         }
 
-        public void     AddMenuItemToList(MenuItem i_CurremtMenuItem)
+        public void     AddMenuItem(MenuItem i_MenuItem)
         {
-            r_InnerMenus.Add(i_CurremtMenuItem);
+            r_InnerMenus.Add(i_MenuItem);
         }
 
         public void     RunMenu()
         {
-            string descriptionOfMenu = getDescriptionOfMenu();
-            int userInput = 0;
+            string descriptionOfMenu = getMenuDescription();
+            int userInput;
 
             while (!m_IsMenuEnded)
             {
@@ -43,65 +43,63 @@ namespace Ex04.Menus.Interfaces
                     continue;
                 }
 
-                activateCurrentMenuItem(r_InnerMenus[userInput]);
+                activateMenuItem(r_InnerMenus[userInput]);
             }
 
             m_IsMenuEnded = false;
         }
 
-        private void    activateCurrentMenuItem(MenuItem i_CurrentItemToBeActivated)
+        private void    activateMenuItem(MenuItem i_ItemToBeActivated)
         {
-            if (i_CurrentItemToBeActivated is ExitItem)
+            m_IsMenuEnded = i_ItemToBeActivated is ExitItem;
+
+            if (!m_IsMenuEnded)
             {
-                m_IsMenuEnded = true;
-            }
-            else if (i_CurrentItemToBeActivated is MainMenu)
-            {
-                ((MainMenu)i_CurrentItemToBeActivated).RunMenu();
-            }
-            else
-            {
-                ((ActionItem)i_CurrentItemToBeActivated).ActivateWhanActionOccured();
+                if (i_ItemToBeActivated is MainMenu)
+                {
+                    ((MainMenu)i_ItemToBeActivated).RunMenu();
+                }
+                else
+                {
+                    ((ActionItem)i_ItemToBeActivated).ActivateWhanActionOccured();
+                }
             }
         }
 
         private int     getInputFromUser()
         {
             string inputUserAsString;
-            bool isValidInput;
-            int userChoice = 0;
+            int userChoice;
 
             Console.WriteLine("Enter your request: (1 to 2 or press '0' to Exit).");
             inputUserAsString = Console.ReadLine();
-            isValidInput = int.TryParse(inputUserAsString, out userChoice);
-            if (!isValidInput)
+            if (!int.TryParse(inputUserAsString, out userChoice))
             {
                 throw new Exception(string.Format("the Input {0} is not an intger", inputUserAsString));
             }
-            else if (userChoice < 0 || userChoice > (r_InnerMenus.Count -1))
+            else if (userChoice < 0 || userChoice > r_InnerMenus.Count -1)
             {
-                throw new Exception(String.Format("the Input {0} is out of range", userChoice));
+                throw new Exception(string.Format("the Input {0} is out of range", userChoice));
             }
 
             return userChoice;
         }
 
-        private string  getDescriptionOfMenu()
+        private string  getMenuDescription()
         {
-            StringBuilder descriptionOfMenu = new StringBuilder();
+            StringBuilder menuDescription = new StringBuilder();
             int optionInMenu = 0;
 
-            descriptionOfMenu.AppendLine(string.Format("**{0}**", Title));
-            descriptionOfMenu.AppendLine("--------------------------");
+            menuDescription.AppendLine(string.Format("**{0}**", Title));
+            menuDescription.AppendLine("--------------------------");
             foreach (MenuItem currentItem in r_InnerMenus)
             {
-                descriptionOfMenu.AppendLine(string.Format("{0} -> {1}", optionInMenu, currentItem.Title));
+                menuDescription.AppendLine(string.Format("{0} -> {1}", optionInMenu, currentItem.Title));
                 optionInMenu++;
             }
 
-            descriptionOfMenu.AppendLine("--------------------------");
-
-            return descriptionOfMenu.ToString();
+            menuDescription.AppendLine("--------------------------");
+            return menuDescription.ToString();
         }
     }
 }

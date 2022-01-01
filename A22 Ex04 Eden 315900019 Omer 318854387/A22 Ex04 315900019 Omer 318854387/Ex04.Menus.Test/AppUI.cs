@@ -44,27 +44,27 @@ namespace Ex04.Menus.Test
             showVersionActionItem.MenuSelected += r_ShowVersionAction.ReportAction;
             showDateActionItem.MenuSelected += r_ShowDateAction.ReportAction;
             showTimeActionItem.MenuSelected += r_ShowTimeAction.ReportAction;
-
         }
 
         private void initInterfacesMenu()
         {
             MainMenuInterface versionAndCapitalsMenu = new MainMenuInterface(eMenuTypeInterface.SecondaryMenu, "Version and Capitals");
+            MainMenuInterface dateAndTimeMenu = new MainMenuInterface(eMenuTypeInterface.SecondaryMenu, "Show Date/Time");
             ActionItem countCapitalsActionItem = new ActionItem("Count Capitals");
             ActionItem showVersionActionItem = new ActionItem("Show version");
-            MainMenuInterface dateAndTimeMenu = new MainMenuInterface(eMenuTypeInterface.SecondaryMenu, "Show Date/Time");
             ActionItem showDateActionItem = new ActionItem("Show Date");
             ActionItem showTimeActionItem = new ActionItem("Show Time");
+
             countCapitalsActionItem.AddListner(r_CountCapitlasAction);
             showVersionActionItem.AddListner(r_ShowVersionAction);
-            versionAndCapitalsMenu.AddMenuItemToList(countCapitalsActionItem);
-            versionAndCapitalsMenu.AddMenuItemToList(showVersionActionItem);
+            versionAndCapitalsMenu.AddMenuItem(countCapitalsActionItem);
+            versionAndCapitalsMenu.AddMenuItem(showVersionActionItem);
             showDateActionItem.AddListner(r_ShowDateAction);
             showTimeActionItem.AddListner(r_ShowTimeAction);
-            dateAndTimeMenu.AddMenuItemToList(showDateActionItem);
-            dateAndTimeMenu.AddMenuItemToList(showTimeActionItem);
-            r_InterfacesMenu.AddMenuItemToList(countCapitalsActionItem);
-            r_InterfacesMenu.AddMenuItemToList(dateAndTimeMenu);
+            dateAndTimeMenu.AddMenuItem(showDateActionItem);
+            dateAndTimeMenu.AddMenuItem(showTimeActionItem);
+            r_InterfacesMenu.AddMenuItem(versionAndCapitalsMenu);
+            r_InterfacesMenu.AddMenuItem(dateAndTimeMenu);
         }
     }
 }

@@ -51,17 +51,18 @@ namespace Ex04.Menus.Delegates
 
         private void    activateMenuItem(MenuItem i_ItemToBeActivated)
         {
-            if (i_ItemToBeActivated is ExitItem)
+            m_IsMenuEnded = i_ItemToBeActivated is ExitItem;
+
+            if (!m_IsMenuEnded)
             {
-                m_IsMenuEnded = true;
-            }
-            else if (i_ItemToBeActivated is MainMenu)
-            {
-                ((MainMenu)i_ItemToBeActivated).RunMenu();
-            }
-            else
-            {
-                i_ItemToBeActivated.OnMenuSelected();
+                if (i_ItemToBeActivated is MainMenu)
+                {
+                    ((MainMenu)i_ItemToBeActivated).RunMenu();
+                }
+                else
+                {
+                    i_ItemToBeActivated.OnMenuSelected();
+                }
             }
         }
 
@@ -76,7 +77,7 @@ namespace Ex04.Menus.Delegates
             {
                 throw new FormatException(string.Format("the Input {0} is not an intger", inputUserAsString));
             }
-            else if (userChoice < 0 || userChoice > (r_InnerMenus.Count - 1))
+            else if (userChoice < 0 || userChoice > r_InnerMenus.Count - 1)
             {
                 throw new Exception(string.Format("the Input {0} is out of range", userChoice));
             }
