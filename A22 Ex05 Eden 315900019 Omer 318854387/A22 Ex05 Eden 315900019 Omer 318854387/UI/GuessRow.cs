@@ -135,7 +135,7 @@ namespace UI
 
         private void guessButton_GuessWasMade(int i_RowIndex, Color i_SelectedColor)
         {
-            if (m_ChosenColors[i_RowIndex] == null)
+            if (m_ChosenColors[i_RowIndex] == Color.Empty)
             {
                 m_AmountOfFilledGuesses++;
             }
@@ -145,13 +145,13 @@ namespace UI
             r_ButtonCheckGuess.Enabled = r_GuessButtons.Length == m_AmountOfFilledGuesses;
         }
 
-        public void SetButtonsResultColor(Color[,] i_Color)
+        public void SetButtonsResultColor(Color[] i_Color)
         {
-            for (int i = 0; i < r_ButtonsGuessResult.GetLength(0); i++)
+            for (int i = 0, iColorIndex= 0; i < r_ButtonsGuessResult.GetLength(0); i++)
             {
-                for (int j = 0; j < r_ButtonsGuessResult.GetLength(1); j++)
+                for (int j = 0; j < r_ButtonsGuessResult.GetLength(1);j++)
                 {
-                    r_ButtonsGuessResult[i, j].BackColor = i_Color[i, j];
+                    r_ButtonsGuessResult[i, j].BackColor = i_Color[iColorIndex++];
                 }
             }
         }

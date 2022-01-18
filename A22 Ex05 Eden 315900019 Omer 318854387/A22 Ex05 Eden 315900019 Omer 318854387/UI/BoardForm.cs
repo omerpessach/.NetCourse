@@ -30,8 +30,13 @@ namespace UI
             initButtonsComputerSequence(i_ComputerSequenceButtonsColor, ref relevantStartLocation);
             initGuessButtons(i_AmountOfColorsInSequence, i_ColorOptions, relevantStartLocation);
 
-            int heightOfTheForm = (int)(relevantStartLocation.Y + SystemInformation.CaptionHeight + (r_Guesses[i_GuessesNumber - 1].Height* i_GuessesNumber)  + k_TopFormMargin);
+            int heightOfTheForm = (int)(relevantStartLocation.Y + SystemInformation.CaptionHeight + (r_Guesses[i_GuessesNumber - 1].Height * i_GuessesNumber) + k_TopFormMargin);
             Size = new Size(r_Guesses[i_GuessesNumber - 1].Width + k_LeftFormMargin, heightOfTheForm);
+        }
+
+        public GuessRow[] GuessRows
+        {
+            get => r_Guesses;
         }
 
         private void initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
@@ -58,15 +63,9 @@ namespace UI
             for (int i = 0; i < r_Guesses.Length; i++)
             {
                 GuessRow guessRow = new GuessRow(i_AmountOfColorsInSequence, i_ColorOptions, i_RelevantStartLocation, Controls);
-                guessRow.ButtonCheckGuessClicked += guessRow_ButtonCheckGuessClicked;
                 i_RelevantStartLocation.Y += guessRow.Height;
                 r_Guesses[i] = guessRow;
             }
-        }
-
-        private void guessRow_ButtonCheckGuessClicked()
-        {
-            throw new NotImplementedException();
         }
 
         public void EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
@@ -86,7 +85,7 @@ namespace UI
             }
         }
 
-        public void SetButtonsResultColor(int i_RowNumber, Color[,] i_Color)
+        public void SetButtonsResultColor(int i_RowNumber, Color[] i_Color)
         {
             r_Guesses[i_RowNumber].SetButtonsResultColor(i_Color);
         }
