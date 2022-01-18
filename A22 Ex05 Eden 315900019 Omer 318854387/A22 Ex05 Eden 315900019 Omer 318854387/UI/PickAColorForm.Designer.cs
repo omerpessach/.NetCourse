@@ -1,7 +1,7 @@
 ﻿
 namespace UI
 {
-    partial class BoardForm
+    partial class PickAColorForm
     {
         /// <summary>
         /// Required designer variable.
@@ -31,13 +31,16 @@ namespace UI
         {
             this.SuspendLayout();
             // 
-            // BoardForm
+            // PickAColorForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Name = "BoardForm";
-            this.Text = "BoardForm";
+            this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.ClientSize = new System.Drawing.Size(314, 196);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Name = "PickAColorForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
+            this.Text = "Pick A Color:";
             this.ResumeLayout(false);
 
         }

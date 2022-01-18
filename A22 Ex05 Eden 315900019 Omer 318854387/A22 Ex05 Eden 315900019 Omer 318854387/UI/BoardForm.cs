@@ -10,9 +10,11 @@ namespace UI
 {
     public partial class BoardForm : Form
     {
-        public BoardForm()
+        public BoardForm(List<Color> i_ColorOptions)
         {
             InitializeComponent();
+            PickAColorForm d = new PickAColorForm(i_ColorOptions);
+            d.ShowDialog();
         }
     }
 }
