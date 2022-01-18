@@ -5,10 +5,10 @@ namespace UI
 {
     public partial class ChooseGuessesNumberForm : Form
     {
-        private const int k_MinGuessesNumber = 4;
-        private const int k_MaxGuessesNumber = 10;
+        private const uint k_MinGuessesNumber = 4;
+        private const uint k_MaxGuessesNumber = 10;
         private const string k_GuessesNumberMsg = "Number of chances: {0}";
-        private int m_GuessesNumber = k_MinGuessesNumber;
+        private uint m_GuessesNumber = k_MinGuessesNumber;
 
         public ChooseGuessesNumberForm()
         {
@@ -16,7 +16,7 @@ namespace UI
             buttonGuessesNumber.Text = string.Format(k_GuessesNumberMsg, m_GuessesNumber);
         }
 
-        public int GuessesNumber
+        public uint GuessesNumber
         {
             get { return m_GuessesNumber; }
         }

@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 
 namespace UI
 {
+    public delegate void ColorSelectedEventHandler(Color i_SelectedColor);
+
     public partial class PickAColorForm : Form
     {
         private const int k_ColorButtonWidth = 60;
         private const int k_ColorButtonHeight = 60;
         private const int k_SpaceBetweenButtons = 10;
         private readonly Size r_ButtonColorSize = new Size(k_ColorButtonWidth, k_ColorButtonHeight);
-        private bool m_IsColorSelected;
-        private Color m_SelectedColor;
 
         public PickAColorForm(List<Color> i_ColorOptions)
         {
@@ -23,15 +20,7 @@ namespace UI
             initColorOptions(i_ColorOptions);
         }
 
-        public bool IsColorSelected
-        {
-            get => m_IsColorSelected;
-        }
-
-        public Color SelectedColor
-        {
-            get => m_SelectedColor;
-        }
+        public event ColorSelectedEventHandler ColorSelected;
 
         private void initColorOptions(List<Color> i_ColorOptions)
         {
@@ -41,6 +30,7 @@ namespace UI
             foreach (Color color in i_ColorOptions)
             {
                 Button newButton = new Button();
+
                 newButton.Size = r_ButtonColorSize;
                 newButton.BackColor = color;
                 newButton.Location = relevantColorLocation;
@@ -59,8 +49,7 @@ namespace UI
 
         private void buttonColor_Click(object i_Sender, EventArgs i_EventArgs)
         {
-            m_IsColorSelected = true;
-            m_SelectedColor = (i_Sender as Button).BackColor;
+            ColorSelected?.Invoke((i_Sender as Button).BackColor);
             Close();
         }
     }

@@ -10,11 +10,85 @@ namespace UI
 {
     public partial class BoardForm : Form
     {
-        public BoardForm(List<Color> i_ColorOptions)
+        private const int k_ComputerButtonMargin = 10;
+        private const int k_ComputerButtonSideLength = 60;
+        private const int k_TopMarginGuessButtons = 40;
+        private const int k_ComputerButtonSideLengthWithMargin = k_ComputerButtonMargin + k_ComputerButtonSideLength;
+        private const int k_TopFormMargin = 70;
+        private const int k_LeftFormMargin = 40;
+        private readonly Button[] r_ButtonsComputerSequence;
+        private readonly GuessRow[] r_Guesses;
+        private readonly Size r_ComputerButtonSize = new Size(k_ComputerButtonSideLength, k_ComputerButtonSideLength);
+
+        public BoardForm(uint i_AmountOfColorsInSequence, uint i_GuessesNumber, List<Color> i_ColorOptions, Color i_ComputerSequenceButtonsColor)
         {
             InitializeComponent();
-            PickAColorForm d = new PickAColorForm(i_ColorOptions);
-            d.ShowDialog();
+            Point relevantStartLocation = new Point(k_ComputerButtonMargin, k_ComputerButtonMargin);
+            r_ButtonsComputerSequence = new Button[i_AmountOfColorsInSequence];
+            r_Guesses = new GuessRow[i_GuessesNumber];
+
+            initButtonsComputerSequence(i_ComputerSequenceButtonsColor, ref relevantStartLocation);
+            initGuessButtons(i_AmountOfColorsInSequence, i_ColorOptions, relevantStartLocation);
+
+            int heightOfTheForm = (int)(relevantStartLocation.Y + SystemInformation.CaptionHeight + (r_Guesses[i_GuessesNumber - 1].Height* i_GuessesNumber)  + k_TopFormMargin);
+            Size = new Size(r_Guesses[i_GuessesNumber - 1].Width + k_LeftFormMargin, heightOfTheForm);
+        }
+
+        private void initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
+        {
+            for (int i = 0; i < r_ButtonsComputerSequence.Length; i++)
+            {
+                Button buttonComputerHiddenColor = new Button();
+
+                buttonComputerHiddenColor.BackColor = i_ComputerSequenceButtonsColor;
+                buttonComputerHiddenColor.Enabled = false;
+                buttonComputerHiddenColor.Size = r_ComputerButtonSize;
+                buttonComputerHiddenColor.Location = io_RelevantStartLocation;
+                r_ButtonsComputerSequence[i] = buttonComputerHiddenColor;
+                io_RelevantStartLocation.X += k_ComputerButtonSideLengthWithMargin;
+                Controls.Add(buttonComputerHiddenColor);
+            }
+
+            io_RelevantStartLocation = new Point(k_ComputerButtonMargin, k_ComputerButtonSideLength + k_ComputerButtonMargin);
+        }
+
+        private void initGuessButtons(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_RelevantStartLocation)
+        {
+            i_RelevantStartLocation.Y += k_TopMarginGuessButtons;
+            for (int i = 0; i < r_Guesses.Length; i++)
+            {
+                GuessRow guessRow = new GuessRow(i_AmountOfColorsInSequence, i_ColorOptions, i_RelevantStartLocation, Controls);
+                guessRow.ButtonCheckGuessClicked += guessRow_ButtonCheckGuessClicked;
+                i_RelevantStartLocation.Y += guessRow.Height;
+                r_Guesses[i] = guessRow;
+            }
+        }
+
+        private void guessRow_ButtonCheckGuessClicked()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
+        {
+            r_Guesses[i_RowIndexToEnable].GuessButtonsEnabled = true;
+            if (i_RowIndexToEnable > 0)
+            {
+                r_Guesses[i_RowIndexToEnable - 1].GuessButtonsEnabled = false;
+            }
+        }
+
+        public void SetComputerHiddenButtonColor(Color[] i_Colors)
+        {
+            for (int i = 0; i < i_Colors.Length; i++)
+            {
+                r_ButtonsComputerSequence[i].BackColor = i_Colors[i];
+            }
+        }
+
+        public void SetButtonsResultColor(int i_RowNumber, Color[,] i_Color)
+        {
+            r_Guesses[i_RowNumber].SetButtonsResultColor(i_Color);
         }
     }
 }

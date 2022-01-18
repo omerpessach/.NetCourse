@@ -46,12 +46,19 @@
     <Compile Include="BoardForm.Designer.cs">
       <DependentUpon>BoardForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="CheckGuessButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="ChooseGuessesNumberForm.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ChooseGuessesNumberForm.Designer.cs">
       <DependentUpon>ChooseGuessesNumberForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="GuessButton.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GuessRow.cs" />
     <Compile Include="PickAColorForm.cs">
       <SubType>Form</SubType>
     </Compile>
