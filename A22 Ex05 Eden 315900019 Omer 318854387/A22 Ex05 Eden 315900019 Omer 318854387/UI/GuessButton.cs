@@ -27,7 +27,7 @@ namespace UI
             r_FormPickAColor.ShowDialog();
         }
 
-        private void formPickAColor_ColorSelected(Color i_SelectedColor)
+        private void            formPickAColor_ColorSelected(Color i_SelectedColor)
         {
             BackColor = i_SelectedColor;
             GuessWasMade?.Invoke(r_RowIndex, i_SelectedColor);
