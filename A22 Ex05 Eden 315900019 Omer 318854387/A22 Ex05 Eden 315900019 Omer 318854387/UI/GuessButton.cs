@@ -10,7 +10,7 @@ namespace UI
     public class GuessButton : Button
     {
         private readonly PickAColorForm r_FormPickAColor;
-        private readonly int r_RowIndex;
+        private readonly int            r_RowIndex;
 
         public GuessButton(int i_RowIndex, List<Color> i_Colors)
         {

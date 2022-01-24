@@ -9,9 +9,9 @@ namespace UI
 
     public partial class PickAColorForm : Form
     {
-        private const int k_ColorButtonWidth = 60;
-        private const int k_ColorButtonHeight = 60;
-        private const int k_SpaceBetweenButtons = 10;
+        private const int     k_ColorButtonWidth = 60;
+        private const int     k_ColorButtonHeight = 60;
+        private const int     k_SpaceBetweenButtons = 10;
         private readonly Size r_ButtonColorSize = new Size(k_ColorButtonWidth, k_ColorButtonHeight);
 
         public PickAColorForm(List<Color> i_ColorOptions)
@@ -37,6 +37,7 @@ namespace UI
                 newButton.Click += buttonColor_Click;
                 Controls.Add(newButton);
                 relevantColorLocation.X += k_SpaceBetweenButtons + k_ColorButtonWidth;
+
                 if (relevantColorLocation.X == maxLeft)
                 {
                     relevantColorLocation.Y += k_SpaceBetweenButtons + k_ColorButtonHeight;
@@ -51,6 +52,11 @@ namespace UI
         {
             ColorSelected?.Invoke((i_Sender as Button).BackColor);
             Close();
+        }
+
+        private void PickAColorForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

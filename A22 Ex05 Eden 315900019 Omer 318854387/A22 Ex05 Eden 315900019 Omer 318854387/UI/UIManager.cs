@@ -9,27 +9,28 @@ namespace UI
 {
     public class UIManager
     {
-        private uint m_GuessesNumber;
-        private const uint k_AmountOfColorsInSequence = 4;
-        private int m_CurrentGuessNumber = 0;
+        private uint                    m_GuessesNumber;
+        private const uint              k_AmountOfColorsInSequence = 4;
+        private int                     m_CurrentGuessNumber = 0;
         private ChooseGuessesNumberForm m_ChooseGuessesNumberForm = new ChooseGuessesNumberForm();
-        private BoardForm m_BoardForm;
-        private GameManger m_GameManager;
-        private readonly List<Color> r_ColorOptions = new List<Color>
-                                  {
-                                      Color.Magenta,
-                                      Color.Red,
-                                      Color.Lime,
-                                      Color.MediumTurquoise,
-                                      Color.MediumBlue,
-                                      Color.Yellow,
-                                      Color.Maroon,
-                                      Color.White
-                                  };
+        private BoardForm               m_BoardForm;
+        private GameManger              m_GameManager;
+        private readonly List<Color>    r_ColorOptions = new List<Color>
+                                       {
+                                          Color.Magenta,
+                                          Color.Red,
+                                          Color.Lime,
+                                          Color.MediumTurquoise,
+                                          Color.MediumBlue,
+                                          Color.Yellow,
+                                          Color.Maroon,
+                                          Color.White
+                                       };
 
-        public void StartGame()
+        public void         StartGame()
         {
             m_ChooseGuessesNumberForm.ShowDialog();
+
             if (m_ChooseGuessesNumberForm.DialogResult == DialogResult.OK)
             {
                 m_GuessesNumber = m_ChooseGuessesNumberForm.GuessesNumber;
@@ -41,17 +42,15 @@ namespace UI
             }
         }
 
-        private void uIManager_ButtonCheckGuessClicked(Color[] i_ColorToCheck)
+        private void        uIManager_ButtonCheckGuessClicked(Color[] i_ColorToCheck)
         {
             m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked -= uIManager_ButtonCheckGuessClicked;
-
-
             List<Color> colors = new List<Color>(i_ColorToCheck);
             List<char> colorsAsChars = convertColorsToChars(colors);
             Feedback feedback = m_GameManager.CreateRound(colorsAsChars.ToArray()).CurrentFeedback;
             Color[] result = new Color[4];
-
             int resultIndex = 0;
+
             for (int AmountOfV = 0; AmountOfV < feedback.AmountOfV; AmountOfV++, resultIndex++)
             {
                 result[resultIndex] = Color.Black;
@@ -76,23 +75,23 @@ namespace UI
             }
         }
 
-        private bool hasTheUserWon(Feedback i_Feedback)
+        private bool        hasTheUserWon(Feedback i_Feedback)
         {
             return i_Feedback.AmountOfV == k_AmountOfColorsInSequence;
         }
 
-        private List<char> convertColorsToChars(List<Color> i_Colors)
+        private List<char>  convertColorsToChars(List<Color> i_Colors)
         {
             List<char> guessedChars = i_Colors.ConvertAll(convertColorToChar);
             return guessedChars;
         }
 
-        private char convertColorToChar(Color i_Color)
+        private char        convertColorToChar(Color i_Color)
         {
             return (char)(r_ColorOptions.IndexOf(i_Color) + 'A');
         }
 
-        private Color[] convertCharsToColors(char[] i_Chars)
+        private Color[]     convertCharsToColors(char[] i_Chars)
         {
             Color[] convertedColors = new Color[i_Chars.Length];
             
@@ -104,7 +103,7 @@ namespace UI
             return convertedColors;
         }
 
-        private Color convertCharToColor(char i_Char)
+        private Color       convertCharToColor(char i_Char)
         {
             return r_ColorOptions[i_Char - 'A'];
         }

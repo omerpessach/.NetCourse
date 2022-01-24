@@ -10,15 +10,15 @@ namespace UI
 {
     public partial class BoardForm : Form
     {
-        private const int k_ComputerButtonMargin = 10;
-        private const int k_ComputerButtonSideLength = 60;
-        private const int k_TopMarginGuessButtons = 40;
-        private const int k_ComputerButtonSideLengthWithMargin = k_ComputerButtonMargin + k_ComputerButtonSideLength;
-        private const int k_TopFormMargin = 70;
-        private const int k_LeftFormMargin = 40;
-        private readonly Button[] r_ButtonsComputerSequence;
-        private readonly GuessRow[] r_Guesses;
-        private readonly Size r_ComputerButtonSize = new Size(k_ComputerButtonSideLength, k_ComputerButtonSideLength);
+        private const int            k_ComputerButtonMargin = 10;
+        private const int            k_ComputerButtonSideLength = 60;
+        private const int            k_TopMarginGuessButtons = 40;
+        private const int            k_ComputerButtonSideLengthWithMargin = k_ComputerButtonMargin + k_ComputerButtonSideLength;
+        private const int            k_TopFormMargin = 70;
+        private const int            k_LeftFormMargin = 40;
+        private readonly Button[]    r_ButtonsComputerSequence;
+        private readonly GuessRow[]  r_Guesses;
+        private readonly Size        r_ComputerButtonSize = new Size(k_ComputerButtonSideLength, k_ComputerButtonSideLength);
 
         public BoardForm(uint i_AmountOfColorsInSequence, uint i_GuessesNumber, List<Color> i_ColorOptions, Color i_ComputerSequenceButtonsColor)
         {
@@ -39,7 +39,7 @@ namespace UI
             get => r_Guesses;
         }
 
-        private void initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
+        private void     initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
         {
             for (int i = 0; i < r_ButtonsComputerSequence.Length; i++)
             {
@@ -57,7 +57,7 @@ namespace UI
             io_RelevantStartLocation = new Point(k_ComputerButtonMargin, k_ComputerButtonSideLength + k_ComputerButtonMargin);
         }
 
-        private void initGuessButtons(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_RelevantStartLocation)
+        private void     initGuessButtons(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_RelevantStartLocation)
         {
             i_RelevantStartLocation.Y += k_TopMarginGuessButtons;
             for (int i = 0; i < r_Guesses.Length; i++)
@@ -68,7 +68,7 @@ namespace UI
             }
         }
 
-        public void EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
+        public void      EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
         {
             r_Guesses[i_RowIndexToEnable].GuessButtonsEnabled = true;
             if (i_RowIndexToEnable > 0)
@@ -77,7 +77,7 @@ namespace UI
             }
         }
 
-        public void SetComputerHiddenButtonColor(Color[] i_Colors)
+        public void      SetComputerHiddenButtonColor(Color[] i_Colors)
         {
             for (int i = 0; i < i_Colors.Length; i++)
             {
@@ -85,12 +85,12 @@ namespace UI
             }
         }
 
-        public void SetButtonsResultColor(int i_RowNumber, Color[] i_Color)
+        public void      SetButtonsResultColor(int i_RowNumber, Color[] i_Color)
         {
             r_Guesses[i_RowNumber].SetButtonsResultColor(i_Color);
         }
 
-        private void BoardForm_Load(object sender, EventArgs e)
+        private void     BoardForm_Load(object sender, EventArgs e)
         {
 
         }

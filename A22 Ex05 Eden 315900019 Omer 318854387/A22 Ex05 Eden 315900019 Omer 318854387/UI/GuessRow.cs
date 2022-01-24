@@ -11,21 +11,21 @@ namespace UI
 
     public class GuessRow
     {
-        private const int k_GuessButtonSideLength = 60;
-        private const int k_CheckButtonHeight = 20;
-        private const int k_CheckButtonWidth = 40;
-        private const int k_ResultButtonSideLength = 20;
-        private const int k_MarginResultButton = 10;
-        private const int k_MarginGuessButton = 10;
-        private const int k_TopMarginCheckGuess = 20;
-        private const int k_RightMarginCheckGuess = 15;
-        private readonly GuessButton[] r_GuessButtons;
+        private const int                 k_GuessButtonSideLength = 60;
+        private const int                 k_CheckButtonHeight = 20;
+        private const int                 k_CheckButtonWidth = 40;
+        private const int                 k_ResultButtonSideLength = 20;
+        private const int                 k_MarginResultButton = 10;
+        private const int                 k_MarginGuessButton = 10;
+        private const int                 k_TopMarginCheckGuess = 20;
+        private const int                 k_RightMarginCheckGuess = 15;
+        private readonly GuessButton[]    r_GuessButtons;
         private readonly CheckGuessButton r_ButtonCheckGuess = new CheckGuessButton();
-        private readonly Button[,] r_ButtonsGuessResult;
-        private const string k_CheckGuessSymbol = "-->>";
-        private int m_AmountOfFilledGuesses = 0;
-        private int m_Width;
-        private Color[] m_ChosenColors;
+        private readonly Button[,]        r_ButtonsGuessResult;
+        private const string              k_CheckGuessSymbol = "-->>";
+        private int                       m_AmountOfFilledGuesses = 0;
+        private int                       m_Width;
+        private Color[]                   m_ChosenColors;
 
         public GuessRow(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_StartLocation, ControlCollection o_Controls)
         {
@@ -145,7 +145,7 @@ namespace UI
             r_ButtonCheckGuess.Enabled = r_GuessButtons.Length == m_AmountOfFilledGuesses;
         }
 
-        public void SetButtonsResultColor(Color[] i_Color)
+        public void  SetButtonsResultColor(Color[] i_Color)
         {
             for (int i = 0, iColorIndex= 0; i < r_ButtonsGuessResult.GetLength(0); i++)
             {
