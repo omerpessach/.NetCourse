@@ -8,11 +8,12 @@ namespace Engine
         private readonly char[]      r_RandomSequenceForComparison;
         private readonly Round[]     r_RoundsOfGame;
         private uint                 m_CurrentRound = 0;
+        Random                       m_randomAct = new Random();
 
-        public GameManger(uint i_AmountOfRounds, uint i_AmountOfLettersInSequence)
+        public GameManger(uint o_AmountOfRounds, uint o_AmountOfLettersInSequence)
         {
-            r_RoundsOfGame = new Round[i_AmountOfRounds];
-            r_RandomSequenceForComparison = createRandomSequence(i_AmountOfLettersInSequence);
+            r_RoundsOfGame = new Round[o_AmountOfRounds];
+            r_RandomSequenceForComparison = createRandomSequence(o_AmountOfLettersInSequence);
         }
 
         public uint         CurrentRound
@@ -35,7 +36,6 @@ namespace Engine
 
         private char[]      createRandomSequence(uint i_AmountOfLettersInSequence)
         {
-            Random randomAct = new Random();
             char[] tempRandomSequenceForComparison = new char[i_AmountOfLettersInSequence];
             char randomChar;
 
@@ -43,7 +43,7 @@ namespace Engine
             {
                 do
                 {
-                    randomChar = (char)(randomAct.Next(Enum.GetNames(typeof(eGuessingOption)).Length) + 'A');
+                    randomChar = (char)(m_randomAct.Next(Enum.GetNames(typeof(eGuessingOption)).Length) + 'A');
                 }
                 while (checkIfExistsInSequence(randomChar, tempRandomSequenceForComparison));
 

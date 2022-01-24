@@ -17,9 +17,9 @@
             }
         }
 
-        internal Feedback createFeedbackFromGuess(char[] i_RandomSequenceForComparison)
+        internal Feedback createFeedbackFromGuess(char[] o_RandomSequenceForComparison)
         {
-            return new Feedback(amountOfBulls(i_RandomSequenceForComparison), amountOfCows(i_RandomSequenceForComparison));
+            return new Feedback(amountOfBulls(o_RandomSequenceForComparison), amountOfCows(o_RandomSequenceForComparison));
         }
 
         private uint      amountOfBulls(char[] i_RandomSequenceForComparison)
