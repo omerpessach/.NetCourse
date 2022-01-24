@@ -35,7 +35,6 @@ namespace UI
                 m_GuessesNumber = m_ChooseGuessesNumberForm.GuessesNumber;
                 m_GameManager = new GameManger(m_GuessesNumber, k_AmountOfColorsInSequence);
                 m_BoardForm = new BoardForm(k_AmountOfColorsInSequence, m_GuessesNumber, r_ColorOptions, Color.Black);
-
                 m_BoardForm.GuessRows[0].ButtonCheckGuessClicked += uIManager_ButtonCheckGuessClicked;
                 m_BoardForm.EnableRowAndDisablePrevRowIfNecessary(m_CurrentGuessNumber);
                 m_BoardForm.ShowDialog();
@@ -65,8 +64,21 @@ namespace UI
 
             m_BoardForm.GuessRows[m_CurrentGuessNumber].SetButtonsResultColor(result);
             m_CurrentGuessNumber++;
-            m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked += uIManager_ButtonCheckGuessClicked;
-            m_BoardForm.EnableRowAndDisablePrevRowIfNecessary(m_CurrentGuessNumber);
+            
+            if (m_CurrentGuessNumber != m_GuessesNumber && !hasTheUserWon(feedback))
+            {
+                m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked += uIManager_ButtonCheckGuessClicked;
+                m_BoardForm.EnableRowAndDisablePrevRowIfNecessary(m_CurrentGuessNumber);
+            }
+            else
+            {
+                m_BoardForm.SetComputerHiddenButtonColor(convertCharsToColors(m_GameManager.RandomSequence));
+            }
+        }
+
+        private bool hasTheUserWon(Feedback i_Feedback)
+        {
+            return i_Feedback.AmountOfV == k_AmountOfColorsInSequence;
         }
 
         private List<char> convertColorsToChars(List<Color> i_Colors)
@@ -80,9 +92,15 @@ namespace UI
             return (char)(r_ColorOptions.IndexOf(i_Color) + 'A');
         }
 
-        private List<Color> convertCharsToColors(List<char> i_Chars)
+        private Color[] convertCharsToColors(char[] i_Chars)
         {
-            List<Color> convertedColors = i_Chars.ConvertAll(convertCharToColor);
+            Color[] convertedColors = new Color[i_Chars.Length];
+            
+            for(int i = 0; i < i_Chars.Length; i++)
+            {
+                convertedColors[i] = convertCharToColor(i_Chars[i]);
+            }
+
             return convertedColors;
         }
 

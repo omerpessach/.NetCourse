@@ -16,6 +16,14 @@ namespace Engine
             r_RandomSequenceForComparison = createRandomSequence(o_AmountOfLettersInSequence);
         }
 
+        public char[]       RandomSequence
+        {
+            get
+            {
+                return r_RandomSequenceForComparison;
+            }
+        }
+
         public uint         CurrentRound
         {
             get

@@ -89,5 +89,10 @@ namespace UI
         {
             r_Guesses[i_RowNumber].SetButtonsResultColor(i_Color);
         }
+
+        private void BoardForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
