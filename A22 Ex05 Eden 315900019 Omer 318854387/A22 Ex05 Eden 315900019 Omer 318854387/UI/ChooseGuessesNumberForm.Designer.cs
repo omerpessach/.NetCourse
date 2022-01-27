@@ -39,7 +39,7 @@ namespace UI
             | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonGuessesNumber.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.buttonGuessesNumber.Location = new System.Drawing.Point(16, 15);
-            this.buttonGuessesNumber.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonGuessesNumber.Margin = new System.Windows.Forms.Padding(4);
             this.buttonGuessesNumber.Name = "buttonGuessesNumber";
             this.buttonGuessesNumber.Size = new System.Drawing.Size(341, 28);
             this.buttonGuessesNumber.TabIndex = 0;
@@ -51,12 +51,13 @@ namespace UI
             this.buttonStart.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.buttonStart.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.buttonStart.Location = new System.Drawing.Point(257, 68);
-            this.buttonStart.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.buttonStart.Margin = new System.Windows.Forms.Padding(4);
             this.buttonStart.Name = "buttonStart";
             this.buttonStart.Size = new System.Drawing.Size(100, 28);
             this.buttonStart.TabIndex = 1;
             this.buttonStart.Text = "Start";
             this.buttonStart.UseVisualStyleBackColor = true;
+            this.buttonStart.Click += new System.EventHandler(this.buttonStart_Click);
             // 
             // ChooseGuessesNumberForm
             // 
@@ -67,7 +68,7 @@ namespace UI
             this.Controls.Add(this.buttonStart);
             this.Controls.Add(this.buttonGuessesNumber);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "ChooseGuessesNumberForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bool Pgia";

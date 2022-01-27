@@ -37,9 +37,10 @@ namespace UI
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 554);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BoardForm";
             this.Text = "BoardForm";
+            this.Load += new System.EventHandler(this.BoardForm_Load);
             this.ResumeLayout(false);
 
         }

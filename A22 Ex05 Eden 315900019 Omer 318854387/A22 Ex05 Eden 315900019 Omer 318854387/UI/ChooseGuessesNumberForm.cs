@@ -34,5 +34,10 @@ namespace UI
 
             buttonGuessesNumber.Text = string.Format(k_GuessesNumberMsg, m_GuessesNumber);
         }
+
+        private void buttonStart_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
