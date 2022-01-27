@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace UI
@@ -9,7 +9,7 @@ namespace UI
     {
         public CheckGuessButton()
         {
-            Click += checkGuessButton_Click; ;
+            Click += checkGuessButton_Click;
         }
 
         private void checkGuessButton_Click(object sender, EventArgs e)

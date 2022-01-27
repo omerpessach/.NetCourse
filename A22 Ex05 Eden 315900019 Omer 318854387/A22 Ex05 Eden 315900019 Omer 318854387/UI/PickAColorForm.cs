@@ -9,15 +9,25 @@ namespace UI
 
     public partial class PickAColorForm : Form
     {
-        private const int     k_ColorButtonWidth = 60;
-        private const int     k_ColorButtonHeight = 60;
-        private const int     k_SpaceBetweenButtons = 10;
+        private const int k_ColorButtonWidth = 60;
+        private const int k_ColorButtonHeight = 60;
+        private const int k_SpaceBetweenButtons = 10;
         private readonly Size r_ButtonColorSize = new Size(k_ColorButtonWidth, k_ColorButtonHeight);
+        private List<Button> r_ColorButtons = new List<Button>();
+        private Color m_ChosenColor;
 
         public PickAColorForm(List<Color> i_ColorOptions)
         {
             InitializeComponent();
             initColorOptions(i_ColorOptions);
+        }
+
+        public ICollection<Color> ColorsToDisable
+        {
+            set
+            {
+                r_ColorButtons.ForEach(button => button.Enabled = button.BackColor == m_ChosenColor || !value.Contains(button.BackColor));
+            }
         }
 
         public event ColorSelectedEventHandler ColorSelected;
@@ -36,8 +46,8 @@ namespace UI
                 newButton.Location = relevantColorLocation;
                 newButton.Click += buttonColor_Click;
                 Controls.Add(newButton);
+                r_ColorButtons.Add(newButton);
                 relevantColorLocation.X += k_SpaceBetweenButtons + k_ColorButtonWidth;
-
                 if (relevantColorLocation.X == maxLeft)
                 {
                     relevantColorLocation.Y += k_SpaceBetweenButtons + k_ColorButtonHeight;
@@ -50,13 +60,9 @@ namespace UI
 
         private void buttonColor_Click(object i_Sender, EventArgs i_EventArgs)
         {
-            ColorSelected?.Invoke((i_Sender as Button).BackColor);
+            m_ChosenColor = (i_Sender as Button).BackColor;
+            ColorSelected?.Invoke(m_ChosenColor);
             Close();
-        }
-
-        private void PickAColorForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

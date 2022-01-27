@@ -42,11 +42,10 @@ namespace UI
             }
         }
 
-        private void        uIManager_ButtonCheckGuessClicked(Color[] i_ColorToCheck)
+        private void        uIManager_ButtonCheckGuessClicked(List<Color> i_ColorToCheck)
         {
             m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked -= uIManager_ButtonCheckGuessClicked;
-            List<Color> colors = new List<Color>(i_ColorToCheck);
-            List<char> colorsAsChars = convertColorsToChars(colors);
+            List<char> colorsAsChars = convertColorsToChars(i_ColorToCheck);
             Feedback feedback = m_GameManager.CreateRound(colorsAsChars.ToArray()).CurrentFeedback;
             Color[] result = new Color[4];
             int resultIndex = 0;
@@ -61,9 +60,8 @@ namespace UI
                 result[resultIndex] = Color.Yellow;
             }
 
-            m_BoardForm.GuessRows[m_CurrentGuessNumber].SetButtonsResultColor(result);
+            m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonsResultColor = result;
             m_CurrentGuessNumber++;
-            
             if (m_CurrentGuessNumber != m_GuessesNumber && !hasTheUserWon(feedback))
             {
                 m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked += uIManager_ButtonCheckGuessClicked;
@@ -71,7 +69,8 @@ namespace UI
             }
             else
             {
-                m_BoardForm.SetComputerHiddenButtonColor(convertCharsToColors(m_GameManager.RandomSequence));
+                m_BoardForm.ComputerHiddenButtonColor = convertCharsToColors(m_GameManager.RandomSequence);
+                m_BoardForm.DisableRow(m_CurrentGuessNumber-1);
             }
         }
 
@@ -84,7 +83,7 @@ namespace UI
         {
             List<char> guessedChars = i_Colors.ConvertAll(convertColorToChar);
             return guessedChars;
-        }
+        } 
 
         private char        convertColorToChar(Color i_Color)
         {

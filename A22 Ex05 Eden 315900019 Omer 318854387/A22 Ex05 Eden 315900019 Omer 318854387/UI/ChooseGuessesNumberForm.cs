@@ -16,7 +16,7 @@ namespace UI
             buttonGuessesNumber.Text = string.Format(k_GuessesNumberMsg, m_GuessesNumber);
         }
 
-        public uint GuessesNumber
+        public uint  GuessesNumber
         {
             get { return m_GuessesNumber; }
         }
@@ -33,11 +33,6 @@ namespace UI
             }
 
             buttonGuessesNumber.Text = string.Format(k_GuessesNumberMsg, m_GuessesNumber);
-        }
-
-        private void ChooseGuessesNumberForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

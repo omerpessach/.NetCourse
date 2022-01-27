@@ -22,12 +22,20 @@ namespace UI
 
         public event GuessWasMadeEventHandler GuessWasMade;
 
-        protected override void OnClick(EventArgs e)
+        public ICollection<Color> ColorsToDisable
+        {
+            set
+            {
+                r_FormPickAColor.ColorsToDisable = value;
+            }
+        }
+
+        protected override void   OnClick(EventArgs e)
         {
             r_FormPickAColor.ShowDialog();
         }
 
-        private void            formPickAColor_ColorSelected(Color i_SelectedColor)
+        private void              formPickAColor_ColorSelected(Color i_SelectedColor)
         {
             BackColor = i_SelectedColor;
             GuessWasMade?.Invoke(r_RowIndex, i_SelectedColor);

@@ -5,10 +5,10 @@ namespace Engine
 {
     public class GameManger
     {
-        private readonly char[]      r_RandomSequenceForComparison;
-        private readonly Round[]     r_RoundsOfGame;
-        private uint                 m_CurrentRound = 0;
-        Random                       m_randomAct = new Random();
+        private readonly char[]  r_RandomSequenceForComparison;
+        private readonly Round[] r_RoundsOfGame;
+        private uint             m_CurrentRound = 0;
+        Random                   m_randomAct = new Random();
 
         public GameManger(uint o_AmountOfRounds, uint o_AmountOfLettersInSequence)
         {

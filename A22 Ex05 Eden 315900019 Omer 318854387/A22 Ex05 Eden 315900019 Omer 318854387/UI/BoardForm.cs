@@ -29,7 +29,6 @@ namespace UI
 
             initButtonsComputerSequence(i_ComputerSequenceButtonsColor, ref relevantStartLocation);
             initGuessButtons(i_AmountOfColorsInSequence, i_ColorOptions, relevantStartLocation);
-
             int heightOfTheForm = (int)(relevantStartLocation.Y + SystemInformation.CaptionHeight + (r_Guesses[i_GuessesNumber - 1].Height * i_GuessesNumber) + k_TopFormMargin);
             Size = new Size(r_Guesses[i_GuessesNumber - 1].Width + k_LeftFormMargin, heightOfTheForm);
         }
@@ -39,7 +38,18 @@ namespace UI
             get => r_Guesses;
         }
 
-        private void     initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
+        public Color[]    ComputerHiddenButtonColor
+        {
+            set
+            {
+                for (int i = 0; i < value.Length; i++)
+                {
+                    r_ButtonsComputerSequence[i].BackColor = value[i];
+                }
+            }
+        }
+
+        private void      initButtonsComputerSequence(Color i_ComputerSequenceButtonsColor, ref Point io_RelevantStartLocation)
         {
             for (int i = 0; i < r_ButtonsComputerSequence.Length; i++)
             {
@@ -57,7 +67,7 @@ namespace UI
             io_RelevantStartLocation = new Point(k_ComputerButtonMargin, k_ComputerButtonSideLength + k_ComputerButtonMargin);
         }
 
-        private void     initGuessButtons(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_RelevantStartLocation)
+        private void      initGuessButtons(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_RelevantStartLocation)
         {
             i_RelevantStartLocation.Y += k_TopMarginGuessButtons;
             for (int i = 0; i < r_Guesses.Length; i++)
@@ -68,31 +78,18 @@ namespace UI
             }
         }
 
-        public void      EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
+        public void       EnableRowAndDisablePrevRowIfNecessary(int i_RowIndexToEnable)
         {
             r_Guesses[i_RowIndexToEnable].GuessButtonsEnabled = true;
             if (i_RowIndexToEnable > 0)
             {
-                r_Guesses[i_RowIndexToEnable - 1].GuessButtonsEnabled = false;
+                DisableRow(i_RowIndexToEnable - 1);
             }
         }
 
-        public void      SetComputerHiddenButtonColor(Color[] i_Colors)
+        public void       DisableRow(int i_RowIndexToDisable)
         {
-            for (int i = 0; i < i_Colors.Length; i++)
-            {
-                r_ButtonsComputerSequence[i].BackColor = i_Colors[i];
-            }
-        }
-
-        public void      SetButtonsResultColor(int i_RowNumber, Color[] i_Color)
-        {
-            r_Guesses[i_RowNumber].SetButtonsResultColor(i_Color);
-        }
-
-        private void     BoardForm_Load(object sender, EventArgs e)
-        {
-
+            r_Guesses[i_RowIndexToDisable].GuessButtonsEnabled = false;
         }
     }
 }
