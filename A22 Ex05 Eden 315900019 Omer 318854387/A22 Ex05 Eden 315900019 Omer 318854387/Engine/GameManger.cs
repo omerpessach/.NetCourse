@@ -8,7 +8,7 @@ namespace Engine
         private readonly char[]  r_RandomSequenceForComparison;
         private readonly Round[] r_RoundsOfGame;
         private uint             m_CurrentRound = 0;
-        readonly Random          m_randomAct = new Random();
+        private readonly Random  m_randomAct = new Random();
 
         public GameManger(uint o_AmountOfRounds, uint o_AmountOfLettersInSequence)
         {
