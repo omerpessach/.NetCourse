@@ -40,5 +40,9 @@ namespace UI
 
         }
 
+        private void ChooseGuessesNumberForm_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
