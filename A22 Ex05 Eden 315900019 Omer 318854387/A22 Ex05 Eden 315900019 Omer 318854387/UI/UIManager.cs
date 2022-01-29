@@ -17,7 +17,7 @@ namespace UI
         private GameManger              m_GameManager;
         private readonly List<Color>    r_ColorOptions = new List<Color>
                                        {
-                                          Color.Magenta,
+                                          Color.Magenta, 
                                           Color.Red,
                                           Color.Lime,
                                           Color.MediumTurquoise,
