@@ -2,7 +2,7 @@
 {
     public class Guess
     {
-        private readonly char[]    r_CurrentGuess;
+        private readonly char[] r_CurrentGuess;
 
         public Guess(char[] i_GuessFromUser)
         {

@@ -16,23 +16,23 @@ namespace Engine
             r_RandomSequenceForComparison = createRandomSequence(o_AmountOfLettersInSequence);
         }
 
-        public char[]       RandomSequence
+        public char[]  RandomSequence
         {
             get
             {
                 return r_RandomSequenceForComparison;
             }
         }
-
-        public uint         CurrentRound
+                       
+        public uint    CurrentRound
         {
             get
             {
                 return m_CurrentRound;
             }
         }
-
-        public Round        CreateRound(char[] i_CurrentGuessFromUser)
+                       
+        public Round   CreateRound(char[] i_CurrentGuessFromUser)
         {
             Guess currentGuess = new Guess(i_CurrentGuessFromUser);
             Round newRound = new Round(currentGuess, currentGuess.createFeedbackFromGuess(r_RandomSequenceForComparison));
@@ -41,8 +41,8 @@ namespace Engine
             m_CurrentRound++;
             return newRound;
         }
-
-        private char[]      createRandomSequence(uint i_AmountOfLettersInSequence)
+                       
+        private char[] createRandomSequence(uint i_AmountOfLettersInSequence)
         {
             char[] tempRandomSequenceForComparison = new char[i_AmountOfLettersInSequence];
             char randomChar;
@@ -60,8 +60,8 @@ namespace Engine
 
             return tempRandomSequenceForComparison;
         }
-
-        private bool        checkIfExistsInSequence(char i_CurrentCharFromRandom, char[] i_CurrentSequence)
+                       
+        private bool   checkIfExistsInSequence(char i_CurrentCharFromRandom, char[] i_CurrentSequence)
         {
             bool isLetterExists = false;
 

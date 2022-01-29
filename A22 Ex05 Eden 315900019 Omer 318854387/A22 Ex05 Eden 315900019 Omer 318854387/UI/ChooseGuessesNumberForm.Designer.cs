@@ -72,7 +72,6 @@ namespace UI
             this.Name = "ChooseGuessesNumberForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bool Pgia";
-            this.Load += new System.EventHandler(this.ChooseGuessesNumberForm_Load);
             this.ResumeLayout(false);
 
         }

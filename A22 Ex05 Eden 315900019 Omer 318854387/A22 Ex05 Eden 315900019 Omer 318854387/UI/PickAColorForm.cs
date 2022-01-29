@@ -22,6 +22,8 @@ namespace UI
             initColorOptions(i_ColorOptions);
         }
 
+        public event ColorSelectedEventHandler ColorSelected;
+
         public ICollection<Color> ColorsToDisable
         {
             set
@@ -30,9 +32,7 @@ namespace UI
             }
         }
 
-        public event ColorSelectedEventHandler ColorSelected;
-
-        private void initColorOptions(List<Color> i_ColorOptions)
+        private void              initColorOptions(List<Color> i_ColorOptions)
         {
             Point relevantColorLocation = new Point(k_SpaceBetweenButtons, k_SpaceBetweenButtons);
             int maxLeft = k_SpaceBetweenButtons + (i_ColorOptions.Count / 2 * (k_ColorButtonWidth + k_SpaceBetweenButtons));
@@ -58,16 +58,11 @@ namespace UI
             Size = new Size(maxLeft, relevantColorLocation.Y + SystemInformation.CaptionHeight);
         }
 
-        private void buttonColor_Click(object i_Sender, EventArgs i_EventArgs)
+        private void              buttonColor_Click(object i_Sender, EventArgs i_EventArgs)
         {
             m_ChosenColor = (i_Sender as Button).BackColor;
             ColorSelected?.Invoke(m_ChosenColor);
             Close();
-        }
-
-        private void PickAColorForm_Load(object sender, EventArgs e)
-        {
-
         }
     }
 }

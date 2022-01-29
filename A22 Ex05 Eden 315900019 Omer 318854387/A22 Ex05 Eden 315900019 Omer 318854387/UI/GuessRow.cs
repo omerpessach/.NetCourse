@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Text;
 using System.Windows.Forms;
 using static System.Windows.Forms.Control;
 
@@ -19,12 +18,12 @@ namespace UI
         private const int                       k_MarginGuessButton = 10;
         private const int                       k_TopMarginCheckGuess = 20;
         private const int                       k_RightMarginCheckGuess = 15;
+        private const string                    k_CheckGuessSymbol = "-->>";
         private readonly List<GuessButton>      r_GuessButtons;
         private readonly CheckGuessButton       r_ButtonCheckGuess = new CheckGuessButton();
         private readonly Button[,]              r_ButtonsGuessResult;
-        private const string                    k_CheckGuessSymbol = "-->>";
-        private int                             m_Width;
         private readonly Dictionary<int, Color> r_ChosenColors;
+        private int                             m_Width;
 
         public GuessRow(uint i_AmountOfColorsInSequence, List<Color> i_ColorOptions, Point i_StartLocation, ControlCollection o_Controls)
         {
@@ -38,12 +37,14 @@ namespace UI
             arrangeLocationToAllItems(i_StartLocation);
         }
 
-        public int   Height
+        public event ButtonCheckGuessClickedDelegate ButtonCheckGuessClicked;
+
+        public int     Height
         {
             get => k_GuessButtonSideLength + k_MarginGuessButton;
         }
 
-        public int   Width
+        public int     Width
         {
             get => m_Width;
         }
@@ -62,9 +63,7 @@ namespace UI
             }
         }
 
-        public event ButtonCheckGuessClickedDelegate ButtonCheckGuessClicked;
-
-        public bool  GuessButtonsEnabled
+        public bool    GuessButtonsEnabled
         {
             set
             {
@@ -72,7 +71,7 @@ namespace UI
             }
         }
 
-        private void initCheckGuessButton(ControlCollection o_Controls)
+        private void   initCheckGuessButton(ControlCollection o_Controls)
         {
             r_ButtonCheckGuess.Enabled = false;
             r_ButtonCheckGuess.Text = k_CheckGuessSymbol;
@@ -81,7 +80,7 @@ namespace UI
             o_Controls.Add(r_ButtonCheckGuess);
         }
 
-        private void checkGuessButton_Click(object sender, EventArgs e)
+        private void   checkGuessButton_Click(object sender, EventArgs e)
         {
             Color[] colors = new Color[r_ChosenColors.Count];
 
@@ -93,7 +92,7 @@ namespace UI
             ButtonCheckGuessClicked?.Invoke(colors);
         }
 
-        private void initGuessButtons(List<Color> i_ColorOptions, ControlCollection o_Controls)
+        private void   initGuessButtons(List<Color> i_ColorOptions, ControlCollection o_Controls)
         {
             for (int i = 0; i < r_GuessButtons.Capacity; i++)
             {
@@ -106,7 +105,7 @@ namespace UI
             }
         }
 
-        private void initGuessResultButtons(ControlCollection o_Controls)
+        private void   initGuessResultButtons(ControlCollection o_Controls)
         {
             for (int i = 0; i < r_ButtonsGuessResult.GetLength(0); i++)
             {
@@ -121,7 +120,7 @@ namespace UI
             }
         }
 
-        private void arrangeLocationToAllItems(Point i_StartLocation)
+        private void   arrangeLocationToAllItems(Point i_StartLocation)
         {
             i_StartLocation.Y += k_MarginGuessButton;
             foreach (GuessButton guessButton in r_GuessButtons)
@@ -148,7 +147,7 @@ namespace UI
             }
         }
 
-        private void guessButton_GuessWasMade(int i_RowIndex, Color i_SelectedColor)
+        private void   guessButton_GuessWasMade(int i_RowIndex, Color i_SelectedColor)
         {
             r_ChosenColors[i_RowIndex] = i_SelectedColor;
             r_ButtonCheckGuess.Enabled = r_GuessButtons.Capacity == r_ChosenColors.Count;

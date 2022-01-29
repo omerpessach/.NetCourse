@@ -91,10 +91,5 @@ namespace UI
         {
             r_Guesses[i_RowIndexToDisable].GuessButtonsEnabled = false;
         }
-
-        private void BoardForm_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }
