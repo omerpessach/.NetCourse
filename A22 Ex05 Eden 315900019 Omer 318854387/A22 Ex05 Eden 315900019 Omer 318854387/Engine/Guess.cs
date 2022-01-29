@@ -9,14 +9,6 @@
             r_CurrentGuess = i_GuessFromUser;
         }
 
-        public char[]     CurrentGuess
-        {
-            get
-            {
-                return r_CurrentGuess;
-            }
-        }
-
         internal Feedback createFeedbackFromGuess(char[] o_RandomSequenceForComparison)
         {
             return new Feedback(amountOfBulls(o_RandomSequenceForComparison), amountOfCows(o_RandomSequenceForComparison));

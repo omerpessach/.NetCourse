@@ -11,14 +11,6 @@
             r_CurrentGuess = i_CurrentGuss;
         }
 
-        public Guess     CurrentGuess
-        {
-            get
-            {
-                return r_CurrentGuess;
-            }
-        }
-
         public Feedback  CurrentFeedback
         {
             get

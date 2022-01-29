@@ -42,12 +42,13 @@ namespace UI
             }
         }
 
-        private void        uIManager_ButtonCheckGuessClicked(List<Color> i_ColorToCheck)
+        private void        uIManager_ButtonCheckGuessClicked(Color[] i_ColorToCheck)
         {
             m_BoardForm.GuessRows[m_CurrentGuessNumber].ButtonCheckGuessClicked -= uIManager_ButtonCheckGuessClicked;
-            List<char> colorsAsChars = convertColorsToChars(i_ColorToCheck);
+            List<Color> colors = new List<Color>(i_ColorToCheck);
+            List<char> colorsAsChars = convertColorsToChars(colors);
             Feedback feedback = m_GameManager.CreateRound(colorsAsChars.ToArray()).CurrentFeedback;
-            Color[] result = new Color[4];
+            Color[] result = new Color[k_AmountOfColorsInSequence];
             int resultIndex = 0;
 
             for (int AmountOfV = 0; AmountOfV < feedback.AmountOfV; AmountOfV++, resultIndex++)

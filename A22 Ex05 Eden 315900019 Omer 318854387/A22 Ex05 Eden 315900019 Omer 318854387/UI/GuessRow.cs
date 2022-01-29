@@ -7,7 +7,7 @@ using static System.Windows.Forms.Control;
 
 namespace UI
 {
-    public delegate void ButtonCheckGuessClickedDelegate(List<Color> i_ColorToCheck);
+    public delegate void ButtonCheckGuessClickedDelegate(Color[] i_ColorToCheck);
 
     public class GuessRow
     {
@@ -83,7 +83,14 @@ namespace UI
 
         private void checkGuessButton_Click(object sender, EventArgs e)
         {
-            ButtonCheckGuessClicked?.Invoke(new List<Color>(r_ChosenColors.Values));
+            Color[] colors = new Color[r_ChosenColors.Count];
+
+            for (int i = 0; i < r_ChosenColors.Count; i++)
+            {
+                colors[i] = r_ChosenColors[i];
+            }
+
+            ButtonCheckGuessClicked?.Invoke(colors);
         }
 
         private void initGuessButtons(List<Color> i_ColorOptions, ControlCollection o_Controls)
