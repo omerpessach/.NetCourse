@@ -64,11 +64,5 @@ namespace UI
             ColorSelected?.Invoke(m_ChosenColor);
             Close();
         }
-
-        private void PickAColorForm_Load(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }

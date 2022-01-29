@@ -41,7 +41,6 @@ namespace UI
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "BoardForm";
             this.Text = "BoardForm";
-            this.Load += new System.EventHandler(this.BoardForm_Load);
             this.ResumeLayout(false);
 
         }

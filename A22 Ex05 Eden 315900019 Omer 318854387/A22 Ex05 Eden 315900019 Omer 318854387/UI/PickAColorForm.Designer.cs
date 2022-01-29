@@ -43,7 +43,6 @@ namespace UI
             this.Name = "PickAColorForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Pick A Color:";
-            this.Load += new System.EventHandler(this.PickAColorForm_Load);
             this.ResumeLayout(false);
 
         }

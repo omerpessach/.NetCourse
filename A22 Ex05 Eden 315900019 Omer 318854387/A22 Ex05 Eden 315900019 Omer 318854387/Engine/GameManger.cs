@@ -7,8 +7,8 @@ namespace Engine
     {
         private readonly char[]  r_RandomSequenceForComparison;
         private readonly Round[] r_RoundsOfGame;
+        private readonly Random  r_randomAct = new Random();
         private uint             m_CurrentRound = 0;
-        private readonly Random  m_randomAct = new Random();
 
         public GameManger(uint o_AmountOfRounds, uint o_AmountOfLettersInSequence)
         {
@@ -51,7 +51,7 @@ namespace Engine
             {
                 do
                 {
-                    randomChar = (char)(m_randomAct.Next(Enum.GetNames(typeof(eGuessingOption)).Length) + 'A');
+                    randomChar = (char)(r_randomAct.Next(Enum.GetNames(typeof(eGuessingOption)).Length) + 'A');
                 }
                 while (checkIfExistsInSequence(randomChar, tempRandomSequenceForComparison));
 
